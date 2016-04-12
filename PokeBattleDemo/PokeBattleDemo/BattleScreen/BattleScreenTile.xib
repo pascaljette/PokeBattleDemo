@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BattleScreenTile" customModule="PokeBattleDemo" customModuleProvider="target">
+            <connections>
+                <outlet property="imageButton" destination="7YW-SL-b8A" id="W3P-PP-JOu"/>
+                <outlet property="nameLabel" destination="UP6-oa-3vn" id="5kP-kS-PLI"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="271" height="190"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7YW-SL-b8A" userLabel="imageButton">
+                    <rect key="frame" x="0.0" y="0.0" width="271" height="190"/>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="imageButtonPressed:" destination="-1" eventType="touchUpInside" id="Rrx-0K-1dM"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Charizard" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UP6-oa-3vn" userLabel="nameLabel">
+                    <rect key="frame" x="8" y="165" width="100.5" height="25"/>
+                    <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="20"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="7YW-SL-b8A" secondAttribute="bottom" id="FAh-k8-mmU"/>
+                <constraint firstAttribute="bottom" secondItem="UP6-oa-3vn" secondAttribute="bottom" id="MtN-Pe-GSh"/>
+                <constraint firstAttribute="trailing" secondItem="7YW-SL-b8A" secondAttribute="trailing" id="Rtc-Gg-965"/>
+                <constraint firstItem="7YW-SL-b8A" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="gBX-Kv-1R3"/>
+                <constraint firstItem="UP6-oa-3vn" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="s8Q-Ba-a85"/>
+                <constraint firstItem="7YW-SL-b8A" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="s8V-W0-gaQ"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="157.5" y="1"/>
+        </view>
+    </objects>
+</document>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BattleScreenViewController" customModule="PokeBattleDemo" customModuleProvider="target">
+            <connections>
+                <outlet property="tile1" destination="xn3-VO-5RB" id="1jG-dL-FyZ"/>
+                <outlet property="view" destination="iN0-l3-epB" id="Knr-IZ-DzY"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fla-eF-kl5" customClass="GKSolidColorButton" customModule="GearKit">
+                    <rect key="frame" x="0.0" y="540" width="600" height="60"/>
+                    <color key="backgroundColor" red="0.074509803921568626" green="0.050980392156862744" blue="0.34901960784313724" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="Qld-5A-bu1"/>
+                    </constraints>
+                    <state key="normal" title="Fight">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="disabledBackgroundColor">
+                            <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
+                            <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="fightButtonPressed:" destination="-1" eventType="touchUpInside" id="FaA-p9-A9A"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="xn3-VO-5RB" userLabel="team1poke1" customClass="BattleScreenTile" customModule="PokeBattleDemo" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="292" height="169.5"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="28Y-W1-sUc" userLabel="team1poke2" customClass="BattleScreenTile" customModule="PokeBattleDemo" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="177.5" width="292" height="169"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="h79-1m-n8Z" userLabel="team1poke3" customClass="BattleScreenTile" customModule="PokeBattleDemo" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="354.5" width="292" height="169.5"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="khQ-3F-y5e" userLabel="team2poke2" customClass="BattleScreenTile" customModule="PokeBattleDemo" customModuleProvider="target">
+                    <rect key="frame" x="308" y="177.5" width="292" height="169"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="prs-xR-BL0" userLabel="team2poke3" customClass="BattleScreenTile" customModule="PokeBattleDemo" customModuleProvider="target">
+                    <rect key="frame" x="308" y="354.5" width="292" height="169.5"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="N69-zq-ZcQ" userLabel="team2poke1" customClass="BattleScreenTile" customModule="PokeBattleDemo" customModuleProvider="target">
+                    <rect key="frame" x="308" y="0.0" width="292" height="169.5"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="xn3-VO-5RB" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="1cx-fb-Puk"/>
+                <constraint firstItem="N69-zq-ZcQ" firstAttribute="bottom" secondItem="xn3-VO-5RB" secondAttribute="bottom" id="6k7-eK-PkY"/>
+                <constraint firstItem="28Y-W1-sUc" firstAttribute="leading" secondItem="xn3-VO-5RB" secondAttribute="leading" id="ATP-Gi-VUe"/>
+                <constraint firstAttribute="trailing" secondItem="fla-eF-kl5" secondAttribute="trailing" id="DaV-8a-f9M"/>
+                <constraint firstItem="N69-zq-ZcQ" firstAttribute="top" secondItem="xn3-VO-5RB" secondAttribute="top" id="GBI-AQ-uUw"/>
+                <constraint firstItem="28Y-W1-sUc" firstAttribute="top" secondItem="xn3-VO-5RB" secondAttribute="bottom" constant="8" id="GCu-8B-dGU"/>
+                <constraint firstItem="28Y-W1-sUc" firstAttribute="trailing" secondItem="xn3-VO-5RB" secondAttribute="trailing" id="JKB-lg-wl4"/>
+                <constraint firstItem="fla-eF-kl5" firstAttribute="top" secondItem="h79-1m-n8Z" secondAttribute="bottom" constant="16" id="JSS-IM-MSz"/>
+                <constraint firstItem="khQ-3F-y5e" firstAttribute="top" secondItem="28Y-W1-sUc" secondAttribute="top" id="KRW-DE-GS3"/>
+                <constraint firstItem="h79-1m-n8Z" firstAttribute="height" secondItem="xn3-VO-5RB" secondAttribute="height" id="OLf-iJ-iVR"/>
+                <constraint firstItem="xn3-VO-5RB" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Q6U-qV-dL4"/>
+                <constraint firstItem="h79-1m-n8Z" firstAttribute="leading" secondItem="28Y-W1-sUc" secondAttribute="leading" id="QDc-Cf-IQ3"/>
+                <constraint firstItem="xn3-VO-5RB" firstAttribute="width" secondItem="N69-zq-ZcQ" secondAttribute="width" id="QRF-y0-4eO"/>
+                <constraint firstItem="h79-1m-n8Z" firstAttribute="trailing" secondItem="28Y-W1-sUc" secondAttribute="trailing" id="QZy-c7-kEK"/>
+                <constraint firstItem="prs-xR-BL0" firstAttribute="top" secondItem="h79-1m-n8Z" secondAttribute="top" id="Rli-ZL-ZEC"/>
+                <constraint firstItem="prs-xR-BL0" firstAttribute="bottom" secondItem="h79-1m-n8Z" secondAttribute="bottom" id="SmP-32-DUK"/>
+                <constraint firstItem="khQ-3F-y5e" firstAttribute="leading" secondItem="N69-zq-ZcQ" secondAttribute="leading" id="VSF-Qt-gxd"/>
+                <constraint firstItem="28Y-W1-sUc" firstAttribute="height" secondItem="xn3-VO-5RB" secondAttribute="height" id="Ybp-sP-Ckc"/>
+                <constraint firstItem="khQ-3F-y5e" firstAttribute="bottom" secondItem="28Y-W1-sUc" secondAttribute="bottom" id="Z2A-WM-3wC"/>
+                <constraint firstItem="prs-xR-BL0" firstAttribute="leading" secondItem="khQ-3F-y5e" secondAttribute="leading" id="Zjg-gH-E9U"/>
+                <constraint firstItem="prs-xR-BL0" firstAttribute="trailing" secondItem="khQ-3F-y5e" secondAttribute="trailing" id="b12-45-byt"/>
+                <constraint firstAttribute="bottom" secondItem="fla-eF-kl5" secondAttribute="bottom" id="bpn-hw-sEi"/>
+                <constraint firstAttribute="trailing" secondItem="N69-zq-ZcQ" secondAttribute="trailing" id="byC-OI-qtD"/>
+                <constraint firstItem="N69-zq-ZcQ" firstAttribute="leading" secondItem="xn3-VO-5RB" secondAttribute="trailing" constant="16" id="g7z-mm-jXK"/>
+                <constraint firstItem="h79-1m-n8Z" firstAttribute="top" secondItem="28Y-W1-sUc" secondAttribute="bottom" constant="8" id="gaS-OP-qo5"/>
+                <constraint firstItem="khQ-3F-y5e" firstAttribute="trailing" secondItem="N69-zq-ZcQ" secondAttribute="trailing" id="kZh-gH-Dh0"/>
+                <constraint firstItem="fla-eF-kl5" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ySH-Hj-DAD"/>
+            </constraints>
+        </view>
+    </objects>
+</document>
