@@ -30,7 +30,15 @@ class PokeApiConnection<RequestType: PokeApiRequestBase, ResponseType: PokeApiRe
     
     func execute() {
         
-        let request: RequestType = RequestType()
+        performCall(RequestType())
+    }
+    
+    func execute(request: RequestType) {
+        
+        performCall(request)
+    }
+    
+    private func performCall(request: RequestType) {
         
         // TODO-pk add log or error handling here
         guard let requestFullUrl = request.absoluteUrl else {
@@ -58,6 +66,5 @@ class PokeApiConnection<RequestType: PokeApiRequestBase, ResponseType: PokeApiRe
         }
         
         task.resume()
-        
     }
 }

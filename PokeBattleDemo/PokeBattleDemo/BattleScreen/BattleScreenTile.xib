@@ -18,7 +18,6 @@
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7YW-SL-b8A" userLabel="imageButton">
                     <rect key="frame" x="0.0" y="0.0" width="271" height="190"/>
-                    <state key="normal" title="Button"/>
                     <connections>
                         <action selector="imageButtonPressed:" destination="-1" eventType="touchUpInside" id="Rrx-0K-1dM"/>
                     </connections>

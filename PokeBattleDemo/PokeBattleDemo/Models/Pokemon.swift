@@ -12,5 +12,16 @@ import Foundation
 // For some obscure reason, this crashes if made as a struct.
 class Pokemon : PokeApiModelBase {
     
+    var name: String = ""
+    var spriteUrl: String = ""
     
+    required init() {
+        
+    }
+    
+    init(name: String, spriteUrl: String) {
+        
+        self.name = name
+        self.spriteUrl = spriteUrl
+    }
 }

@@ -8,16 +8,18 @@
 
 import Foundation
 
+class GetPokemonListRequest {
 
-class GetPokemonListRequest : PokeApiRequestBase {
-    
-    // Force to have an init method even if it is empty for creatin in Generics.
     required init() {
-        
+
     }
+}
+
+extension GetPokemonListRequest : PokeApiRequestBase {
+    
     
     var apiPath: String {
-     
+        
         return "/api/v2/pokemon"
     }
     

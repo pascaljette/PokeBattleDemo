@@ -11,5 +11,6 @@ import Foundation
 
 protocol PokeApiModelBase {
     
-    
+    // Required init for populating with JSON data
+    init()
 }

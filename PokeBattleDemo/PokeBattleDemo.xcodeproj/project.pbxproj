@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		53026E221CBE55BF00C847D7 /* GetPokemonRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53026E211CBE55BF00C847D7 /* GetPokemonRequest.swift */; };
+		53026E241CBE55CB00C847D7 /* GetPokemonResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53026E231CBE55CB00C847D7 /* GetPokemonResponse.swift */; };
 		532613771CBCEC3B006985F3 /* BattleScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 532613761CBCEC3B006985F3 /* BattleScreenViewController.xib */; };
 		532613791CBCEC58006985F3 /* BattleScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532613781CBCEC58006985F3 /* BattleScreenViewController.swift */; };
 		5326137C1CBCEE52006985F3 /* Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5326137B1CBCEE52006985F3 /* Pokemon.swift */; };
@@ -28,6 +30,8 @@
 
 /* Begin PBXFileReference section */
 		18B997C3AA94393664F9936B /* Pods_PokeBattleDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PokeBattleDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		53026E211CBE55BF00C847D7 /* GetPokemonRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetPokemonRequest.swift; sourceTree = "<group>"; };
+		53026E231CBE55CB00C847D7 /* GetPokemonResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetPokemonResponse.swift; sourceTree = "<group>"; };
 		532613761CBCEC3B006985F3 /* BattleScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BattleScreenViewController.xib; sourceTree = "<group>"; };
 		532613781CBCEC58006985F3 /* BattleScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BattleScreenViewController.swift; sourceTree = "<group>"; };
 		5326137B1CBCEE52006985F3 /* Pokemon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pokemon.swift; sourceTree = "<group>"; };
@@ -115,6 +119,8 @@
 			children = (
 				532613891CBD01BE006985F3 /* GetPokemonListRequest.swift */,
 				532613921CBD04E6006985F3 /* GetPokemonListResponse.swift */,
+				53026E211CBE55BF00C847D7 /* GetPokemonRequest.swift */,
+				53026E231CBE55CB00C847D7 /* GetPokemonResponse.swift */,
 			);
 			path = Pokemon;
 			sourceTree = "<group>";
@@ -311,6 +317,8 @@
 				5326138E1CBD02FD006985F3 /* PokeApiModelBase.swift in Sources */,
 				532613841CBCFFF0006985F3 /* PokeApiRequestBase.swift in Sources */,
 				5326138C1CBD02BE006985F3 /* PokeApiResponseBase.swift in Sources */,
+				53026E241CBE55CB00C847D7 /* GetPokemonResponse.swift in Sources */,
+				53026E221CBE55BF00C847D7 /* GetPokemonRequest.swift in Sources */,
 				532613931CBD04E6006985F3 /* GetPokemonListResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

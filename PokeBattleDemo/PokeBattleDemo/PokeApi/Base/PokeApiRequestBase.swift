@@ -10,7 +10,6 @@ import Foundation
 
 protocol PokeApiRequestBase {
     
-    // Force to have an init method even if it is empty for creatin in Generics.
     init()
     
     var apiPath: String { get }

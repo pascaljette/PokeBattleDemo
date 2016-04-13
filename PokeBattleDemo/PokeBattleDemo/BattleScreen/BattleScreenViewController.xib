@@ -7,7 +7,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BattleScreenViewController" customModule="PokeBattleDemo" customModuleProvider="target">
             <connections>
-                <outlet property="tile1" destination="xn3-VO-5RB" id="1jG-dL-FyZ"/>
+                <outlet property="team1poke1" destination="xn3-VO-5RB" id="HWK-Wc-UyN"/>
+                <outlet property="team1poke2" destination="28Y-W1-sUc" id="ADw-ML-0U5"/>
+                <outlet property="team1poke3" destination="h79-1m-n8Z" id="Grf-Xb-xt8"/>
+                <outlet property="team2poke1" destination="khQ-3F-y5e" id="6gg-Mp-JBH"/>
+                <outlet property="team2poke2" destination="prs-xR-BL0" id="KGd-bN-71s"/>
+                <outlet property="team2poke3" destination="N69-zq-ZcQ" id="Onw-Qt-n2S"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Knr-IZ-DzY"/>
             </connections>
         </placeholder>

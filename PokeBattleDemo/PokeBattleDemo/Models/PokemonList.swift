@@ -12,5 +12,10 @@ import Foundation
 // For some obscure reason, this crashes if made as a struct.
 class PokemonList : PokeApiModelBase {
     
+    required init() {
+        
+        
+    }
+    
     var pokemonUrlStrings: [String] = []
 }

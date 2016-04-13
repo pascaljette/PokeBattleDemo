@@ -17,6 +17,37 @@ class BattleScreenTile: UIView {
     
     @IBOutlet weak var view: UIView!
     
+    var pokemon: Pokemon? {
+        
+        didSet {
+            
+            GKThread.dispatchOnUiThread { [weak self] in
+                
+                guard let strongSelf = self else {
+                    
+                    return
+                }
+                
+                strongSelf.nameLabel.text = strongSelf.pokemon?.name
+                
+                guard let imageUrl = strongSelf.pokemon?.spriteUrl else {
+                    
+                    strongSelf.imageButton.setBackgroundImage(nil, forState: .Normal)
+                    return
+                }
+                
+                // TODO error checking!
+                // There is a case where URLs will be empty.  Need to be considered.
+                let url = NSURL(string: imageUrl)
+                let data = NSData(contentsOfURL : url!)
+                let image = UIImage(data : data!)
+
+                strongSelf.imageButton.setBackgroundImage(image, forState: .Normal)
+                
+            }
+        }
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         
         super.init(coder: aDecoder)
@@ -31,6 +62,7 @@ class BattleScreenTile: UIView {
         
         self.addSubview(self.view)
         
+        // Restore constraints when loaded in interface builder.
         self.view.translatesAutoresizingMaskIntoConstraints = false
         self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[view]|", options: NSLayoutFormatOptions.AlignAllCenterY , metrics: nil, views: ["view": self.view]))
         self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[view]|", options: NSLayoutFormatOptions.AlignAllCenterX , metrics: nil, views: ["view": self.view]))
