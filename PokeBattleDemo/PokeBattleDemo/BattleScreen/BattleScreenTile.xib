@@ -23,7 +23,7 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Charizard" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UP6-oa-3vn" userLabel="nameLabel">
-                    <rect key="frame" x="8" y="165" width="100.5" height="25"/>
+                    <rect key="frame" x="8" y="165" width="247" height="25"/>
                     <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="20"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
@@ -34,6 +34,7 @@
                 <constraint firstAttribute="bottom" secondItem="7YW-SL-b8A" secondAttribute="bottom" id="FAh-k8-mmU"/>
                 <constraint firstAttribute="bottom" secondItem="UP6-oa-3vn" secondAttribute="bottom" id="MtN-Pe-GSh"/>
                 <constraint firstAttribute="trailing" secondItem="7YW-SL-b8A" secondAttribute="trailing" id="Rtc-Gg-965"/>
+                <constraint firstAttribute="trailing" secondItem="UP6-oa-3vn" secondAttribute="trailing" constant="16" id="dXb-mj-ibO"/>
                 <constraint firstItem="7YW-SL-b8A" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="gBX-Kv-1R3"/>
                 <constraint firstItem="UP6-oa-3vn" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="s8Q-Ba-a85"/>
                 <constraint firstItem="7YW-SL-b8A" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="s8V-W0-gaQ"/>

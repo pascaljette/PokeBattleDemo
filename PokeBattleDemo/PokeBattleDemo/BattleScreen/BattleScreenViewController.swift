@@ -27,7 +27,6 @@ class BattleScreenViewController : GKViewControllerBase {
 
     @IBOutlet weak var team2poke3: BattleScreenTile!
 
-    
     var pokemonList: PokemonList = PokemonList()
     
     

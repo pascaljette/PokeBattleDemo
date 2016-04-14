@@ -19,32 +19,56 @@ class BattleScreenTile: UIView {
     
     var pokemon: Pokemon? {
         
+        // TODO this needs to be refactored and/or optimized to remove all the thread dispatching stuff
         didSet {
             
-            GKThread.dispatchOnUiThread { [weak self] in
+            guard let pokemonInstance = self.pokemon else {
                 
-                guard let strongSelf = self else {
-                    
-                    return
-                }
-                
-                strongSelf.nameLabel.text = strongSelf.pokemon?.name
-                
-                guard let imageUrl = strongSelf.pokemon?.spriteUrl else {
-                    
-                    strongSelf.imageButton.setBackgroundImage(nil, forState: .Normal)
-                    return
-                }
-                
-                // TODO error checking!
-                // There is a case where URLs will be empty.  Need to be considered.
-                let url = NSURL(string: imageUrl)
-                let data = NSData(contentsOfURL : url!)
-                let image = UIImage(data : data!)
+                GKThread.dispatchOnUiThread {
 
-                strongSelf.imageButton.setBackgroundImage(image, forState: .Normal)
+                    self.nameLabel.text = nil
+                    self.imageButton.setBackgroundImage(nil, forState: .Normal)
+                }
                 
+                return
             }
+            
+            GKThread.dispatchOnUiThread {
+
+                self.nameLabel.text = pokemonInstance.name.uppercaseString
+            }
+
+            guard let imageUrl = NSURL(string: pokemonInstance.spriteUrl) where !String.isNilOrEmpty(pokemonInstance.spriteUrl) else {
+                
+                GKThread.dispatchOnUiThread {
+
+                    self.imageButton.setBackgroundImage(UIImage(named: "NoImageDefault.png"), forState: .Normal)
+                }
+                
+                return
+            }
+            
+            let task = NSURLSession.sharedSession().dataTaskWithURL(imageUrl) {(data, response, error) in
+                
+                // TODO Error handling!
+                guard error == nil else {
+                    
+                    print("Error retrieving image: \(imageUrl.absoluteString)")
+                    return
+                }
+                
+                if let dataInstance = data {
+                    
+                    let image = UIImage(data : dataInstance)
+                    
+                    GKThread.dispatchOnUiThread {
+                        
+                        self.imageButton.setBackgroundImage(image, forState: .Normal)
+                    }
+                }
+            }
+            
+            task.resume()
         }
     }
     
@@ -59,6 +83,12 @@ class BattleScreenTile: UIView {
         
         let className = String(self.dynamicType)
         self.view = NSBundle.mainBundle().loadNibNamed(className, owner: self, options: nil).first as! UIView
+        
+        nameLabel.text = nil
+        nameLabel.minimumScaleFactor = 8.0 / nameLabel.font.pointSize
+        nameLabel.adjustsFontSizeToFitWidth = true
+        
+        imageButton.setBackgroundImage(nil, forState: .Normal)
         
         self.addSubview(self.view)
         
