@@ -14,6 +14,7 @@ class Pokemon : PokeApiModelBase {
     
     var name: String = ""
     var spriteUrl: String = ""
+    var types: [PokemonType] = []
     
     required init() {
         

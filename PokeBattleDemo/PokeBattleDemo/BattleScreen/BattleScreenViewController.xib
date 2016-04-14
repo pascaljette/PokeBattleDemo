@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BattleScreenViewController" customModule="PokeBattleDemo" customModuleProvider="target">
             <connections>
+                <outlet property="actionButton" destination="fla-eF-kl5" id="Cg3-Kg-mPQ"/>
                 <outlet property="team1poke1" destination="xn3-VO-5RB" id="HWK-Wc-UyN"/>
                 <outlet property="team1poke2" destination="28Y-W1-sUc" id="ADw-ML-0U5"/>
                 <outlet property="team1poke3" destination="h79-1m-n8Z" id="Grf-Xb-xt8"/>

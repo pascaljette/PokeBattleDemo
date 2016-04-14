@@ -17,6 +17,15 @@ class BattleScreenTile: UIView {
     
     @IBOutlet weak var view: UIView!
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+
+    func setLoading() {
+        
+        nameLabel.text = nil
+        imageButton.setBackgroundImage(nil, forState: .Normal)
+        activityIndicator.startAnimating()
+    }
+    
     var pokemon: Pokemon? {
         
         // TODO this needs to be refactored and/or optimized to remove all the thread dispatching stuff
@@ -30,6 +39,7 @@ class BattleScreenTile: UIView {
                     self.imageButton.setBackgroundImage(nil, forState: .Normal)
                 }
                 
+                activityIndicator.stopAnimating()
                 return
             }
             
@@ -45,10 +55,21 @@ class BattleScreenTile: UIView {
                     self.imageButton.setBackgroundImage(UIImage(named: "NoImageDefault.png"), forState: .Normal)
                 }
                 
+                activityIndicator.stopAnimating()
                 return
             }
             
-            let task = NSURLSession.sharedSession().dataTaskWithURL(imageUrl) {(data, response, error) in
+            let task = NSURLSession.sharedSession().dataTaskWithURL(imageUrl) {[weak self] (data, response, error) in
+                
+                guard let strongSelf = self else {
+                    
+                    return
+                }
+                
+                GKThread.dispatchOnUiThread {
+                    
+                    strongSelf.activityIndicator.stopAnimating()
+                }
                 
                 // TODO Error handling!
                 guard error == nil else {
@@ -63,7 +84,7 @@ class BattleScreenTile: UIView {
                     
                     GKThread.dispatchOnUiThread {
                         
-                        self.imageButton.setBackgroundImage(image, forState: .Normal)
+                        strongSelf.imageButton.setBackgroundImage(image, forState: .Normal)
                     }
                 }
             }
@@ -89,6 +110,8 @@ class BattleScreenTile: UIView {
         nameLabel.adjustsFontSizeToFitWidth = true
         
         imageButton.setBackgroundImage(nil, forState: .Normal)
+        
+        activityIndicator.stopAnimating()
         
         self.addSubview(self.view)
         

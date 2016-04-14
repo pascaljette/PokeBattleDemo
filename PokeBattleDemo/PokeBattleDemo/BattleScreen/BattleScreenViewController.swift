@@ -27,6 +27,8 @@ class BattleScreenViewController : GKViewControllerBase {
 
     @IBOutlet weak var team2poke3: BattleScreenTile!
 
+    @IBOutlet weak var actionButton: UIButton!
+    
     var pokemonList: PokemonList = PokemonList()
     
     
@@ -41,6 +43,8 @@ class BattleScreenViewController : GKViewControllerBase {
     
     
     @IBAction func fightButtonPressed(sender: AnyObject) {
+        
+        actionButton.enabled = false
         
         let call: GetPokemonListConnection = GetPokemonListConnection()
         
@@ -91,6 +95,11 @@ class BattleScreenViewController : GKViewControllerBase {
     }
     
     private func shuffleForTile(tile: BattleScreenTile) {
+        
+        GKThread.dispatchOnUiThread {
+            
+            tile.setLoading()
+        }
         
         // No guarantee that we don't have duplicates, but that's OK.
         let randomPokemonUrl = pokemonList.pokemonUrlStrings[Int(arc4random_uniform(UInt32(pokemonList.pokemonUrlStrings.count)))]

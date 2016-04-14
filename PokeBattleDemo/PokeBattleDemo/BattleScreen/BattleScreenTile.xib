@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BattleScreenTile" customModule="PokeBattleDemo" customModuleProvider="target">
             <connections>
+                <outlet property="activityIndicator" destination="oS1-bV-gQI" id="KuI-0F-6Am"/>
                 <outlet property="imageButton" destination="7YW-SL-b8A" id="W3P-PP-JOu"/>
                 <outlet property="nameLabel" destination="UP6-oa-3vn" id="5kP-kS-PLI"/>
             </connections>
@@ -25,15 +26,20 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Charizard" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UP6-oa-3vn" userLabel="nameLabel">
                     <rect key="frame" x="8" y="165" width="247" height="25"/>
                     <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="20"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="oS1-bV-gQI">
+                    <rect key="frame" x="125" y="85" width="20" height="20"/>
+                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="7YW-SL-b8A" secondAttribute="bottom" id="FAh-k8-mmU"/>
                 <constraint firstAttribute="bottom" secondItem="UP6-oa-3vn" secondAttribute="bottom" id="MtN-Pe-GSh"/>
+                <constraint firstItem="oS1-bV-gQI" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="ROm-TZ-G48"/>
                 <constraint firstAttribute="trailing" secondItem="7YW-SL-b8A" secondAttribute="trailing" id="Rtc-Gg-965"/>
+                <constraint firstItem="oS1-bV-gQI" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="U6A-lX-AE9"/>
                 <constraint firstAttribute="trailing" secondItem="UP6-oa-3vn" secondAttribute="trailing" constant="16" id="dXb-mj-ibO"/>
                 <constraint firstItem="7YW-SL-b8A" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="gBX-Kv-1R3"/>
                 <constraint firstItem="UP6-oa-3vn" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="s8Q-Ba-a85"/>
