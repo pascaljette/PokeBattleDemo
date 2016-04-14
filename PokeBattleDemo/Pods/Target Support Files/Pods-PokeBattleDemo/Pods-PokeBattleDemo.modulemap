@@ -1,0 +1,6 @@
+framework module Pods_PokeBattleDemo {
+  umbrella header "Pods-PokeBattleDemo-umbrella.h"
+
+  export *
+  module * { export * }
+}

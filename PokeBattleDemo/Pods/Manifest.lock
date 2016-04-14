@@ -1,0 +1,13 @@
+PODS:
+  - GearKit (0.1.5):
+    - SwiftyJSON (~> 2)
+  - SwiftyJSON (2.3.2)
+
+DEPENDENCIES:
+  - GearKit (~> 0.1.5)
+
+SPEC CHECKSUMS:
+  GearKit: 8e767bb755069ff2a29ef1c7b449538127c96442
+  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
+
+COCOAPODS: 0.39.0
