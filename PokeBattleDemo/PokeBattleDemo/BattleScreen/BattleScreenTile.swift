@@ -15,6 +15,9 @@ class BattleScreenTile: UIView {
     
     @IBOutlet weak var imageButton: UIButton!
     
+    @IBOutlet weak var typeImage1: UIImageView!
+    @IBOutlet weak var typeImage2: UIImageView!
+    
     @IBOutlet weak var view: UIView!
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -22,6 +25,8 @@ class BattleScreenTile: UIView {
     func setLoading() {
         
         nameLabel.text = nil
+        typeImage1.image = nil
+        typeImage2.image = nil
         imageButton.setBackgroundImage(nil, forState: .Normal)
         activityIndicator.startAnimating()
     }
@@ -46,6 +51,17 @@ class BattleScreenTile: UIView {
             GKThread.dispatchOnUiThread {
 
                 self.nameLabel.text = pokemonInstance.name.uppercaseString
+                
+                if let firstType = pokemonInstance.types.first {
+                    
+                    self.typeImage1.image = PokemonTypeMapping(rawValue: firstType.name)?.getImage()
+                }
+                
+                
+                if pokemonInstance.types.isInBounds(1) {
+                    
+                    self.typeImage2.image = PokemonTypeMapping(rawValue: pokemonInstance.types[1].name)?.getImage()
+                }
             }
 
             guard let imageUrl = NSURL(string: pokemonInstance.spriteUrl) where !String.isNilOrEmpty(pokemonInstance.spriteUrl) else {

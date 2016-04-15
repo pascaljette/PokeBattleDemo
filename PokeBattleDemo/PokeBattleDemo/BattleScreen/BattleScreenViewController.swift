@@ -9,6 +9,43 @@
 import Foundation
 import GearKit
 
+// TODO can be made more elegant
+class ExecutingTasksCounter {
+    
+    private var queue = dispatch_queue_create("shuffleForTile.task.counter", DISPATCH_QUEUE_SERIAL)
+    private (set) var value : Int = 0
+    
+    var zeroAction: (() -> Void)?
+    var nonZeroAction: (() -> Void)?
+    
+    func increment () {
+        dispatch_sync(queue) {
+            self.value += 1
+        }
+    }
+    
+    func decrement () {
+        
+        dispatch_sync(queue) {
+            self.value -= 1
+            
+            // sanity check
+            self.value = max(0, self.value)
+            
+            if self.value > 0 {
+                
+                self.nonZeroAction?()
+            }
+            
+            if self.value == 0 {
+                
+                self.zeroAction?()
+            }
+        }
+    }
+
+}
+
 class BattleScreenViewController : GKViewControllerBase {
     
     typealias GetPokemonListConnection = PokeApiConnection<GetPokemonListRequest, GetPokemonListResponse>
@@ -31,6 +68,7 @@ class BattleScreenViewController : GKViewControllerBase {
     
     var pokemonList: PokemonList = PokemonList()
     
+    var shuffleForTileCounter: ExecutingTasksCounter = ExecutingTasksCounter()
     
     
     override func viewDidLoad() {
@@ -38,7 +76,23 @@ class BattleScreenViewController : GKViewControllerBase {
         super.viewDidLoad()
         
         // TODO localize
-        self.navigationItem.title = "Pokermon!"        
+        self.navigationItem.title = "Pokermon!"
+        
+        shuffleForTileCounter.nonZeroAction = {
+            
+            GKThread.dispatchOnUiThread {
+                
+                self.actionButton.enabled = false
+            }
+        }
+        
+        shuffleForTileCounter.zeroAction = {
+            
+            GKThread.dispatchOnUiThread {
+                
+                self.actionButton.enabled = true
+            }
+        }
     }
     
     
@@ -96,6 +150,8 @@ class BattleScreenViewController : GKViewControllerBase {
     
     private func shuffleForTile(tile: BattleScreenTile) {
         
+        shuffleForTileCounter.increment()
+        
         GKThread.dispatchOnUiThread {
             
             tile.setLoading()
@@ -109,6 +165,8 @@ class BattleScreenViewController : GKViewControllerBase {
         let call: GetPokemonConnection = GetPokemonConnection()
         
         call.onCompletion = { (status, error, response) in
+            
+            self.shuffleForTileCounter.decrement()
             
             switch status {
                 

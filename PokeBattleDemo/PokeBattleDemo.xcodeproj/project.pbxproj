@@ -27,6 +27,26 @@
 		539A53751CBCEA74000B83A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539A53741CBCEA74000B83A3 /* AppDelegate.swift */; };
 		539A537C1CBCEA74000B83A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 539A537B1CBCEA74000B83A3 /* Assets.xcassets */; };
 		539A537F1CBCEA74000B83A3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 539A537D1CBCEA74000B83A3 /* LaunchScreen.storyboard */; };
+		53D0A9291CC0F99800AE3858 /* bug.png in Resources */ = {isa = PBXBuildFile; fileRef = 53D0A9171CC0F99800AE3858 /* bug.png */; };
+		53D0A92A1CC0F99800AE3858 /* dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 53D0A9181CC0F99800AE3858 /* dark.png */; };
+		53D0A92B1CC0F99800AE3858 /* dragon.png in Resources */ = {isa = PBXBuildFile; fileRef = 53D0A9191CC0F99800AE3858 /* dragon.png */; };
+		53D0A92C1CC0F99800AE3858 /* electric.png in Resources */ = {isa = PBXBuildFile; fileRef = 53D0A91A1CC0F99800AE3858 /* electric.png */; };
+		53D0A92D1CC0F99800AE3858 /* fairy.png in Resources */ = {isa = PBXBuildFile; fileRef = 53D0A91B1CC0F99800AE3858 /* fairy.png */; };
+		53D0A92E1CC0F99800AE3858 /* fighting.png in Resources */ = {isa = PBXBuildFile; fileRef = 53D0A91C1CC0F99800AE3858 /* fighting.png */; };
+		53D0A92F1CC0F99800AE3858 /* fire.png in Resources */ = {isa = PBXBuildFile; fileRef = 53D0A91D1CC0F99800AE3858 /* fire.png */; };
+		53D0A9301CC0F99800AE3858 /* flying.png in Resources */ = {isa = PBXBuildFile; fileRef = 53D0A91E1CC0F99800AE3858 /* flying.png */; };
+		53D0A9311CC0F99800AE3858 /* ghost.png in Resources */ = {isa = PBXBuildFile; fileRef = 53D0A91F1CC0F99800AE3858 /* ghost.png */; };
+		53D0A9321CC0F99800AE3858 /* grass.png in Resources */ = {isa = PBXBuildFile; fileRef = 53D0A9201CC0F99800AE3858 /* grass.png */; };
+		53D0A9331CC0F99800AE3858 /* ground.png in Resources */ = {isa = PBXBuildFile; fileRef = 53D0A9211CC0F99800AE3858 /* ground.png */; };
+		53D0A9341CC0F99800AE3858 /* ice.png in Resources */ = {isa = PBXBuildFile; fileRef = 53D0A9221CC0F99800AE3858 /* ice.png */; };
+		53D0A9351CC0F99800AE3858 /* normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 53D0A9231CC0F99800AE3858 /* normal.png */; };
+		53D0A9361CC0F99800AE3858 /* poison.png in Resources */ = {isa = PBXBuildFile; fileRef = 53D0A9241CC0F99800AE3858 /* poison.png */; };
+		53D0A9371CC0F99800AE3858 /* psychic.png in Resources */ = {isa = PBXBuildFile; fileRef = 53D0A9251CC0F99800AE3858 /* psychic.png */; };
+		53D0A9381CC0F99800AE3858 /* rock.png in Resources */ = {isa = PBXBuildFile; fileRef = 53D0A9261CC0F99800AE3858 /* rock.png */; };
+		53D0A9391CC0F99800AE3858 /* steel.png in Resources */ = {isa = PBXBuildFile; fileRef = 53D0A9271CC0F99800AE3858 /* steel.png */; };
+		53D0A93A1CC0F99800AE3858 /* water.png in Resources */ = {isa = PBXBuildFile; fileRef = 53D0A9281CC0F99800AE3858 /* water.png */; };
+		53D0A93C1CC0FA8900AE3858 /* PokemonTypeMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D0A93B1CC0FA8900AE3858 /* PokemonTypeMapping.swift */; };
+		53D0A93E1CC10B3000AE3858 /* pokeball.png in Resources */ = {isa = PBXBuildFile; fileRef = 53D0A93D1CC10B3000AE3858 /* pokeball.png */; };
 		B9BC24BEFE4859480D0CFC46 /* Pods_PokeBattleDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18B997C3AA94393664F9936B /* Pods_PokeBattleDemo.framework */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +74,26 @@
 		539A537B1CBCEA74000B83A3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		539A537E1CBCEA74000B83A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		539A53801CBCEA74000B83A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		53D0A9171CC0F99800AE3858 /* bug.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bug.png; sourceTree = "<group>"; };
+		53D0A9181CC0F99800AE3858 /* dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dark.png; sourceTree = "<group>"; };
+		53D0A9191CC0F99800AE3858 /* dragon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dragon.png; sourceTree = "<group>"; };
+		53D0A91A1CC0F99800AE3858 /* electric.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = electric.png; sourceTree = "<group>"; };
+		53D0A91B1CC0F99800AE3858 /* fairy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fairy.png; sourceTree = "<group>"; };
+		53D0A91C1CC0F99800AE3858 /* fighting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fighting.png; sourceTree = "<group>"; };
+		53D0A91D1CC0F99800AE3858 /* fire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fire.png; sourceTree = "<group>"; };
+		53D0A91E1CC0F99800AE3858 /* flying.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flying.png; sourceTree = "<group>"; };
+		53D0A91F1CC0F99800AE3858 /* ghost.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ghost.png; sourceTree = "<group>"; };
+		53D0A9201CC0F99800AE3858 /* grass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grass.png; sourceTree = "<group>"; };
+		53D0A9211CC0F99800AE3858 /* ground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ground.png; sourceTree = "<group>"; };
+		53D0A9221CC0F99800AE3858 /* ice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ice.png; sourceTree = "<group>"; };
+		53D0A9231CC0F99800AE3858 /* normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = normal.png; sourceTree = "<group>"; };
+		53D0A9241CC0F99800AE3858 /* poison.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = poison.png; sourceTree = "<group>"; };
+		53D0A9251CC0F99800AE3858 /* psychic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = psychic.png; sourceTree = "<group>"; };
+		53D0A9261CC0F99800AE3858 /* rock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rock.png; sourceTree = "<group>"; };
+		53D0A9271CC0F99800AE3858 /* steel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = steel.png; sourceTree = "<group>"; };
+		53D0A9281CC0F99800AE3858 /* water.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = water.png; sourceTree = "<group>"; };
+		53D0A93B1CC0FA8900AE3858 /* PokemonTypeMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PokemonTypeMapping.swift; sourceTree = "<group>"; };
+		53D0A93D1CC10B3000AE3858 /* pokeball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pokeball.png; sourceTree = "<group>"; };
 		C83E4AEEE5574E4F4482A3AC /* Pods-PokeBattleDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokeBattleDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PokeBattleDemo/Pods-PokeBattleDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		ED1BFA77714B24C28E6DB468 /* Pods-PokeBattleDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokeBattleDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-PokeBattleDemo/Pods-PokeBattleDemo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -90,7 +130,9 @@
 		53026E271CBFA80900C847D7 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				53D0A9161CC0F99800AE3858 /* Types */,
 				53026E281CBFA82200C847D7 /* NoImageDefault.png */,
+				53D0A93D1CC10B3000AE3858 /* pokeball.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -151,6 +193,7 @@
 				532613921CBD04E6006985F3 /* GetPokemonListResponse.swift */,
 				53026E211CBE55BF00C847D7 /* GetPokemonRequest.swift */,
 				53026E231CBE55CB00C847D7 /* GetPokemonResponse.swift */,
+				53D0A93B1CC0FA8900AE3858 /* PokemonTypeMapping.swift */,
 			);
 			path = Pokemon;
 			sourceTree = "<group>";
@@ -195,6 +238,31 @@
 				539A53801CBCEA74000B83A3 /* Info.plist */,
 			);
 			path = PokeBattleDemo;
+			sourceTree = "<group>";
+		};
+		53D0A9161CC0F99800AE3858 /* Types */ = {
+			isa = PBXGroup;
+			children = (
+				53D0A9171CC0F99800AE3858 /* bug.png */,
+				53D0A9181CC0F99800AE3858 /* dark.png */,
+				53D0A9191CC0F99800AE3858 /* dragon.png */,
+				53D0A91A1CC0F99800AE3858 /* electric.png */,
+				53D0A91B1CC0F99800AE3858 /* fairy.png */,
+				53D0A91C1CC0F99800AE3858 /* fighting.png */,
+				53D0A91D1CC0F99800AE3858 /* fire.png */,
+				53D0A91E1CC0F99800AE3858 /* flying.png */,
+				53D0A91F1CC0F99800AE3858 /* ghost.png */,
+				53D0A9201CC0F99800AE3858 /* grass.png */,
+				53D0A9211CC0F99800AE3858 /* ground.png */,
+				53D0A9221CC0F99800AE3858 /* ice.png */,
+				53D0A9231CC0F99800AE3858 /* normal.png */,
+				53D0A9241CC0F99800AE3858 /* poison.png */,
+				53D0A9251CC0F99800AE3858 /* psychic.png */,
+				53D0A9261CC0F99800AE3858 /* rock.png */,
+				53D0A9271CC0F99800AE3858 /* steel.png */,
+				53D0A9281CC0F99800AE3858 /* water.png */,
+			);
+			path = Types;
 			sourceTree = "<group>";
 		};
 		6B1CFAA39B8E94AD0BCC304E /* Frameworks */ = {
@@ -275,11 +343,30 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53D0A9351CC0F99800AE3858 /* normal.png in Resources */,
+				53D0A93E1CC10B3000AE3858 /* pokeball.png in Resources */,
+				53D0A92B1CC0F99800AE3858 /* dragon.png in Resources */,
+				53D0A93A1CC0F99800AE3858 /* water.png in Resources */,
+				53D0A9311CC0F99800AE3858 /* ghost.png in Resources */,
+				53D0A9291CC0F99800AE3858 /* bug.png in Resources */,
+				53D0A9341CC0F99800AE3858 /* ice.png in Resources */,
 				539A537F1CBCEA74000B83A3 /* LaunchScreen.storyboard in Resources */,
+				53D0A92A1CC0F99800AE3858 /* dark.png in Resources */,
+				53D0A92C1CC0F99800AE3858 /* electric.png in Resources */,
+				53D0A92F1CC0F99800AE3858 /* fire.png in Resources */,
 				53026E291CBFA82200C847D7 /* NoImageDefault.png in Resources */,
 				532613771CBCEC3B006985F3 /* BattleScreenViewController.xib in Resources */,
+				53D0A92E1CC0F99800AE3858 /* fighting.png in Resources */,
+				53D0A9301CC0F99800AE3858 /* flying.png in Resources */,
 				539A537C1CBCEA74000B83A3 /* Assets.xcassets in Resources */,
+				53D0A9331CC0F99800AE3858 /* ground.png in Resources */,
+				53D0A9391CC0F99800AE3858 /* steel.png in Resources */,
+				53D0A9321CC0F99800AE3858 /* grass.png in Resources */,
 				5326137E1CBCEF2C006985F3 /* BattleScreenTile.xib in Resources */,
+				53D0A9381CC0F99800AE3858 /* rock.png in Resources */,
+				53D0A9371CC0F99800AE3858 /* psychic.png in Resources */,
+				53D0A92D1CC0F99800AE3858 /* fairy.png in Resources */,
+				53D0A9361CC0F99800AE3858 /* poison.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,6 +435,7 @@
 				532613801CBCEF5A006985F3 /* BattleScreenTile.swift in Sources */,
 				5326138E1CBD02FD006985F3 /* PokeApiModelBase.swift in Sources */,
 				532613841CBCFFF0006985F3 /* PokeApiRequestBase.swift in Sources */,
+				53D0A93C1CC0FA8900AE3858 /* PokemonTypeMapping.swift in Sources */,
 				5326138C1CBD02BE006985F3 /* PokeApiResponseBase.swift in Sources */,
 				53026E241CBE55CB00C847D7 /* GetPokemonResponse.swift in Sources */,
 				53026E2B1CBFCD0300C847D7 /* PokemonType.swift in Sources */,
