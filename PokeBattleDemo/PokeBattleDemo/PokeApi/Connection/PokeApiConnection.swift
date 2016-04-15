@@ -25,7 +25,6 @@ class PokeApiConnection<RequestType: PokeApiRequestBase, ResponseType: PokeApiRe
     
     init() {
         
-        print("init")
     }
     
     func execute() {

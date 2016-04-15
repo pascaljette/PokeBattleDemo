@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         
-        let viewController = BattleScreenViewController()
+        let viewController = IntroScreenViewController()
         let navigationController = GKNavigationControllerBase(rootViewController: viewController)
         navigationController.navigationBar.translucent = false
         
