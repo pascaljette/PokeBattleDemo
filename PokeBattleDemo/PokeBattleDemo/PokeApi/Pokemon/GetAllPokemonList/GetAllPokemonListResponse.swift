@@ -21,39 +21,25 @@
 // SOFTWARE.
 
 import Foundation
+import SwiftyJSON
 
-class GetPokemonRequest {
+class GetAllPokemonListResponse: PokeApiResponseBase {
     
-    var pokemonFullUrl: String = ""
+    typealias ModelType = AllPokemonList
     
-    required init() {
-
-    }
-    
-    init(fullUrl: String) {
+    required init(json: JSON) {
         
-        self.pokemonFullUrl = fullUrl
-    }
-}
-
-extension GetPokemonRequest : PokeApiRequestBase {
-    
-    var apiPath: String {
+        model = AllPokemonList()
         
-        /// TODO better error handling
-        guard let url: NSURL = NSURL(string: pokemonFullUrl) else {
-            
-            print("could not build URL")
-            return ""
+        if let allPokemon = json["results"].array {
+
+            for pokemon in allPokemon {
+                
+                model.pokemonUrlStrings.append(pokemon["url"].string!)
+            }
         }
-        
-        return url.path ?? ""
     }
     
-    var queryItems: [NSURLQueryItem]? {
-        
-        return [NSURLQueryItem(name: "limit", value: "1000")]
-    }
-
+    // enforce the fact that every response must be associated with a model
+    var model: ModelType
 }
-

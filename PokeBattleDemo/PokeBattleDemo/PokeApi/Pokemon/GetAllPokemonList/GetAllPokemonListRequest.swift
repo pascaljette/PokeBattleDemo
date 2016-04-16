@@ -22,14 +22,14 @@
 
 import Foundation
 
-class GetPokemonListRequest {
+class GetAllPokemonListRequest {
 
     required init() {
 
     }
 }
 
-extension GetPokemonListRequest : PokeApiRequestBase {
+extension GetAllPokemonListRequest : PokeApiRequestBase {
     
     
     var apiPath: String {

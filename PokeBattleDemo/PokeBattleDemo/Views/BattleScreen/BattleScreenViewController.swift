@@ -28,13 +28,7 @@ import GearKit
 // the height of the whole thing
 class BattleScreenViewController : GKViewControllerBase {
     
-    //
-    // MARK: Nested types.
-    //
     
-    typealias GetPokemonListConnection = PokeApiConnection<GetPokemonListRequest, GetPokemonListResponse>
-    typealias GetPokemonConnection = PokeApiConnection<GetPokemonRequest, GetPokemonResponse>
-
     //
     // MARK: IBOutlets.
     //
@@ -58,8 +52,8 @@ class BattleScreenViewController : GKViewControllerBase {
     private var processingTile: BattleScreenTile!
     
     private var pokemonList: AllPokemonList
-    private var initialDrawPlayer1: [Pokemon]
-    private var initialDrawPlayer2: [Pokemon]
+    private var player1: Player
+    private var player2: Player
     
     private var stateMachine: StateMachine = StateMachine()
     
@@ -73,13 +67,13 @@ class BattleScreenViewController : GKViewControllerBase {
     ///
     /// - parameter model: Model to use to initialise the view controller.
     init(pokemonList: AllPokemonList
-        , initialDrawPlayer1: [Pokemon]
-        , initialDrawPlayer2: [Pokemon]
+        , player1: Player
+        , player2: Player
         , pokemonFetcher: PokemonFetcher) {
         
         self.pokemonList = pokemonList
-        self.initialDrawPlayer1 = initialDrawPlayer1
-        self.initialDrawPlayer2 = initialDrawPlayer2
+        self.player1 = player1
+        self.player2 = player2
         self.pokemonFetcher = pokemonFetcher
         
         super.init(nibName: "BattleScreenViewController", bundle: nil)
@@ -132,13 +126,13 @@ class BattleScreenViewController : GKViewControllerBase {
         
         super.viewWillAppear(animated)
         
-        team1poke1.pokemon = initialDrawPlayer1[0]
-        team1poke2.pokemon = initialDrawPlayer1[1]
-        team1poke3.pokemon = initialDrawPlayer1[2]
+        team1poke1.pokemon = player1.pokemonDraw[0]
+        team1poke2.pokemon = player1.pokemonDraw[1]
+        team1poke3.pokemon = player1.pokemonDraw[2]
 
-        team2poke1.pokemon = initialDrawPlayer2[0]
-        team2poke2.pokemon = initialDrawPlayer2[1]
-        team2poke3.pokemon = initialDrawPlayer2[2]
+        team2poke1.pokemon = player2.pokemonDraw[0]
+        team2poke2.pokemon = player2.pokemonDraw[1]
+        team2poke3.pokemon = player2.pokemonDraw[2]
     }
     
     @IBAction func fightButtonPressed(sender: AnyObject) {
@@ -179,13 +173,7 @@ extension BattleScreenViewController : StateMachineDelegate {
             strongSelf.actionButton.setTitle(strongSelf.stateMachine.currentState?.actionButtonText
                 , forState: .Normal)
             
-            strongSelf.team1poke1.imageButton.enabled = false
-            strongSelf.team1poke2.imageButton.enabled = false
-            strongSelf.team1poke3.imageButton.enabled = false
-            
-            strongSelf.team2poke1.imageButton.enabled = false
-            strongSelf.team2poke2.imageButton.enabled = false
-            strongSelf.team2poke3.imageButton.enabled = false
+            strongSelf.setEnabledStatusForAllTiles(false)
         }
     }
     
@@ -225,14 +213,7 @@ extension BattleScreenViewController : StateMachineDelegate {
             strongSelf.actionButton.setTitle(strongSelf.stateMachine.currentState?.actionButtonText
                 , forState: .Normal)
 
-            strongSelf.team1poke1.imageButton.enabled = false
-            strongSelf.team1poke2.imageButton.enabled = false
-            strongSelf.team1poke3.imageButton.enabled = false
-            
-            strongSelf.team2poke1.imageButton.enabled = false
-            strongSelf.team2poke2.imageButton.enabled = false
-            strongSelf.team2poke3.imageButton.enabled = false
-
+            strongSelf.setEnabledStatusForAllTiles(false)
         }
     }
 }
@@ -243,7 +224,14 @@ extension BattleScreenViewController : BattleScreenTileDelegate {
         
         processingTile = sender
         
-        GKThread.dispatchOnUiThread {
+        GKThread.dispatchOnUiThread { [weak self] in
+            
+            guard let strongSelf = self else {
+                
+                return
+            }
+            
+            strongSelf.setEnabledStatusForAllTiles(false)
             
             sender.loading = true
         }
@@ -279,3 +267,17 @@ extension BattleScreenViewController : PokemonFetcherDelegate {
     }
 }
 
+extension BattleScreenViewController {
+    
+    private func setEnabledStatusForAllTiles(enabled: Bool) {
+        
+        team1poke1.imageButton.enabled = enabled
+        team1poke2.imageButton.enabled = enabled
+        team1poke3.imageButton.enabled = enabled
+        
+        team2poke1.imageButton.enabled = enabled
+        team2poke2.imageButton.enabled = enabled
+        team2poke3.imageButton.enabled = enabled
+
+    }
+}

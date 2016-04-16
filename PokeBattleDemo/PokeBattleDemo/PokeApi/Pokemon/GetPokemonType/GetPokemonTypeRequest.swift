@@ -22,21 +22,37 @@
 
 import Foundation
 
-// TODO
-// For some obscure reason, this crashes if made as a struct.
-class Pokemon : PokeApiModelBase {
+class GetPokemonTypeRequest {
     
-    var name: String = ""
-    var spriteUrl: String = ""
-    var types: [PokemonTypeIdentifier] = []
+    var pokemonTypeFullUrl: String = ""
     
     required init() {
         
     }
     
-    init(name: String, spriteUrl: String) {
+    init(fullUrl: String) {
         
-        self.name = name
-        self.spriteUrl = spriteUrl
+        self.pokemonTypeFullUrl = fullUrl
     }
 }
+
+extension GetPokemonTypeRequest : PokeApiRequestBase {
+    
+    var apiPath: String {
+        
+        /// TODO better error handling
+        guard let url: NSURL = NSURL(string: pokemonTypeFullUrl) else {
+            
+            print("could not build URL")
+            return ""
+        }
+        
+        return url.path ?? ""
+    }
+    
+    var queryItems: [NSURLQueryItem]? {
+        
+        return nil
+    }
+}
+

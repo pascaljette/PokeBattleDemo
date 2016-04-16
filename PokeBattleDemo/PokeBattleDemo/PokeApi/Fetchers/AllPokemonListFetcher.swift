@@ -29,7 +29,7 @@ protocol AllPokemonListFetcherDelegate: class {
 
 class AllPokemonListFetcher {
     
-    typealias GetPokemonListConnection = PokeApiConnection<GetPokemonListRequest, GetPokemonListResponse>
+    typealias GetPokemonListConnection = PokeApiConnection<GetAllPokemonListRequest, GetAllPokemonListResponse>
     
     weak var delegate: AllPokemonListFetcherDelegate?
     

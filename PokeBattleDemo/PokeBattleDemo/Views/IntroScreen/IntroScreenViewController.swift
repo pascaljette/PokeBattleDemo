@@ -141,15 +141,18 @@ extension IntroScreenViewController {
                     return
                 }
                 
-                let initialDrawPlayer1 = Array(strongSelf.initialDraw[0..<GlobalConstants.NUMBER_OF_POKEMON_PER_PLAYER])
-                let initialDrawPlayer2 = Array(strongSelf.initialDraw[GlobalConstants.NUMBER_OF_POKEMON_PER_PLAYER..<strongSelf.initialDraw.count])
+                let player1: Player = Player()
+                player1.pokemonDraw = Array(strongSelf.initialDraw[0..<GlobalConstants.NUMBER_OF_POKEMON_PER_PLAYER])
                 
+                let player2: Player = Player()
+                player2.pokemonDraw = Array(strongSelf.initialDraw[GlobalConstants.NUMBER_OF_POKEMON_PER_PLAYER..<strongSelf.initialDraw.count])
+                                
                 let pokemonFetcher = PokemonFetcher(fetcherMode: .RANDOM(strongSelf.pokemonList))
                 
                 strongSelf.navigationController?.pushViewController(
                     BattleScreenViewController(pokemonList: strongSelf.pokemonList
-                        , initialDrawPlayer1: initialDrawPlayer1
-                        , initialDrawPlayer2: initialDrawPlayer2
+                        , player1: player1
+                        , player2: player2
                         , pokemonFetcher: pokemonFetcher)
                     , animated: true)
             }

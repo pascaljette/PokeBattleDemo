@@ -23,20 +23,24 @@
 import Foundation
 import SwiftyJSON
 
-class GetPokemonListResponse: PokeApiResponseBase {
+class GetPokemonResponse: PokeApiResponseBase {
     
-    typealias ModelType = AllPokemonList
+    typealias ModelType = Pokemon
     
     required init(json: JSON) {
         
-        model = AllPokemonList()
+        model = ModelType()
         
-        if let allPokemon = json["results"].array {
-
-            for pokemon in allPokemon {
-                
-                model.pokemonUrlStrings.append(pokemon["url"].string!)
-            }
+        model.name = json["name"].string ?? ""
+        model.spriteUrl = json["sprites"].dictionary?["front_default"]?.string ?? ""
+        
+        for (_, typeElement) in json["types"] {
+            
+            let type = PokemonTypeIdentifier()
+            type.name = typeElement["type"]["name"].string ?? ""
+            type.infoUrl = typeElement["type"]["url"].string ?? ""
+            
+            model.types.append(type)
         }
     }
     
