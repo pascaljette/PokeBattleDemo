@@ -57,7 +57,7 @@ class BattleScreenViewController : GKViewControllerBase {
     
     private var stateMachine: StateMachine = StateMachine()
     
-    private var pokemonFetcher: PokemonFetcher
+    private var pokemonFetcher: RandomPokemonFetcher
     
     //
     // MARK: Initialisation.
@@ -69,7 +69,7 @@ class BattleScreenViewController : GKViewControllerBase {
     init(pokemonList: AllPokemonList
         , player1: Player
         , player2: Player
-        , pokemonFetcher: PokemonFetcher) {
+        , pokemonFetcher: RandomPokemonFetcher) {
         
         self.pokemonList = pokemonList
         self.player1 = player1
@@ -242,7 +242,7 @@ extension BattleScreenViewController : BattleScreenTileDelegate {
 
 }
 
-extension BattleScreenViewController : PokemonFetcherDelegate {
+extension BattleScreenViewController : RandomPokemonFetcherDelegate {
     
     func didGetPokemon(success: Bool, result: Pokemon?, error: NSError?) {
         

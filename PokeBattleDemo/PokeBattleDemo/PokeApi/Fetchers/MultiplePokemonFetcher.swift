@@ -28,7 +28,7 @@ class MultiplePokemonFetcher {
     // MARK: Stored properties
     //
     
-    private var pokemonFetchers: [PokemonFetcher] = []
+    private var pokemonFetchers: [RandomPokemonFetcher] = []
     private var count: Int
     
     private var pokemonArray: [Pokemon] = []
@@ -53,7 +53,7 @@ extension MultiplePokemonFetcher {
         
         for _ in 0..<count {
             
-            let pokemonFetcher = PokemonFetcher(fetcherMode: .RANDOM(allPokemonList))
+            let pokemonFetcher = RandomPokemonFetcher(allPokemonList: allPokemonList)
             pokemonFetcher.delegate = self
             pokemonFetchers.append(pokemonFetcher)
             
@@ -79,7 +79,7 @@ extension MultiplePokemonFetcher {
     }
 }
 
-extension MultiplePokemonFetcher : PokemonFetcherDelegate {
+extension MultiplePokemonFetcher : RandomPokemonFetcherDelegate {
     
     func didGetPokemon(success: Bool, result: Pokemon?, error: NSError?) {
      

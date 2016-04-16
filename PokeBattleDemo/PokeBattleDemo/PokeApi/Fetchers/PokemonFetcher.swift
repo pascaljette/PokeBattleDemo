@@ -22,73 +22,32 @@
 
 import Foundation
 
-protocol PokemonFetcherDelegate: class {
+protocol RandomPokemonFetcherDelegate: class {
     
     func didGetPokemon(success: Bool, result: Pokemon?, error: NSError?)
 }
 
-enum PokemonFetcherMode {
-    
-    // TODO We are not using manual anywhere, consider letting it go.
-    case MANUAL(String)
-    case RANDOM(AllPokemonList)
-}
-
-class PokemonFetcher {
+class RandomPokemonFetcher {
     
     typealias GetPokemonConnection = PokeApiConnection<GetPokemonRequest, GetPokemonResponse>
     
-    weak var delegate: PokemonFetcherDelegate?
- 
-    var pokemonUrl: String
+    weak var delegate: RandomPokemonFetcherDelegate?
     
     // TODO: AllPokemonList stays immutable for the whole lifecycle of the application.
     // Consider making it a singleton to avoid passing it all the time.
     private var allPokemonList: AllPokemonList
     
-    // TODO there really is no reason to keep this here.  Consider making separate classes for random and non random.
-    private var fetcherMode: PokemonFetcherMode
-    
-    init(fetcherMode: PokemonFetcherMode) {
+    init(allPokemonList: AllPokemonList) {
         
-        self.fetcherMode = fetcherMode
-        
-        switch fetcherMode {
-            
-        case .MANUAL(let pokemonUrl):
-            
-            // AllPokemonList is not needed for a manual load
-            self.allPokemonList = AllPokemonList()
-            self.pokemonUrl = pokemonUrl
-            
-        case .RANDOM(let allPokemonList):
-            
-            self.allPokemonList = allPokemonList
-            
-            // TODO will be randomized later (very bad practice, needs to be fixed)
-            self.pokemonUrl = ""
-        }
+        self.allPokemonList = allPokemonList
     }
 }
 
-extension PokemonFetcher {
-    
-    func randomize() {
-        
-        self.pokemonUrl = allPokemonList.pokemonUrlStrings[Int(arc4random_uniform(UInt32(allPokemonList.pokemonUrlStrings.count)))]
-    }
+extension RandomPokemonFetcher {
     
     func fetch() {
         
-        switch fetcherMode {
-            
-        case .RANDOM(_):
-            randomize()
-            
-        case .MANUAL(_):
-            break
-            
-        }
+        let pokemonUrl = allPokemonList.pokemonUrlStrings[Int(arc4random_uniform(UInt32(allPokemonList.pokemonUrlStrings.count)))]
         
         let call: GetPokemonConnection = GetPokemonConnection()
         let getPokemonRequest = GetPokemonRequest(fullUrl: pokemonUrl)

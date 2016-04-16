@@ -147,7 +147,7 @@ extension IntroScreenViewController {
                 let player2: Player = Player()
                 player2.pokemonDraw = Array(strongSelf.initialDraw[GlobalConstants.NUMBER_OF_POKEMON_PER_PLAYER..<strongSelf.initialDraw.count])
                                 
-                let pokemonFetcher = PokemonFetcher(fetcherMode: .RANDOM(strongSelf.pokemonList))
+                let pokemonFetcher = RandomPokemonFetcher(allPokemonList: strongSelf.pokemonList)
                 
                 strongSelf.navigationController?.pushViewController(
                     BattleScreenViewController(pokemonList: strongSelf.pokemonList
@@ -217,7 +217,6 @@ extension IntroScreenViewController : MultiplePokemonFetcherDelegate {
     // MARK: MultiplePokemonFetcherDelegate implementation
     //
     
-    
     func didGetPokemonArray(success: Bool, result: [Pokemon]?, error: NSError?) {
         
         defer {
@@ -250,7 +249,6 @@ extension IntroScreenViewController : MultiplePokemonFetcherDelegate {
             })
         }
     }
-
 }
 
 extension IntroScreenViewController {
