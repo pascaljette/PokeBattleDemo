@@ -9,7 +9,7 @@
 import Foundation
 
 class PokemonType : PokeApiModelBase {
-    
+        
     required init() {
         
     }

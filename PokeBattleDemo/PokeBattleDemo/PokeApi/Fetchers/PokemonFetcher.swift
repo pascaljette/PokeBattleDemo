@@ -62,7 +62,18 @@ extension RandomPokemonFetcher {
             switch status {
                 
             case .Success:
-                strongSelf.delegate?.didGetPokemon(true, result: response?.model, error: nil)
+                strongSelf.delegate?.didGetPokemon(true, result: response!.model, error: nil)
+                
+                // Cache the types right now.
+                for typeIdentifier in response!.model.types {
+                    
+                    let pokemonTypeFetcher: PokemontTypeFetcher = PokemontTypeFetcher(pokemonTypeIdentifier: typeIdentifier)
+                    
+                    pokemonTypeFetcher.fetch()
+                }
+                
+                // Cache the type right now
+                
                 
             case .ConnectionError:
                 strongSelf.delegate?.didGetPokemon(false, result: nil, error: error)

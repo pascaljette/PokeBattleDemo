@@ -151,6 +151,25 @@ extension BattleScreenViewController : StateMachineDelegate {
     
     func didPressFightButton() {
         
+        // TODO we shouldn't need to rebuild here
+        let player1: Player = Player()
+        player1.pokemonDraw = [team1poke1.pokemon!, team1poke2.pokemon!, team1poke3.pokemon!]
+        
+        let player2: Player = Player()
+        player1.pokemonDraw = [team2poke1.pokemon!, team2poke2.pokemon!, team2poke3.pokemon!]
+        
+        let player1Damage = 0
+        let player2Damage = 0
+        
+        // Calculate the damage from player1 to player2
+        for pokemon in player1.pokemonDraw {
+            
+            for opposingPokemon in player2.pokemonDraw {
+                
+                
+            }
+        }
+        
         print("fight")
     }
     

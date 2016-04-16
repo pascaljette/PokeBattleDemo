@@ -21,10 +21,14 @@
 // SOFTWARE.
 
 import Foundation
+import UIKit
 
 // TODO
 // For some obscure reason, this crashes if made as a struct.
 class Pokemon : PokeApiModelBase {
+    
+    // TODO this should probably be configurable
+    private let BASE_DAMAGE: CGFloat = CGFloat(50.0)
     
     var name: String = ""
     var spriteUrl: String = ""
@@ -38,5 +42,13 @@ class Pokemon : PokeApiModelBase {
         
         self.name = name
         self.spriteUrl = spriteUrl
+    }
+    
+    func damageAgainstPokemon(otherPokemon: Pokemon) {
+        
+        let selfTypes: [PokemonType] = []
+        let otherTypes: [PokemonType] = []
+
+        
     }
 }

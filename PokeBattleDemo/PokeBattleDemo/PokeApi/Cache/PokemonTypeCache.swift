@@ -13,7 +13,6 @@ struct PokemonTypeCache {
     
     private init() {
     
-    
     }
     
     static var cachedType: [PokemonType] = []
