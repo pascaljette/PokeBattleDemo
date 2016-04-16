@@ -83,7 +83,10 @@ extension MultiplePokemonFetcher : PokemonFetcherDelegate {
     
     func didGetPokemon(success: Bool, result: Pokemon?, error: NSError?) {
      
-        dispatch_group_leave(dispatchGroup)
+        defer {
+            
+            dispatch_group_leave(dispatchGroup)
+        }
 
         guard let pokemonInstance = result where success == true else {
             
