@@ -22,9 +22,14 @@
 
 import Foundation
 
-
-protocol PokeApiModelBase {
+// TODO
+// For some obscure reason, this crashes if made as a struct.
+class AllPokemonList : PokeApiModelBase {
     
-    // Required init for populating with JSON data
-    init()
+    required init() {
+        
+        
+    }
+    
+    var pokemonUrlStrings: [String] = []
 }

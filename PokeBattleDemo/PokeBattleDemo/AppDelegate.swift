@@ -20,7 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         
-        let viewController = IntroScreenViewController()
+        let viewController = IntroScreenViewController(allPokemonListFetcher: AllPokemonListFetcher()
+            , multiplePokemonFetcher: MultiplePokemonFetcher(count: GlobalConstants.NUMBER_OF_POKEMON_PER_PLAYER * 2))
+        
         let navigationController = GKNavigationControllerBase(rootViewController: viewController)
         navigationController.navigationBar.translucent = false
         

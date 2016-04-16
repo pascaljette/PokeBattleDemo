@@ -22,21 +22,47 @@
 
 import Foundation
 
-// TODO
-// For some obscure reason, this crashes if made as a struct.
-class Pokemon : PokeApiModelBase {
+protocol AllPokemonListFetcherDelegate: class {
     
-    var name: String = ""
-    var spriteUrl: String = ""
-    var types: [PokemonType] = []
+    func didGetAllPokemonList(success: Bool, result: AllPokemonList?, error: NSError?)
+}
+
+class AllPokemonListFetcher {
     
-    required init() {
+    typealias GetPokemonListConnection = PokeApiConnection<GetPokemonListRequest, GetPokemonListResponse>
+    
+    weak var delegate: AllPokemonListFetcherDelegate?
+    
+}
+
+
+extension AllPokemonListFetcher {
         
-    }
-    
-    init(name: String, spriteUrl: String) {
+    func fetch() {
         
-        self.name = name
-        self.spriteUrl = spriteUrl
+        let call: GetPokemonListConnection = GetPokemonListConnection()
+        
+        call.onCompletion = { [weak self] (status, error, response) in
+            
+            guard let strongSelf = self else {
+                
+                return
+            }
+            
+            switch status {
+                
+            case .Success:
+                strongSelf.delegate?.didGetAllPokemonList(true, result: response?.model, error: nil)
+                
+            case .ConnectionError:
+                strongSelf.delegate?.didGetAllPokemonList(false, result: nil, error: error)
+                
+            case .UrlError:
+                strongSelf.delegate?.didGetAllPokemonList(false, result: nil, error: error)
+            }
+        }
+        
+        call.execute()
     }
 }
+
