@@ -29,6 +29,7 @@ protocol PokemonFetcherDelegate: class {
 
 enum PokemonFetcherMode {
     
+    // TODO We are not using manual anywhere, consider letting it go.
     case MANUAL(String)
     case RANDOM(AllPokemonList)
 }
@@ -41,22 +42,53 @@ class PokemonFetcher {
  
     var pokemonUrl: String
     
+    // TODO: AllPokemonList stays immutable for the whole lifecycle of the application.
+    // Consider making it a singleton to avoid passing it all the time.
+    private var allPokemonList: AllPokemonList
+    
+    // TODO there really is no reason to keep this here.  Consider making separate classes for random and non random.
+    private var fetcherMode: PokemonFetcherMode
+    
     init(fetcherMode: PokemonFetcherMode) {
+        
+        self.fetcherMode = fetcherMode
         
         switch fetcherMode {
             
         case .MANUAL(let pokemonUrl):
+            
+            // AllPokemonList is not needed for a manual load
+            self.allPokemonList = AllPokemonList()
             self.pokemonUrl = pokemonUrl
             
         case .RANDOM(let allPokemonList):
-            self.pokemonUrl = allPokemonList.pokemonUrlStrings[Int(arc4random_uniform(UInt32(allPokemonList.pokemonUrlStrings.count)))]
+            
+            self.allPokemonList = allPokemonList
+            
+            // TODO will be randomized later (very bad practice, needs to be fixed)
+            self.pokemonUrl = ""
         }
     }
 }
 
 extension PokemonFetcher {
     
+    func randomize() {
+        
+        self.pokemonUrl = allPokemonList.pokemonUrlStrings[Int(arc4random_uniform(UInt32(allPokemonList.pokemonUrlStrings.count)))]
+    }
+    
     func fetch() {
+        
+        switch fetcherMode {
+            
+        case .RANDOM(_):
+            randomize()
+            
+        case .MANUAL(_):
+            break
+            
+        }
         
         let call: GetPokemonConnection = GetPokemonConnection()
         let getPokemonRequest = GetPokemonRequest(fullUrl: pokemonUrl)

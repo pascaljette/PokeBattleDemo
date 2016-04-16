@@ -98,6 +98,7 @@
                 <constraint firstItem="khQ-3F-y5e" firstAttribute="trailing" secondItem="N69-zq-ZcQ" secondAttribute="trailing" id="kZh-gH-Dh0"/>
                 <constraint firstItem="fla-eF-kl5" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ySH-Hj-DAD"/>
             </constraints>
+            <point key="canvasLocation" x="178" y="141"/>
         </view>
     </objects>
 </document>

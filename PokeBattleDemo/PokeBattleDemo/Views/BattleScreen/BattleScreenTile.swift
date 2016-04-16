@@ -23,6 +23,12 @@
 import Foundation
 import GearKit
 
+protocol BattleScreenTileDelegate: class {
+    
+    func tileButtonPressed(sender: BattleScreenTile)
+}
+
+// TODO fix all these dispatch to UI thread, they are unacceptable.
 class BattleScreenTile: UIView {
     
     @IBOutlet weak var nameLabel: UILabel!
@@ -30,19 +36,33 @@ class BattleScreenTile: UIView {
     @IBOutlet weak var imageButton: UIButton!
     
     @IBOutlet weak var typeImage1: UIImageView!
+    
     @IBOutlet weak var typeImage2: UIImageView!
     
     @IBOutlet weak var view: UIView!
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
-    func setLoading() {
+    weak var delegate: BattleScreenTileDelegate?
+    
+    var loading: Bool = false {
         
-        nameLabel.text = nil
-        typeImage1.image = nil
-        typeImage2.image = nil
-        imageButton.setBackgroundImage(nil, forState: .Normal)
-        activityIndicator.startAnimating()
+        didSet {
+         
+            if loading {
+                
+                nameLabel.text = nil
+                typeImage1.image = nil
+                typeImage2.image = nil
+                imageButton.setBackgroundImage(nil, forState: .Normal)
+                activityIndicator.startAnimating()
+            
+            } else {
+                
+                activityIndicator.stopAnimating()
+            }
+        }
+        
     }
     
     var pokemon: Pokemon? {
@@ -58,7 +78,7 @@ class BattleScreenTile: UIView {
                     self.imageButton.setBackgroundImage(nil, forState: .Normal)
                 }
                 
-                activityIndicator.stopAnimating()
+                loading = false
                 return
             }
             
@@ -83,9 +103,9 @@ class BattleScreenTile: UIView {
                 GKThread.dispatchOnUiThread {
 
                     self.imageButton.setBackgroundImage(UIImage(named: "NoImageDefault.png"), forState: .Normal)
+                    self.loading = false
                 }
                 
-                activityIndicator.stopAnimating()
                 return
             }
             
@@ -98,7 +118,7 @@ class BattleScreenTile: UIView {
                 
                 GKThread.dispatchOnUiThread {
                     
-                    strongSelf.activityIndicator.stopAnimating()
+                    strongSelf.loading = false
                 }
                 
                 // TODO Error handling!
@@ -157,6 +177,6 @@ extension BattleScreenTile {
     
     @IBAction func imageButtonPressed(sender: AnyObject) {
         
-        print("image button pressed")
+        delegate?.tileButtonPressed(self)
     }
 }

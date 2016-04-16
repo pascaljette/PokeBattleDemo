@@ -37,6 +37,8 @@ class PokeApiConnection<RequestType: PokeApiRequestBase, ResponseType: PokeApiRe
     
     var onCompletion: OnCompletion?
     
+    private var task: NSURLSessionTask?
+    
     init() {
         
     }
@@ -61,7 +63,7 @@ class PokeApiConnection<RequestType: PokeApiRequestBase, ResponseType: PokeApiRe
             return
         }
         
-        let task = NSURLSession.sharedSession().dataTaskWithURL(requestFullUrl) {(data, response, error) in
+        self.task = NSURLSession.sharedSession().dataTaskWithURL(requestFullUrl) {(data, response, error) in
             
             guard error == nil else {
                 
@@ -79,6 +81,6 @@ class PokeApiConnection<RequestType: PokeApiRequestBase, ResponseType: PokeApiRe
             }
         }
         
-        task.resume()
+        task!.resume()
     }
 }
