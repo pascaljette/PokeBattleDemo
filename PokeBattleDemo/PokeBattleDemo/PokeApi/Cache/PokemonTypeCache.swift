@@ -14,6 +14,15 @@ class PokemonTypeCache {
     // Singleton pattern
     static let sharedInstance = PokemonTypeCache()
     
+    // TODO this should be a dictionary to be able to clear when multiple calls are made.
+    // Right now we are using this only to keep references to the fetchers so they don't
+    // get de-allocated.
+    private var activeFetchers: [PokemonTypeFetcher] = []
+    
+    var dispatchGroup = dispatch_group_create()
+    
+    var registerCompletion: (() -> Void)?
+    
     private init() {
     
     }
@@ -24,11 +33,22 @@ class PokemonTypeCache {
             
             downloadAndCache(identifier)
         }
+        
+        dispatch_group_notify(dispatchGroup, dispatch_get_main_queue()) {
+            
+            self.activeFetchers = []
+            self.registerCompletion?()
+        }
     }
     
-    func downloadAndCache(pokemonTypeIdentifier: PokemonTypeIdentifier) {
+    private func downloadAndCache(pokemonTypeIdentifier: PokemonTypeIdentifier) {
         
         let pokemonTypeFetcher: PokemonTypeFetcher = PokemonTypeFetcher(pokemonTypeIdentifier: pokemonTypeIdentifier)
+        pokemonTypeFetcher.delegate = self
+        
+        dispatch_group_enter(dispatchGroup)
+        
+        activeFetchers.append(pokemonTypeFetcher)
         
         pokemonTypeFetcher.fetch()
     }
@@ -44,4 +64,20 @@ class PokemonTypeCache {
     }
     
     var cachedTypes: [PokemonType] = []
+}
+
+extension PokemonTypeCache : PokemonTypeFetcherDelegate {
+    
+    func didGetPokemonType(success: Bool, result: PokemonType?, error: NSError?) {
+        
+        dispatch_group_leave(dispatchGroup)
+        
+        if let typeInstance = result where success == true {
+            
+            if !cachedTypes.contains( {$0.typeIdentifier.name == typeInstance.typeIdentifier.name} ) {
+                
+                cachedTypes.append(typeInstance)
+            }
+        }
+    }
 }

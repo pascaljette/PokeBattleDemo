@@ -39,6 +39,11 @@ class PokemonTypeFetcher {
         
         self.pokemonTypeIdentifier = pokemonTypeIdentifier
     }
+    
+    deinit {
+        
+        print("deinit fetcher with name \(pokemonTypeIdentifier.name)")
+    }
 }
 
 extension PokemonTypeFetcher {
