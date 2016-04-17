@@ -22,42 +22,47 @@
 
 import Foundation
 
-protocol PokeApiRequestBase {
+protocol AllPokemonListFetcherDelegate: class {
     
-    init()
-    
-    var apiPath: String { get }
-    var queryItems: [NSURLQueryItem]? { get }
+    func didGetAllPokemonList(success: Bool, result: AllPokemonList?, error: NSError?)
 }
 
-extension PokeApiRequestBase {
+class AllPokemonListFetcher {
     
-    var baseUrlString: String {
-        
-        return GlobalConstants.POKEAPI_BASE_URL
-    }
+    typealias GetPokemonListConnection = PokeApiConnection<GetAllPokemonListRequest, GetAllPokemonListResponse>
     
-    var absoluteUrl: NSURL? {
+    weak var delegate: AllPokemonListFetcherDelegate?
+    
+}
+
+
+extension AllPokemonListFetcher {
         
-        guard let url: NSURL = NSURL(string: baseUrlString) else {
+    func fetch() {
+        
+        let call: GetPokemonListConnection = GetPokemonListConnection()
+        
+        call.onCompletion = { [weak self] (status, error, response) in
             
-            print("Could not form url from string \(baseUrlString)")
-            return nil;
-        }
-        
-        guard let components: NSURLComponents = NSURLComponents(URL: url, resolvingAgainstBaseURL: true) else {
-            
-            print("Could not find URL components from string \(baseUrlString)")
-            return nil;
-        }
-        
-        // NSURLComponents does not get fully initialized, even passing a NSURL in its constructor.
-        // We must do it manually.  There might be a better way (XCode 7.2)
-        components.scheme = url.scheme
-        components.host = url.host
-        components.path = apiPath
-        components.queryItems = queryItems
+            guard let strongSelf = self else {
                 
-        return components.URL;
+                return
+            }
+            
+            switch status {
+                
+            case .Success:
+                strongSelf.delegate?.didGetAllPokemonList(true, result: response?.model, error: nil)
+                
+            case .ConnectionError:
+                strongSelf.delegate?.didGetAllPokemonList(false, result: nil, error: error)
+                
+            case .UrlError:
+                strongSelf.delegate?.didGetAllPokemonList(false, result: nil, error: error)
+            }
+        }
+        
+        call.execute()
     }
 }
+

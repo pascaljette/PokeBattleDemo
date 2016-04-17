@@ -21,10 +21,29 @@
 // SOFTWARE.
 
 import Foundation
+import SwiftyJSON
 
-
-protocol PokeApiModelBase {
+class GetPokemonResponse: PokeApiResponseBase {
     
-    // Required init for populating with JSON data
-    init()
+    typealias ModelType = Pokemon
+    
+    required init(json: JSON) {
+        
+        model = ModelType()
+        
+        model.name = json["name"].string ?? ""
+        model.spriteUrl = json["sprites"].dictionary?["front_default"]?.string ?? ""
+        
+        for (_, typeElement) in json["types"] {
+            
+            let type = PokemonTypeIdentifier()
+            type.name = typeElement["type"]["name"].string ?? ""
+            type.infoUrl = typeElement["type"]["url"].string ?? ""
+            
+            model.types.append(type)
+        }
+    }
+    
+    // enforce the fact that every response must be associated with a model
+    var model: ModelType
 }

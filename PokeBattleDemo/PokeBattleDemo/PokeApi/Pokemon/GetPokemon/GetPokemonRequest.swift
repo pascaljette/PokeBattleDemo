@@ -22,9 +22,38 @@
 
 import Foundation
 
-
-protocol PokeApiModelBase {
+class GetPokemonRequest {
     
-    // Required init for populating with JSON data
-    init()
+    var pokemonFullUrl: String = ""
+    
+    required init() {
+
+    }
+    
+    init(fullUrl: String) {
+        
+        self.pokemonFullUrl = fullUrl
+    }
 }
+
+extension GetPokemonRequest : PokeApiRequestBase {
+    
+    var apiPath: String {
+        
+        /// TODO better error handling
+        guard let url: NSURL = NSURL(string: pokemonFullUrl) else {
+            
+            print("could not build URL")
+            return ""
+        }
+        
+        return url.path ?? ""
+    }
+    
+    var queryItems: [NSURLQueryItem]? {
+        
+        return nil
+    }
+
+}
+

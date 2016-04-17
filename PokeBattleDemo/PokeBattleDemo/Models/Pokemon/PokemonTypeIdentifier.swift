@@ -22,9 +22,12 @@
 
 import Foundation
 
-
-protocol PokeApiModelBase {
+class PokemonTypeIdentifier : PokeApiModelBase {
     
-    // Required init for populating with JSON data
-    init()
+    required init() {
+        
+    }
+    
+    var name: String = ""
+    var infoUrl: String = ""
 }

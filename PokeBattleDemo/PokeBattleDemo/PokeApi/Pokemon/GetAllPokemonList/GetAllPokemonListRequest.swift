@@ -22,9 +22,23 @@
 
 import Foundation
 
+class GetAllPokemonListRequest {
 
-protocol PokeApiModelBase {
+    required init() {
+
+    }
+}
+
+extension GetAllPokemonListRequest : PokeApiRequestBase {
     
-    // Required init for populating with JSON data
-    init()
+    
+    var apiPath: String {
+        
+        return "/api/v2/pokemon"
+    }
+    
+    var queryItems: [NSURLQueryItem]? {
+        
+        return [NSURLQueryItem(name: "limit", value: "1000")]
+    }
 }

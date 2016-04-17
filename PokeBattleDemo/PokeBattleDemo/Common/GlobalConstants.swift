@@ -14,4 +14,8 @@ final class GlobalConstants {
     class var POKEAPI_BASE_URL: String {
         return "http://pokeapi.co"
     }
+    
+    class var NUMBER_OF_POKEMON_PER_PLAYER: Int {
+        return NSBundle.mainBundle().objectForInfoDictionaryKey("PokemonCountPerPlayer") as! Int
+    }
 }

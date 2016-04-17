@@ -21,10 +21,26 @@
 // SOFTWARE.
 
 import Foundation
+import UIKit
 
-
-protocol PokeApiModelBase {
+// TODO
+// For some obscure reason, this crashes if made as a struct.
+class Pokemon : PokeApiModelBase {
     
-    // Required init for populating with JSON data
-    init()
+    // TODO this should probably be configurable
+    private let BASE_DAMAGE: CGFloat = CGFloat(50.0)
+    
+    var name: String = ""
+    var spriteUrl: String = ""
+    var types: [PokemonTypeIdentifier] = []
+    
+    required init() {
+        
+    }
+    
+    init(name: String, spriteUrl: String) {
+        
+        self.name = name
+        self.spriteUrl = spriteUrl
+    }    
 }
