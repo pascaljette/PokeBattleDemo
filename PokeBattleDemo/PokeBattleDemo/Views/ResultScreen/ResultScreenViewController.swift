@@ -110,3 +110,15 @@ extension ResultScreenViewController {
     }
 }
 
+extension ResultScreenViewController {
+    
+    //
+    // MARK: IBAction
+    //
+
+    @IBAction func oneMoreButtonPressed(sender: AnyObject) {
+        
+        self.navigationController?.popToRootViewControllerAnimated(true)
+    }
+    
+}

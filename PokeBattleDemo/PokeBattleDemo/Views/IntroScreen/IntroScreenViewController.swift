@@ -141,6 +141,8 @@ extension IntroScreenViewController {
                     return
                 }
                 
+                strongSelf.loading = false
+                
                 let player1: Player = Player(id: .PLAYER_1, pokemonDraw: Array(strongSelf.initialDraw[0..<GlobalConstants.NUMBER_OF_POKEMON_PER_PLAYER]))
 
                 let player2: Player = Player(id: .PLAYER_2, pokemonDraw: Array(strongSelf.initialDraw[GlobalConstants.NUMBER_OF_POKEMON_PER_PLAYER..<strongSelf.initialDraw.count]))
