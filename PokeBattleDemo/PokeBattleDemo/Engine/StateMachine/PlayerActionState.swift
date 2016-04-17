@@ -8,12 +8,6 @@
 
 import Foundation
 
-enum PlayerId {
-    
-    case PLAYER_1
-    case PLAYER_2
-}
-
 protocol PlayerActionStateDelegate: class {
     
     func didPressSkipButton()

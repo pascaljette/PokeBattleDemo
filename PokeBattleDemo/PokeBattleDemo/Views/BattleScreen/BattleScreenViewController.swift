@@ -59,6 +59,8 @@ class BattleScreenViewController : GKViewControllerBase {
     
     private var pokemonFetcher: RandomPokemonFetcher
     
+    private var battleEngine: BattleEngine
+    
     //
     // MARK: Initialisation.
     //
@@ -69,12 +71,14 @@ class BattleScreenViewController : GKViewControllerBase {
     init(pokemonList: AllPokemonList
         , player1: Player
         , player2: Player
-        , pokemonFetcher: RandomPokemonFetcher) {
+        , pokemonFetcher: RandomPokemonFetcher
+        , battleEngine: BattleEngine) {
         
         self.pokemonList = pokemonList
         self.player1 = player1
         self.player2 = player2
         self.pokemonFetcher = pokemonFetcher
+        self.battleEngine = battleEngine
         
         super.init(nibName: "BattleScreenViewController", bundle: nil)
         
@@ -145,37 +149,23 @@ extension BattleScreenViewController : StateMachineDelegate {
     
     func didPressSkipButton() {
         
-        print("skip")
         stateMachine.proceedToNextState()
     }
     
     func didPressFightButton() {
         
         // TODO we shouldn't need to rebuild here
-        let player1: Player = Player()
         player1.pokemonDraw = [team1poke1.pokemon!, team1poke2.pokemon!, team1poke3.pokemon!]
-        
-        let player2: Player = Player()
-        player1.pokemonDraw = [team2poke1.pokemon!, team2poke2.pokemon!, team2poke3.pokemon!]
-        
-        let player1Damage = 0
-        let player2Damage = 0
-        
-        // Calculate the damage from player1 to player2
-        for pokemon in player1.pokemonDraw {
-            
-            for opposingPokemon in player2.pokemonDraw {
+        player2.pokemonDraw = [team2poke1.pokemon!, team2poke2.pokemon!, team2poke3.pokemon!]
+
+        let battleResult = battleEngine.fight(player1: player1, player2: player2)
                 
-                
-            }
-        }
+        self.navigationController?.pushViewController(ResultScreenViewController(battleResult: battleResult), animated: true)
         
-        print("fight")
     }
     
     func didPressStartButton() {
         
-        print("start")
         stateMachine.proceedToNextState()
     }
 

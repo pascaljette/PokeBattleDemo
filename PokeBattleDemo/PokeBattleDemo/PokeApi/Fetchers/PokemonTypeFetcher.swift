@@ -27,7 +27,7 @@ protocol PokemonTypeFetcherDelegate: class {
     func didGetPokemonType(success: Bool, result: PokemonType?, error: NSError?)
 }
 
-class PokemontTypeFetcher {
+class PokemonTypeFetcher {
     
     typealias GetPokemonTypeConnection = PokeApiConnection<GetPokemonTypeRequest, GetPokemonTypeResponse>
     
@@ -41,12 +41,12 @@ class PokemontTypeFetcher {
     }
 }
 
-extension PokemontTypeFetcher {
+extension PokemonTypeFetcher {
     
     func fetch() {
         
         // Check the cache first
-        for cachedType in PokemonTypeCache.cachedType {
+        for cachedType in PokemonTypeCache.sharedInstance.cachedTypes {
             
             if cachedType.typeIdentifier.name == self.pokemonTypeIdentifier.name {
                 

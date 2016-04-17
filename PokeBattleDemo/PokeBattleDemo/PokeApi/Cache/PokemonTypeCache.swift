@@ -9,11 +9,39 @@
 import Foundation
 
 
-struct PokemonTypeCache {
+class PokemonTypeCache {
+    
+    // Singleton pattern
+    static let sharedInstance = PokemonTypeCache()
     
     private init() {
     
     }
     
-    static var cachedType: [PokemonType] = []
+    func downloadAndCacheMultiple(allIdentifiers: [PokemonTypeIdentifier]) {
+        
+        for identifier in allIdentifiers {
+            
+            downloadAndCache(identifier)
+        }
+    }
+    
+    func downloadAndCache(pokemonTypeIdentifier: PokemonTypeIdentifier) {
+        
+        let pokemonTypeFetcher: PokemonTypeFetcher = PokemonTypeFetcher(pokemonTypeIdentifier: pokemonTypeIdentifier)
+        
+        pokemonTypeFetcher.fetch()
+    }
+    
+    func isCachedForIdentifier(pokemonTypeIdentifier: PokemonTypeIdentifier) -> Bool {
+        
+        return cachedTypeForIdentifier(pokemonTypeIdentifier) != nil
+    }
+    
+    func cachedTypeForIdentifier(pokemonTypeIdentifier: PokemonTypeIdentifier) -> PokemonType? {
+        
+        return cachedTypes.filter( { $0.typeIdentifier.name == pokemonTypeIdentifier.name } ).first
+    }
+    
+    var cachedTypes: [PokemonType] = []
 }

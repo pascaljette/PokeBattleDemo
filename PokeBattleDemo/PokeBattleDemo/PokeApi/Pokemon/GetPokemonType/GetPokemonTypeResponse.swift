@@ -68,19 +68,10 @@ class GetPokemonTypeResponse: PokeApiResponseBase {
             
             model.doubleDamageToTypes.append(type)
         }
-        
-        var typeIsCached = false
-        for cachedType in PokemonTypeCache.cachedType {
-            
-            if cachedType.typeIdentifier.name == model.typeIdentifier.name {
                 
-                typeIsCached = true
-            }
-        }
-        
-        if !typeIsCached {
+        if !PokemonTypeCache.sharedInstance.cachedTypes.contains( {$0.typeIdentifier.name == model.typeIdentifier.name} ) {
             
-            PokemonTypeCache.cachedType.append(model)
+            PokemonTypeCache.sharedInstance.cachedTypes.append(model)
         }
     }
     

@@ -42,13 +42,5 @@ class Pokemon : PokeApiModelBase {
         
         self.name = name
         self.spriteUrl = spriteUrl
-    }
-    
-    func damageAgainstPokemon(otherPokemon: Pokemon) {
-        
-        let selfTypes: [PokemonType] = []
-        let otherTypes: [PokemonType] = []
-
-        
-    }
+    }    
 }
