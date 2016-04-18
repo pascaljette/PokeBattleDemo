@@ -19,9 +19,9 @@ class PokemonTypeCache {
     // get de-allocated.
     private var activeFetchers: [PokemonTypeFetcher] = []
     
-    var dispatchGroup = dispatch_group_create()
+    private var activeMultipleFetchers: [MultiplePokemonTypeFetcher] = []
     
-    var registerCompletion: (() -> Void)?
+    var dispatchGroup = dispatch_group_create()
     
     private init() {
     
@@ -29,16 +29,14 @@ class PokemonTypeCache {
     
     func downloadAndCacheMultiple(allIdentifiers: [PokemonTypeIdentifier]) {
         
-        for identifier in allIdentifiers {
-            
-            downloadAndCache(identifier)
-        }
+        let multipleTypeFetcher = MultiplePokemonTypeFetcher(pokemonTypeIdentifiers: allIdentifiers)
+        multipleTypeFetcher.delegate = self
         
-        dispatch_group_notify(dispatchGroup, dispatch_get_main_queue()) {
-            
-            self.activeFetchers = []
-            self.registerCompletion?()
-        }
+        dispatch_group_enter(dispatchGroup)
+        
+        activeMultipleFetchers.append(multipleTypeFetcher)
+        
+        multipleTypeFetcher.fetch()
     }
     
     private func downloadAndCache(pokemonTypeIdentifier: PokemonTypeIdentifier) {
@@ -68,9 +66,14 @@ class PokemonTypeCache {
 
 extension PokemonTypeCache : PokemonTypeFetcherDelegate {
     
-    func didGetPokemonType(success: Bool, result: PokemonType?, error: NSError?) {
+    func didGetPokemonType(fetcher: PokemonTypeFetcher, success: Bool, result: PokemonType?, error: NSError?) {
         
-        dispatch_group_leave(dispatchGroup)
+        defer {
+            
+            dispatch_group_leave(dispatchGroup)
+            activeFetchers = activeFetchers.filter( { $0 !== fetcher} )
+
+        }
         
         if let typeInstance = result where success == true {
             
@@ -81,3 +84,27 @@ extension PokemonTypeCache : PokemonTypeFetcherDelegate {
         }
     }
 }
+
+extension PokemonTypeCache : MultiplePokemonTypeFetcherDelegate {
+    
+    func didGetPokemonTypeArray(fetcher: MultiplePokemonTypeFetcher, success: Bool, result: [PokemonType]?, error: NSError?) {
+    
+        defer {
+            
+            dispatch_group_leave(dispatchGroup)
+            activeMultipleFetchers = activeMultipleFetchers.filter( { $0 !== fetcher} )
+        }
+        
+        if let typeArrayInstance = result where success == true {
+            
+            for typeInstance in typeArrayInstance {
+                
+                if !cachedTypes.contains( {$0.typeIdentifier.name == typeInstance.typeIdentifier.name} ) {
+                    
+                    cachedTypes.append(typeInstance)
+                }
+            }
+        }
+    }
+}
+

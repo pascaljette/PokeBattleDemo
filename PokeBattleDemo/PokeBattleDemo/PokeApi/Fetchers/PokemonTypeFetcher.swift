@@ -24,7 +24,7 @@ import Foundation
 
 protocol PokemonTypeFetcherDelegate: class {
     
-    func didGetPokemonType(success: Bool, result: PokemonType?, error: NSError?)
+    func didGetPokemonType(fetcher: PokemonTypeFetcher, success: Bool, result: PokemonType?, error: NSError?)
 }
 
 class PokemonTypeFetcher {
@@ -39,11 +39,6 @@ class PokemonTypeFetcher {
         
         self.pokemonTypeIdentifier = pokemonTypeIdentifier
     }
-    
-    deinit {
-        
-        print("deinit fetcher with name \(pokemonTypeIdentifier.name)")
-    }
 }
 
 extension PokemonTypeFetcher {
@@ -55,7 +50,7 @@ extension PokemonTypeFetcher {
             
             if cachedType.typeIdentifier.name == self.pokemonTypeIdentifier.name {
                 
-                delegate?.didGetPokemonType(true, result: cachedType, error: nil)
+                delegate?.didGetPokemonType(self, success: true, result: cachedType, error: nil)
             }
         }
         
@@ -72,13 +67,13 @@ extension PokemonTypeFetcher {
             switch status {
                 
             case .Success:
-                strongSelf.delegate?.didGetPokemonType(true, result: response!.model, error: nil)
+                strongSelf.delegate?.didGetPokemonType(strongSelf, success: true, result: response!.model, error: nil)
                                 
             case .ConnectionError:
-                strongSelf.delegate?.didGetPokemonType(false, result: nil, error: error)
+                strongSelf.delegate?.didGetPokemonType(strongSelf, success: false, result: nil, error: error)
                 
             case .UrlError:
-                strongSelf.delegate?.didGetPokemonType(false, result: nil, error: error)
+                strongSelf.delegate?.didGetPokemonType(strongSelf, success: false, result: nil, error: error)
             }
         }
         

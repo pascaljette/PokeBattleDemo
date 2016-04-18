@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 protocol GameState {
     
     var nextState: GameState? { get set }

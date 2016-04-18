@@ -10,7 +10,6 @@ import Foundation
 
 class BattleEngine {
 
-    
     private var BASE_DAMAGE: Double {
         return 10.0
     }

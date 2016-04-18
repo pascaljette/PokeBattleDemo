@@ -17,6 +17,7 @@
 		539A537F1CBCEA74000B83A3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 539A537D1CBCEA74000B83A3 /* LaunchScreen.storyboard */; };
 		53CEEE6C1CC3891F0045C596 /* BattleResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CEEE6B1CC3891F0045C596 /* BattleResult.swift */; };
 		53CEEE6E1CC389BD0045C596 /* PlayerResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CEEE6D1CC389BD0045C596 /* PlayerResult.swift */; };
+		53CEEE701CC4E0510045C596 /* MultiplePokemonTypeFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CEEE6F1CC4E0510045C596 /* MultiplePokemonTypeFetcher.swift */; };
 		53D0A9291CC0F99800AE3858 /* bug.png in Resources */ = {isa = PBXBuildFile; fileRef = 53D0A9171CC0F99800AE3858 /* bug.png */; };
 		53D0A92A1CC0F99800AE3858 /* dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 53D0A9181CC0F99800AE3858 /* dark.png */; };
 		53D0A92B1CC0F99800AE3858 /* dragon.png in Resources */ = {isa = PBXBuildFile; fileRef = 53D0A9191CC0F99800AE3858 /* dragon.png */; };
@@ -85,6 +86,7 @@
 		539A53801CBCEA74000B83A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		53CEEE6B1CC3891F0045C596 /* BattleResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BattleResult.swift; sourceTree = "<group>"; };
 		53CEEE6D1CC389BD0045C596 /* PlayerResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerResult.swift; sourceTree = "<group>"; };
+		53CEEE6F1CC4E0510045C596 /* MultiplePokemonTypeFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiplePokemonTypeFetcher.swift; sourceTree = "<group>"; };
 		53D0A9171CC0F99800AE3858 /* bug.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bug.png; sourceTree = "<group>"; };
 		53D0A9181CC0F99800AE3858 /* dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dark.png; sourceTree = "<group>"; };
 		53D0A9191CC0F99800AE3858 /* dragon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dragon.png; sourceTree = "<group>"; };
@@ -322,6 +324,7 @@
 				53D0A9551CC2180900AE3858 /* RandomPokemonFetcher.swift */,
 				53D0A9571CC21EAF00AE3858 /* MultiplePokemonFetcher.swift */,
 				53D0A9691CC25D5000AE3858 /* PokemonTypeFetcher.swift */,
+				53CEEE6F1CC4E0510045C596 /* MultiplePokemonTypeFetcher.swift */,
 			);
 			path = Fetchers;
 			sourceTree = "<group>";
@@ -616,6 +619,7 @@
 				53D0A9771CC25DE600AE3858 /* GetPokemonResponse.swift in Sources */,
 				532613841CBCFFF0006985F3 /* PokeApiRequestBase.swift in Sources */,
 				53D0A9521CC2111C00AE3858 /* AllPokemonListFetcher.swift in Sources */,
+				53CEEE701CC4E0510045C596 /* MultiplePokemonTypeFetcher.swift in Sources */,
 				53D0A9751CC25DE600AE3858 /* GetAllPokemonListResponse.swift in Sources */,
 				5326138C1CBD02BE006985F3 /* PokeApiResponseBase.swift in Sources */,
 				53D0A98A1CC35FDD00AE3858 /* PokeApiModelBase.swift in Sources */,
