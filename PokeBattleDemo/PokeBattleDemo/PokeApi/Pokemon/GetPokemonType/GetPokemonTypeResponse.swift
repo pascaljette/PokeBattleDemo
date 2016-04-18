@@ -27,15 +27,14 @@ class GetPokemonTypeResponse: PokeApiResponseBase {
     
     typealias ModelType = PokemonType
     
+    // enforce the fact that every response must be associated with a model
+    var model: ModelType
+    
     required init(json: JSON) {
         
         model = ModelType()
         
-        let typeIdentifier = PokemonTypeIdentifier()
-        typeIdentifier.name = json["name"].string ?? ""
-        typeIdentifier.infoUrl = json["url"].string ?? ""
-        
-        model.typeIdentifier = typeIdentifier
+        model.typeIdentifier = generateIdentifier(json)
         
         guard let damageRelations = json["damage_relations"].dictionary else {
             
@@ -44,32 +43,23 @@ class GetPokemonTypeResponse: PokeApiResponseBase {
         
         for (_,subJson):(String, JSON) in damageRelations["no_damage_to"]! {
             
-            let type = PokemonTypeIdentifier()
-            type.name = subJson["name"].string ?? ""
-            type.infoUrl = subJson["url"].string ?? ""
-            
-            model.noDamageToTypes.append(type)
+            model.noDamageToTypes.append(generateIdentifier(subJson))
         }
         
         for (_,subJson):(String, JSON) in damageRelations["half_damage_to"]! {
             
-            let type = PokemonTypeIdentifier()
-            type.name = subJson["name"].string ?? ""
-            type.infoUrl = subJson["url"].string ?? ""
-            
-            model.halfDamageToTypes.append(type)
+            model.halfDamageToTypes.append(generateIdentifier(subJson))
         }
 
         for (_,subJson):(String, JSON) in damageRelations["double_damage_to"]! {
-            
-            let type = PokemonTypeIdentifier()
-            type.name = subJson["name"].string ?? ""
-            type.infoUrl = subJson["url"].string ?? ""
-            
-            model.doubleDamageToTypes.append(type)
+                        
+            model.doubleDamageToTypes.append(generateIdentifier(subJson))
         }
     }
     
-    // enforce the fact that every response must be associated with a model
-    var model: ModelType
+    private func generateIdentifier(subJson: JSON) -> PokemonTypeIdentifier {
+        
+        return PokemonTypeIdentifier(name: subJson["name"].string ?? ""
+            , infoUrl: subJson["url"].string ?? "")
+    }
 }

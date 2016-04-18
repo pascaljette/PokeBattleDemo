@@ -256,8 +256,8 @@
 		53CEEE6A1CC389140045C596 /* Battle */ = {
 			isa = PBXGroup;
 			children = (
-				53CEEE6B1CC3891F0045C596 /* BattleResult.swift */,
 				53CEEE6D1CC389BD0045C596 /* PlayerResult.swift */,
+				53CEEE6B1CC3891F0045C596 /* BattleResult.swift */,
 			);
 			path = Battle;
 			sourceTree = "<group>";

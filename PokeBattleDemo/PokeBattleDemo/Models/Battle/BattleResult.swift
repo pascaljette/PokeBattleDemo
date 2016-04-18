@@ -23,12 +23,27 @@
 
 import Foundation
 
+/// Result after the battle is complete and the scores have been computed.
+struct BattleResult {
 
-class BattleResult {
-
+    //
+    // MARK: Stored properties
+    //
+    
+    /// Result for player 1.
     var player1Result: PlayerResult
+    
+    /// Result for player 2.
     var player2Result: PlayerResult
     
+    //
+    // MARK: Initialization
+    //
+
+    /// Initialize with results from both players.
+    ///
+    /// - parameter player1Result: Result for player 1.
+    /// - parameter player2Result: Result for player 2.
     init(player1Result: PlayerResult, player2Result: PlayerResult) {
 
         self.player1Result = player1Result
@@ -36,12 +51,21 @@ class BattleResult {
         self.player2Result = player2Result
     }
     
+}
+
+extension BattleResult {
+    
+    //
+    // MARK: Computed properties
+    //
+
+    /// Returns a reference on the winning player.  Nil if there is a draw.
     var winner: Player? {
         
         if player1Result.score > player2Result.score {
             
             return player1Result.player
-        
+            
         } else if player2Result.score > player1Result.score {
             
             return player2Result.player
@@ -51,3 +75,4 @@ class BattleResult {
         return nil
     }
 }
+

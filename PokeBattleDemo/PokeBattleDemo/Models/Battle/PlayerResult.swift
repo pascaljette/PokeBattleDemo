@@ -23,11 +23,27 @@
 
 import Foundation
 
-class PlayerResult {
+/// Battle result for a single player.
+struct PlayerResult {
     
+    //
+    // MARK: Stored properties
+    //
+    
+    /// Player score
     var score: Double
+    
+    /// Reference on the player.
     var player: Player
     
+    //
+    // MARK: Initialization
+    //
+    
+    /// Initialize with a player and a score.
+    ///
+    /// - parameter player: Reference on the player who batlled.
+    /// - parameter score: Score obtained by the player after the battle is complete.
     init(player: Player, score: Double) {
         
         self.score = score

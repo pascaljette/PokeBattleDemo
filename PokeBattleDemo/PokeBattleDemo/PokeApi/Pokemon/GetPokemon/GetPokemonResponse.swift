@@ -36,9 +36,8 @@ class GetPokemonResponse: PokeApiResponseBase {
         
         for (_, typeElement) in json["types"] {
             
-            let type = PokemonTypeIdentifier()
-            type.name = typeElement["type"]["name"].string ?? ""
-            type.infoUrl = typeElement["type"]["url"].string ?? ""
+            let type = PokemonTypeIdentifier(name: typeElement["type"]["name"].string ?? ""
+                , infoUrl: typeElement["type"]["url"].string ?? "")
             
             model.types.append(type)
         }

@@ -23,15 +23,32 @@
 
 import Foundation
 
-class PokemonType : PokeApiModelBase {
-        
-    required init() {
+/// Model representing a full pokemon type, including it's strengths and weaknesses.
+struct PokemonType : PokeApiModelBase {
+    
+    //
+    // MARK: Stored properties
+    //
+    
+    /// List of identifiers against which it does no damage.
+    var noDamageToTypes: [PokemonTypeIdentifier] = []
+    
+    /// List of identifiers against which it does half damage.
+    var halfDamageToTypes: [PokemonTypeIdentifier] = []
+    
+    /// List of identifiers against which it does double damage.
+    var doubleDamageToTypes: [PokemonTypeIdentifier] = []
+    
+    /// List of identifiers against which it does no damage.
+    var typeIdentifier: PokemonTypeIdentifier = PokemonTypeIdentifier()
+    
+    //
+    // MARK: Initialization.
+    //
+    
+    /// Required by PokeApiModelBase.
+    init() {
         
     }
     
-    var noDamageToTypes: [PokemonTypeIdentifier] = []
-    var halfDamageToTypes: [PokemonTypeIdentifier] = []
-    var doubleDamageToTypes: [PokemonTypeIdentifier] = []
-
-    var typeIdentifier: PokemonTypeIdentifier = PokemonTypeIdentifier()
 }

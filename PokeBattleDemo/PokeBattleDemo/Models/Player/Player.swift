@@ -23,18 +23,37 @@
 
 import Foundation
 
+/// Player id, differentiates between player 1 and player 2.
 enum PlayerId {
     
+    /// Player 1
     case PLAYER_1
+    
+    /// Player 2
     case PLAYER_2
 }
 
-class Player {
+/// Representation of a player with their id and pokemons.
+struct Player {
     
+    //
+    // MARK: Stored properties
+    //
+    
+    /// Player id used to differentiate between player 1 and player 2.
     var id: PlayerId
     
-    var pokemonDraw: [Pokemon] = []
+    /// Pokemon currently in the player's possession.
+    var pokemonDraw: [Pokemon]
     
+    //
+    // MARK: Initialization
+    //
+    
+    /// Initialize with an id and an array of currently possessed pokemon.
+    ///
+    /// - parameter id: Player id used to differentiate between player 1 and player 2.
+    /// - parameter pokemonDraw: Array of pokemon currently in the player's possession.
     init(id: PlayerId, pokemonDraw: [Pokemon]) {
         
         self.id = id

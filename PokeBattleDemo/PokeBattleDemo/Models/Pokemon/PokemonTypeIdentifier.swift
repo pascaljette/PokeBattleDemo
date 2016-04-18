@@ -22,12 +22,35 @@
 
 import Foundation
 
-class PokemonTypeIdentifier : PokeApiModelBase {
+/// Identifier used to retrieve a type's full information.
+struct PokemonTypeIdentifier : PokeApiModelBase {
     
-    required init() {
+    //
+    // MARK: Stored properties
+    //
+
+    /// Name of the type.
+    var name: String = ""
+    
+    /// URL used to retrieve the type's full information.
+    var infoUrl: String = ""
+
+    //
+    // MARK: Initialization
+    //
+    
+    /// Required by PokeApiModelBase.
+    init() {
         
     }
     
-    var name: String = ""
-    var infoUrl: String = ""
+    /// Initialize with a name and info Url
+    ///
+    /// - parameter name: Type name.
+    /// - paramater spriteUrl: String representing the URL to retrieve the type's full information.
+    init(name: String, infoUrl: String) {
+        
+        self.name = name
+        self.infoUrl = infoUrl
+    }
 }
