@@ -23,28 +23,46 @@
 
 import Foundation
 
+/// Delegate for the fight state.
 protocol FightStateDelegate: class {
     
+    /// Delegate must implement the action when the fight button is pressed.
     func didPressFightButton()
+    
+    /// Delegate is responsible for setting the view when this state becomes active.
     func setupViewForFightState()
 }
 
+/// Fight state.  This occurs after all pokemon have been drawn and we are ready to
+/// call the battle engine to calculate the fight result.
 class FightState: GameState {
     
+    //
+    // MARK: Stored properties
+    //
+    
+    /// Reference on the delegate.
     weak var delegate: FightStateDelegate?
     
+    //
+    // MARK: GameState implementation
+    //
+    
+    /// Reference on the next state.
     var nextState: GameState?
     
+    /// Text for the action button.
     var actionButtonText: String {
         return "FIGHT !"
     }
     
-    // Do nothing here.
+    /// When the action button is pressed, defer to the delegate..
     func actionButtonPressed() {
         
         delegate?.didPressFightButton()
     }
     
+    /// To setup the view corresponding to this state, defer to the delegate.
     func setupViewForState() {
         
         delegate?.setupViewForFightState()

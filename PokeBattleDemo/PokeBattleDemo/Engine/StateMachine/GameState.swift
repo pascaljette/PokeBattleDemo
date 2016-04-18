@@ -20,16 +20,20 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-
 import Foundation
 
+/// Protocol for a basic game state.
 protocol GameState {
     
+    /// Stored property for the next state.
     var nextState: GameState? { get set }
     
+    /// Text for the action button on the game screen.
     var actionButtonText: String { get }
     
+    /// Function to call (usually deferred to the delegate) when the action button is pressed.
     func actionButtonPressed()
     
+    /// Setup the view for the current active state.
     func setupViewForState()
 }

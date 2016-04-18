@@ -37,6 +37,12 @@ Documentation is not using the full extent of the [Swift markup language](https:
 ## Xamarin
 [Xamarin](https://www.xamarin.com/) implementation would have been better, considering we are aiming for iOS/Android cross-platform usage, but the proof of concept has been implemented in iOS/Swift only for now due to time constraints.
 
+## Dependency Injection and mocks
+We already have proper dependency injection in our view controllers.  This would make the project easy to mock and test.  What we need to do next is deign proper interfaces for the objects passed to the view controller initializers so that a mock implementation can be passed as well.
+
+## Localization
+In iOS, localization is as easy as putting all our strings in localizable .strings files.  This should be relatively trivial to do with our application.
+
 ## Home screen
 
 ### Progress View

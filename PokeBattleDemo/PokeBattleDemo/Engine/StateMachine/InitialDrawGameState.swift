@@ -23,29 +23,45 @@
 
 import Foundation
 
+/// Delegate for the initial state.
 protocol InitialDrawGameStateDelegate: class {
     
+    /// Delegate must implement the action when the start button is pressed.
     func didPressStartButton()
+    
+    /// Delegate is responsible for setting the view when this state becomes active.
     func setupViewForInitialState()
 }
 
-
+/// Initial state for when the draw is complete and we're waiting for the player to start.
 class InitialDrawGameState: GameState {
     
+    //
+    // MARK: Stored properties
+    //
+    
+    /// Reference on the delegate.
     weak var delegate: InitialDrawGameStateDelegate?
     
+    //
+    // MARK: GameState implementation
+    //
+    
+    /// Reference on the next state.
     var nextState: GameState?
     
+    /// Text for the action button.
     var actionButtonText: String {
         return "Start"
     }
     
-    // Do nothing here.
+    /// When the action button is pressed, defer to the delegate..
     func actionButtonPressed() {
         
         delegate?.didPressStartButton()
     }
     
+    /// To setup the view corresponding to this state, defer to the delegate.
     func setupViewForState() {
         
         delegate?.setupViewForInitialState()

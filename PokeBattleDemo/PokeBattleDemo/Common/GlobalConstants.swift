@@ -33,4 +33,11 @@ final class GlobalConstants {
     class var NUMBER_OF_POKEMON_PER_PLAYER: Int {
         return NSBundle.mainBundle().objectForInfoDictionaryKey("PokemonCountPerPlayer") as! Int
     }
+    
+    
+    // TODO: Put this in a plist or a data file
+    class var NUMBER_OF_TURNS_PER_PLAYER: Int {
+        return 2
+    }
+
 }

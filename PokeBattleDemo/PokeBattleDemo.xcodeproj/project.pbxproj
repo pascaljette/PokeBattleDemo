@@ -417,11 +417,11 @@
 		53D0A9901CC3601B00AE3858 /* StateMachine */ = {
 			isa = PBXGroup;
 			children = (
-				53D0A9911CC3601B00AE3858 /* FightState.swift */,
+				53D0A9951CC3601B00AE3858 /* StateMachine.swift */,
 				53D0A9921CC3601B00AE3858 /* GameState.swift */,
+				53D0A9911CC3601B00AE3858 /* FightState.swift */,
 				53D0A9931CC3601B00AE3858 /* InitialDrawGameState.swift */,
 				53D0A9941CC3601B00AE3858 /* PlayerActionState.swift */,
-				53D0A9951CC3601B00AE3858 /* StateMachine.swift */,
 			);
 			path = StateMachine;
 			sourceTree = "<group>";
