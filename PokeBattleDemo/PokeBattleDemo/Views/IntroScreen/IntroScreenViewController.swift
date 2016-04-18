@@ -29,28 +29,56 @@ class IntroScreenViewController : GKViewControllerBase {
     //
     // MARK: Nested types
     //
+    
+    /// Status of the fetching operations.
     enum Status {
         
+        /// Initial state, fetching operations are not executing.
         case IDLE
+        
+        /// Fetching the list of all pokemons to retrieve info from their URLs.
         case FETCHING_POKEMON_LIST
+        
+        /// Fetching the initial draw for each player from the pokemon list.
         case FETCHING_INITIAL_DRAW
+        
+        /// Fetching operations completed, ready to proceed.
         case READY
     }
+    
+    //
+    // MARK: IBOutlets
+    //
+    
+    /// Start button.
+    @IBOutlet weak var startButton: UIButton!
+    
+    /// Activity indicator.
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     //
     // MARK: Stored properties
     //
     
+    /// Reference on the fetcher that gets the full pokemon list.
     private let allPokemonFetcher: AllPokemonListFetcher
     
+    /// Reference on the fetcher that gets detailed for each pokemon (chosen randomly).
     private let multiplePokemonFetcher: MultiplePokemonFetcher
     
+    /// Reference on the pokemon list retrieved by the AllPokemonListFetcher.
     private var pokemonList: AllPokemonList = AllPokemonList()
     
+    /// Initial draw containing all pokemon for all players..
     private var initialDraw: [Pokemon] = []
     
+    /// Dispatch group for thread synchronization.
     private let dispatchGroup = dispatch_group_create();
     
+    /// Current status of the view controller.
+    private var status: Status = .IDLE
+    
+    /// Sets up elements with respect to the view controller's loading status.
     private var loading: Bool = false {
         
         didSet {
@@ -67,20 +95,14 @@ class IntroScreenViewController : GKViewControllerBase {
         }
     }
     
-    private var status: Status = .IDLE
-    
-    //
-    // MARK: IBOutlets
-    //
-    
-    @IBOutlet weak var startButton: UIButton!
-
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
     //
     // MARK: Initializers
     //
 
+    /// Initialize with the proper injected properties.  Also sets the view controller's delegates.
+    ///
+    /// - parameter allPokemonListFetcher: Instance of the fetcher that gets the list of all pokemon.
+    /// - parameter multiplePokemonFetcher: Instance of the fetcher that gets the initial draw for all players.
     init(allPokemonListFetcher: AllPokemonListFetcher, multiplePokemonFetcher: MultiplePokemonFetcher) {
         
         self.allPokemonFetcher = allPokemonListFetcher
@@ -91,6 +113,9 @@ class IntroScreenViewController : GKViewControllerBase {
         allPokemonFetcher.delegate = self
     }
     
+    /// Required initialiser.  Unsupported so make it crash as soon as possible.
+    ///
+    /// - parameter coder: Coder used to initialize the view controller (when instantiated from a storyboard).
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented (storyboard not supported)")
     }
@@ -102,6 +127,7 @@ extension IntroScreenViewController {
     // MARK: UIViewController lifecycle
     //
 
+    /// View did load.
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -114,15 +140,6 @@ extension IntroScreenViewController {
         allPokemonFetcher.fetch()
         status = .FETCHING_POKEMON_LIST
     }
-}
-
-extension IntroScreenViewController {
-    
-    //
-    // MARK: Computed properties
-    //
-
-    
 }
 
 extension IntroScreenViewController {

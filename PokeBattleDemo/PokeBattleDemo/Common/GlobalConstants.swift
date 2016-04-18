@@ -23,19 +23,21 @@
 
 import Foundation
 
-
+/// Constants used globally in the application.
 final class GlobalConstants {
     
+    /// Base Url for PokeApi.
     class var POKEAPI_BASE_URL: String {
         return "http://pokeapi.co"
     }
     
+    /// Number of pokemon per player.
     class var NUMBER_OF_POKEMON_PER_PLAYER: Int {
         return NSBundle.mainBundle().objectForInfoDictionaryKey("PokemonCountPerPlayer") as! Int
     }
     
-    
     // TODO: Put this in a plist or a data file
+    /// Number of turn per player.
     class var NUMBER_OF_TURNS_PER_PLAYER: Int {
         return 2
     }

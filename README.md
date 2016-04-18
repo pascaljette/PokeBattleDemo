@@ -47,3 +47,8 @@ In iOS, localization is as easy as putting all our strings in localizable .strin
 
 ### Progress View
 We have 1 task to retrieve the pokemon list and n tasks to retrieve initial draw pokemons from the home screen.  A rudimentary progress view could be implemented instead of the activity indicator to give the user a better indicator of the loading progress.
+
+## BattleScreen
+
+### Collection View
+We should be using a collection view instead of hardcoding 3 pokemon per player to make the program more extensible.  In that case, extra pokemon would mean long loading times but there might be a better way to stream data to circumvent this problem.
