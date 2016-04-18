@@ -7,6 +7,11 @@ This uses XCode 7.3 (Swift 2.2).
 # How to use (play)
 There is an intial draw of 3 random pokemon per player.  Each player gets 2 rounds to discard one pokemon and get another random one.  After both players have completed all rounds, damage is calculated according to the pokemon types and the damage they can inflict to the opposing player's pokemon.  The winner is the player who can inflict the most damages to other players.  Type effectiveness is calculated according to the rules described in [Bulbapedia](http://bulbapedia.bulbagarden.net/wiki/Type) but instead of using specific moves, we are considering all pokemons have only one move which corresponds to their innate type.
 
+![Alt text](PokeBattleDemo/Screenshots/IntroScreen.png "Intro Screen")
+![Alt text](PokeBattleDemo/Screenshots/BattleScreen.png "Battle Screen")
+![Alt text](PokeBattleDemo/Screenshots/ResultScreen.png "Result Screen")
+
+
 # Design Philosophy
 
 ## No Storyboards
