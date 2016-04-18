@@ -68,11 +68,6 @@ class GetPokemonTypeResponse: PokeApiResponseBase {
             
             model.doubleDamageToTypes.append(type)
         }
-                
-        if !PokemonTypeCache.sharedInstance.cachedTypes.contains( {$0.typeIdentifier.name == model.typeIdentifier.name} ) {
-            
-            PokemonTypeCache.sharedInstance.cachedTypes.append(model)
-        }
     }
     
     // enforce the fact that every response must be associated with a model

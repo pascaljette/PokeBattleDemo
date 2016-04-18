@@ -17,16 +17,10 @@ protocol MultiplePokemonFetcherDelegate: class {
 class MultiplePokemonFetcher {
     
     //
-    // MARK: Nested types
-    //
-    
-    typealias GetPokemonConnection = PokeApiConnection<GetPokemonRequest, GetPokemonResponse>
-    
-    weak var delegate: MultiplePokemonFetcherDelegate?
-    
-    //
     // MARK: Stored properties
     //
+    
+    weak var delegate: MultiplePokemonFetcherDelegate?
     
     private var pokemonFetchers: [RandomPokemonFetcher] = []
     private var count: Int

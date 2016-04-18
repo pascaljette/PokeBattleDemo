@@ -158,10 +158,22 @@ extension BattleScreenViewController : StateMachineDelegate {
         player1.pokemonDraw = [team1poke1.pokemon!, team1poke2.pokemon!, team1poke3.pokemon!]
         player2.pokemonDraw = [team2poke1.pokemon!, team2poke2.pokemon!, team2poke3.pokemon!]
 
-        let battleResult = battleEngine.fight(player1: player1, player2: player2)
-                
-        self.navigationController?.pushViewController(ResultScreenViewController(battleResult: battleResult), animated: true)
+        actionButton.enabled = false
         
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [weak self] in
+            
+            guard let strongSelf = self else {
+                
+                return
+            }
+            
+            let battleResult = strongSelf.battleEngine.fight(player1: strongSelf.player1, player2: strongSelf.player2)
+
+            GKThread.dispatchOnUiThread {
+                
+                strongSelf.navigationController?.pushViewController(ResultScreenViewController(battleResult: battleResult), animated: true)
+            }
+        }
     }
     
     func didPressStartButton() {

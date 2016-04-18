@@ -10,12 +10,16 @@ import Foundation
 
 class BattleEngine {
 
-    
     private var BASE_DAMAGE: Double {
         return 10.0
     }
     
     func fight(player1 player1: Player, player2: Player) -> BattleResult {
+        
+        // first wait for the cache dispatch group to finish.
+        // TODO there might be a better way to do this. At least show an indicator that 
+        // we are waiting for a better UX
+        dispatch_group_wait(PokemonTypeCache.sharedInstance.dispatchGroup, DISPATCH_TIME_FOREVER)
         
         let player1Result = PlayerResult(player: player1, score: dealDamageFromPlayer(player1, toPlayer: player2))
         let player2Result = PlayerResult(player: player2, score: dealDamageFromPlayer(player2, toPlayer: player1))
