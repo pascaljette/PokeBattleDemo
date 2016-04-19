@@ -24,41 +24,62 @@ import Foundation
 import GearKit
 
 // TODO There is a more flexible way to control the tiles in this view.
-// Use a TableView with cells that contain 2 buttons.  This will also give us 
-// the height of the whole thing
+// Use a TableView with cells that contain 2 buttons or a collectionview.
+
+/// Main screen for player interactions where the players draws are displayed.
 class BattleScreenViewController : GKViewControllerBase {
-    
     
     //
     // MARK: IBOutlets.
     //
 
+    /// Player 1, topmost pokemon
     @IBOutlet weak var team1poke1: BattleScreenTile!
     
+    /// Player 1, middle pokemon
     @IBOutlet weak var team1poke2: BattleScreenTile!
 
+    /// Player 1, bottom pokemon
     @IBOutlet weak var team1poke3: BattleScreenTile!
 
+    /// Player 2, topmost pokemon
     @IBOutlet weak var team2poke1: BattleScreenTile!
 
+    /// Player 2, middle pokemon
     @IBOutlet weak var team2poke2: BattleScreenTile!
 
+    /// Player 2, bottom pokemon
     @IBOutlet weak var team2poke3: BattleScreenTile!
 
+    /// Action button for start, skip, fight, etc.
     @IBOutlet weak var actionButton: UIButton!
     
-    // TODO no no no.  Do not keep a reference on the processing tile.  There might be several and then
+    //
+    // MARK: Stored properties.
+    //
+    
+    // TODO Do not keep a reference on the processing tile.  There might be several and then
     // we have to refactor the whole thing.
+    
+    /// Tile that requested to load a new pokemon.
     private var processingTile: BattleScreenTile!
     
+    /// Reference on all possible downloadable pokemon
     private var pokemonList: AllPokemonList
+    
+    /// Reference on player 1
     private var player1: Player
+    
+    /// Reference on player 2
     private var player2: Player
     
-    private var stateMachine: StateMachine = StateMachine()
+    /// State machine used for the view's states.
+    private var stateMachine: StateMachine
     
+    /// Random pokemon fetcher for swap operations.
     private var pokemonFetcher: RandomPokemonFetcher
     
+    /// Reference on the battle engine.
     private var battleEngine: BattleEngine
     
     //
@@ -72,12 +93,14 @@ class BattleScreenViewController : GKViewControllerBase {
         , player1: Player
         , player2: Player
         , pokemonFetcher: RandomPokemonFetcher
+        , stateMachine: StateMachine
         , battleEngine: BattleEngine) {
         
         self.pokemonList = pokemonList
         self.player1 = player1
         self.player2 = player2
         self.pokemonFetcher = pokemonFetcher
+        self.stateMachine = stateMachine
         self.battleEngine = battleEngine
         
         super.init(nibName: "BattleScreenViewController", bundle: nil)
@@ -86,14 +109,26 @@ class BattleScreenViewController : GKViewControllerBase {
         self.pokemonFetcher.delegate = self
     }
     
+    /// Required initialiser.  Unsupported so make it crash as soon as possible.
+    ///
+    /// - parameter coder: Coder used to initialize the view controller (when instantiated from a storyboard).
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) is not supported (no storyboard support)")
     }
     
+}
+
+extension BattleScreenViewController {
+    
+    //
+    // MARK: UIViewController lifecycle
+    //
+    
+    /// View did load. Setup navigation item and the tiles as well.
     override func viewDidLoad() {
         
         super.viewDidLoad()
-                        
+        
         // TODO localize
         self.navigationItem.title = "Battle!"
         
@@ -102,7 +137,7 @@ class BattleScreenViewController : GKViewControllerBase {
         team1poke1.delegate = self
         team1poke2.delegate = self
         team1poke3.delegate = self
-
+        
         team2poke1.delegate = self
         team2poke2.delegate = self
         team2poke3.delegate = self
@@ -119,13 +154,16 @@ class BattleScreenViewController : GKViewControllerBase {
             strongSelf.team1poke1.loading = true
             strongSelf.team1poke2.loading = true
             strongSelf.team1poke3.loading = true
-
+            
             strongSelf.team2poke1.loading = true
             strongSelf.team2poke2.loading = true
             strongSelf.team2poke3.loading = true
         }
     }
     
+    /// View will appear.
+    ///
+    /// - parameter animated: Whether animated.
     override func viewWillAppear(animated: Bool) {
         
         super.viewWillAppear(animated)
@@ -133,25 +171,26 @@ class BattleScreenViewController : GKViewControllerBase {
         team1poke1.pokemon = player1.pokemonDraw[0]
         team1poke2.pokemon = player1.pokemonDraw[1]
         team1poke3.pokemon = player1.pokemonDraw[2]
-
+        
         team2poke1.pokemon = player2.pokemonDraw[0]
         team2poke2.pokemon = player2.pokemonDraw[1]
         team2poke3.pokemon = player2.pokemonDraw[2]
-    }
-    
-    @IBAction func fightButtonPressed(sender: AnyObject) {
-        
-        stateMachine.currentState?.actionButtonPressed()
     }
 }
 
 extension BattleScreenViewController : StateMachineDelegate {
     
+    //
+    // MARK: StateMachineDelegate implementation
+    //
+    
+    /// Skip button action used in the player action state.
     func didPressSkipButton() {
         
         stateMachine.proceedToNextState()
     }
     
+    /// Fight button action used after all the players' turns are finished.
     func didPressFightButton() {
         
         // TODO we shouldn't need to rebuild here
@@ -176,11 +215,14 @@ extension BattleScreenViewController : StateMachineDelegate {
         }
     }
     
+    /// Start button action used on the initial state.
     func didPressStartButton() {
         
         stateMachine.proceedToNextState()
     }
 
+    /// Setup the view for the initial state.
+    /// Disable all the player tiles.
     func setupViewForInitialState() {
         
         GKThread.dispatchOnUiThread { [weak self] in
@@ -198,6 +240,10 @@ extension BattleScreenViewController : StateMachineDelegate {
         }
     }
     
+    /// Setup the view for the player action state.
+    /// Enable only the current player's tiles.
+    ///
+    /// - parameter playerId: Id of the player to determine whose turn it is.
     func setupViewForPlayerActionState(playerId: PlayerId) {
         
         GKThread.dispatchOnUiThread { [weak self] in
@@ -221,6 +267,8 @@ extension BattleScreenViewController : StateMachineDelegate {
         }
     }
     
+    /// Setup the view for the fight state after all actions are complete.
+    /// Disable all pokemon tiles and enable the fight button.
     func setupViewForFightState() {
         
         GKThread.dispatchOnUiThread { [ weak self] in
@@ -241,6 +289,13 @@ extension BattleScreenViewController : StateMachineDelegate {
 
 extension BattleScreenViewController : BattleScreenTileDelegate {
     
+    //
+    // MARK: BattleScreenTileDelegate implementation
+    //
+    
+    /// A tile was pressed.  Disable everything until we get the new random pokemon.
+    ///
+    /// - parameter: Tile sending the event.
     func tileButtonPressed(sender: BattleScreenTile) {
         
         processingTile = sender
@@ -260,16 +315,26 @@ extension BattleScreenViewController : BattleScreenTileDelegate {
         actionButton.enabled = false
         pokemonFetcher.fetch()
     }
-
 }
 
 extension BattleScreenViewController : RandomPokemonFetcherDelegate {
     
+    //
+    // MARK: RandomPokemonFetcherDelegate implementation
+    //
+    
+    /// Did get random pokemon from pressing a tile.
+    ///
+    /// - parameter success: Whether the list retrieval succeeded.
+    /// - parameter result: Retrieved list or nil on failure.
+    /// - parameter error: Error object or nil on failure.
     func didGetPokemon(success: Bool, result: Pokemon?, error: NSError?) {
-        
         if success {
             
-            processingTile.pokemon = result
+            GKThread.dispatchOnUiThread {
+                
+                self.processingTile.pokemon = result
+            }
             
             stateMachine.proceedToNextState()
             
@@ -285,11 +350,36 @@ extension BattleScreenViewController : RandomPokemonFetcherDelegate {
             
             presentViewController(alertController, animated: true, completion: nil)
         }
+
     }
 }
 
 extension BattleScreenViewController {
     
+    //
+    // MARK: IBAction
+    //
+    
+    /// Triggered when the action button is pressed.  It will go
+    /// to the state machine and then call the proper function on its
+    /// delegate depending on the current state.
+    ///
+    /// - parameter sender: The object triggering this event.
+    @IBAction func actionButtonPressed(sender: AnyObject) {
+        
+        stateMachine.currentState?.actionButtonPressed()
+    }
+}
+
+extension BattleScreenViewController {
+    
+    //
+    // MARK: Private utility functions.
+    //
+    
+    /// Set enabled status for all battle tiles.
+    ///
+    /// - parameter enabled: Enabled status to set for all tiles.
     private func setEnabledStatusForAllTiles(enabled: Bool) {
         
         team1poke1.imageButton.enabled = enabled

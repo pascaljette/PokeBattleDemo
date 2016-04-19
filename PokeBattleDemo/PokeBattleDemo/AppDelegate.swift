@@ -28,9 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
+        // Load manually since we're not using storyboards.
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         
         let viewController = IntroScreenViewController(allPokemonListFetcher: AllPokemonListFetcher()
