@@ -23,10 +23,19 @@
 import Foundation
 import SwiftyJSON
 
+/// Response gotten when getting a single pokemon info from the API.
 class GetPokemonResponse: PokeApiResponseBase {
     
+    //
+    // MARK: PokeApiResponseBase implementation
+    //
+    
+    /// Model type
     typealias ModelType = Pokemon
     
+    /// Initialize from json.
+    ///
+    /// - parameter json: JSON or subJSON data with which to initialize.
     required init(json: JSON) {
         
         model = ModelType()
@@ -43,6 +52,6 @@ class GetPokemonResponse: PokeApiResponseBase {
         }
     }
     
-    // enforce the fact that every response must be associated with a model
+    /// Model instance.
     var model: ModelType
 }

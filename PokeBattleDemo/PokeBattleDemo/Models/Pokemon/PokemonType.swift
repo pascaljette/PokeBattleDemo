@@ -50,5 +50,4 @@ struct PokemonType : PokeApiModelBase {
     init() {
         
     }
-    
 }

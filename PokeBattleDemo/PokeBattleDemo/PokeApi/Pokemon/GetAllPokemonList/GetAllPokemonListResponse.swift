@@ -23,10 +23,19 @@
 import Foundation
 import SwiftyJSON
 
+/// Response gotten when getting all available pokemon in the API.
 class GetAllPokemonListResponse: PokeApiResponseBase {
     
+    //
+    // MARK: PokeApiResponseBase implementation
+    //
+    
+    /// Model type.
     typealias ModelType = AllPokemonList
     
+    /// Initialize from json.
+    ///
+    /// - parameter json: JSON or subJSON data with which to initialize.
     required init(json: JSON) {
         
         model = AllPokemonList()
@@ -40,6 +49,6 @@ class GetAllPokemonListResponse: PokeApiResponseBase {
         }
     }
     
-    // enforce the fact that every response must be associated with a model
+    /// Model instance.
     var model: ModelType
 }

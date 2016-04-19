@@ -23,13 +23,19 @@
 import Foundation
 import SwiftyJSON
 
+/// Response gotten when getting a single pokemon type info from the API.
 class GetPokemonTypeResponse: PokeApiResponseBase {
     
+    //
+    // MARK: PokeApiResponseBase implementation
+    //
+    
+    /// Model type
     typealias ModelType = PokemonType
     
-    // enforce the fact that every response must be associated with a model
-    var model: ModelType
-    
+    /// Initialize from json.
+    ///
+    /// - parameter json: JSON or subJSON data with which to initialize.
     required init(json: JSON) {
         
         model = ModelType()
@@ -57,6 +63,22 @@ class GetPokemonTypeResponse: PokeApiResponseBase {
         }
     }
     
+    /// Model instance.
+    var model: ModelType
+}
+
+
+extension GetPokemonTypeResponse {
+    
+    //
+    // MARK: Private utility functions.
+    //
+
+    /// Retrieve the pokemon type identifier from the type's subjson.
+    ///
+    /// - parameter subJson: Type subJSON containing all the type information.
+    ///
+    /// - returns: The generated type identifier.
     private func generateIdentifier(subJson: JSON) -> PokemonTypeIdentifier {
         
         return PokemonTypeIdentifier(name: subJson["name"].string ?? ""

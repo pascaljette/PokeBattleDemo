@@ -22,21 +22,33 @@
 
 import Foundation
 
+// TODO There is no guarantee that all urls retrieved from the API will use the base url string.
+// As such, this should be extended so that it can use a full url as well.
+// We could create two children extensions for PokeApiRequestBase and play with protocol extensions
+// to achieve this.
+
+/// Protocol for all api requests.
 protocol PokeApiRequestBase {
-    
+
+    /// Required empty initialiser for instantiation based on protocol type only.
     init()
     
+    /// Path of the function to call.
     var apiPath: String { get }
+    
+    /// Query items (path parameter).
     var queryItems: [NSURLQueryItem]? { get }
 }
 
 extension PokeApiRequestBase {
     
+    /// Base url for the API.
     var baseUrlString: String {
         
         return GlobalConstants.POKEAPI_BASE_URL
     }
     
+    /// Build absolute url based on all url components in the type.
     var absoluteUrl: NSURL? {
         
         guard let url: NSURL = NSURL(string: baseUrlString) else {
@@ -52,7 +64,7 @@ extension PokeApiRequestBase {
         }
         
         // NSURLComponents does not get fully initialized, even passing a NSURL in its constructor.
-        // We must do it manually.  There might be a better way (XCode 7.2)
+        // We must do it manually.  There might be a better way (XCode 7.3)
         components.scheme = url.scheme
         components.host = url.host
         components.path = apiPath

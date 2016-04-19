@@ -22,12 +22,19 @@
 
 import SwiftyJSON
 
+/// Protocol for a response from the API
 protocol PokeApiResponseBase {
     
+    /// Model type
     associatedtype ModelType: PokeApiModelBase
     
+    /// Initialize from json.
+    ///
+    /// - parameter json: JSON or subJSON data with which to initialize.
     init(json: JSON)
     
     // enforce the fact that every response must be associated with a model
+    
+    /// Model instance.
     var model: ModelType { get set }
 }

@@ -41,7 +41,7 @@ struct Pokemon : PokeApiModelBase {
     var types: [PokemonTypeIdentifier] = []
     
     //
-    // MARK: Stored properties
+    // MARK: Initialization
     //
 
     /// Required by PokeApiModelBase
