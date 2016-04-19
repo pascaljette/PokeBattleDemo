@@ -202,9 +202,10 @@ extension BattleScreenTile {
         
         // Restore constraints when loaded in interface builder.
         self.view.translatesAutoresizingMaskIntoConstraints = false
-        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[view]|", options: NSLayoutFormatOptions.AlignAllCenterY , metrics: nil, views: ["view": self.view]))
-        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[view]|", options: NSLayoutFormatOptions.AlignAllCenterX , metrics: nil, views: ["view": self.view]))
         
+        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[view]|", options: NSLayoutFormatOptions.AlignAllCenterY , metrics: nil, views: ["view": self.view]))
+        
+        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[view]|", options: NSLayoutFormatOptions.AlignAllCenterX , metrics: nil, views: ["view": self.view]))
     }
 
 }
@@ -212,9 +213,12 @@ extension BattleScreenTile {
 extension BattleScreenTile {
     
     //
-    // MARK: IBActions.
+    // MARK: IBActions
     //
     
+    /// Triggered when the image button is pressed.
+    ///
+    /// - parameter sender: Reference on the image button triggering the event.
     @IBAction func imageButtonPressed(sender: AnyObject) {
         
         delegate?.tileButtonPressed(self)

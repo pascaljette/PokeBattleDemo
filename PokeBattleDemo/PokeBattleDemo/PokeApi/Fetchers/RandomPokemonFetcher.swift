@@ -22,21 +22,47 @@
 
 import Foundation
 
+/// Delegate for a fetcher that retrieves a single random pokemon.
 protocol RandomPokemonFetcherDelegate: class {
     
+    /// Did get random pokemon from the fetcher.
+    ///
+    /// - parameter success: Whether the list retrieval succeeded.
+    /// - parameter result: Retrieved list or nil on failure.
+    /// - parameter error: Error object or nil on failure.
     func didGetPokemon(success: Bool, result: Pokemon?, error: NSError?)
 }
 
+/// Fetcher that retrieves a single random pokemon.
 class RandomPokemonFetcher {
     
+    //
+    // MARK: Nested types
+    //
+    
+    /// Connection type
     typealias GetPokemonConnection = PokeApiConnection<GetPokemonRequest, GetPokemonResponse>
     
+    //
+    // MARK: Stored properties
+    //
+    
+    /// Weak reference on the delegate.
     weak var delegate: RandomPokemonFetcherDelegate?
     
     // TODO: AllPokemonList stays immutable for the whole lifecycle of the application.
     // Consider making it a singleton to avoid passing it all the time.
+    
+    /// List of all available pokemon from which to retrieve a single detailed one.
     private var allPokemonList: AllPokemonList
     
+    //
+    // MARK: Initialisation
+    //
+    
+    /// Initialise with the list of available pokemon.
+    ///
+    /// - parameter allPokemonList: List of all available pokemon (and their URLs)
     init(allPokemonList: AllPokemonList) {
         
         self.allPokemonList = allPokemonList
@@ -45,6 +71,11 @@ class RandomPokemonFetcher {
 
 extension RandomPokemonFetcher {
     
+    //
+    // MARK: Public functions
+    //
+
+    /// Fetch the data and calls the delegate on completion.
     func fetch() {
         
         let pokemonUrl = allPokemonList.pokemonUrlStrings[Int(arc4random_uniform(UInt32(allPokemonList.pokemonUrlStrings.count)))]

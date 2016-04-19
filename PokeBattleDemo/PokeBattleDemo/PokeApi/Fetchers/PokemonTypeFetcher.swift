@@ -34,14 +34,33 @@ protocol PokemonTypeFetcherDelegate: class {
     func didGetPokemonType(fetcher: PokemonTypeFetcher, success: Bool, result: PokemonType?, error: NSError?)
 }
 
+/// Retrieve detailed info for a single pokemon type.
 class PokemonTypeFetcher {
     
+    //
+    // MARK: Nested types
+    //
+    
+    /// Connection type
     typealias GetPokemonTypeConnection = PokeApiConnection<GetPokemonTypeRequest, GetPokemonTypeResponse>
     
+    //
+    // MARK: Stored properties
+    //
+    
+    /// Weak reference on the delegate.
     weak var delegate: PokemonTypeFetcherDelegate?
     
-    var pokemonTypeIdentifier: PokemonTypeIdentifier
+    /// Internal reference on the pokemon type identifier (name).
+    private var pokemonTypeIdentifier: PokemonTypeIdentifier
     
+    //
+    // MARK: Initialisation
+    //
+
+    /// Initialise with a single pokemon type identifier for which to retrieve detailed info.
+    ///
+    /// - parameter pokemonTypeIdentifier: Identifier for which to retrieve the detailed type info.
     init(pokemonTypeIdentifier: PokemonTypeIdentifier) {
         
         self.pokemonTypeIdentifier = pokemonTypeIdentifier
@@ -50,6 +69,11 @@ class PokemonTypeFetcher {
 
 extension PokemonTypeFetcher {
     
+    //
+    // MARK: Public functions
+    //
+    
+    /// Fetch the data and calls the delegate on completion.
     func fetch() {
         
         // Check the cache first

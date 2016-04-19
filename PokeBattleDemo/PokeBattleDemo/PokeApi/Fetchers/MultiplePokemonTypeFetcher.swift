@@ -42,23 +42,36 @@ class MultiplePokemonTypeFetcher {
     // MARK: Stored properties
     //
     
+    /// Weak reference on the delegate.
     weak var delegate: MultiplePokemonTypeFetcherDelegate?
     
+    /// Internal reference on pokemon type fetchers.  References must be kept here
+    /// so they don't get deallocated when they go out of function scope.
     private var pokemonTypeFetchers: [PokemonTypeFetcher] = []
 
+    /// Store the pokemon type identifiers from initialisation.
     private let pokemonTypeIdentifiers: [PokemonTypeIdentifier]
     
-    private var pokemonTypeArray: [PokemonType] = []
+    /// Internal reference on the pokemon type array to pass to the delegate.
+    private var pokemonTypeArray: [PokemonType]?
     
+    /// Internal reference on the success flag to pass to the delegate.
     private var success: Bool = true
+    
+    /// Internal reference on the error object to pass to the delegate.
     private var error: NSError?
     
+    /// Dispatch group for thread synchronisation.
     private let dispatchGroup = dispatch_group_create();
     
     //
     // MARK: Initialization
     //
     
+    /// Initialise with an array of pokemon type identifiers.  A fetcher
+    /// will be created for every single type identifier in the array.
+    ///
+    /// - parameter pokemonTypeIdentifiers: Array of type identifiers for which to retrieve detailed info.
     init(pokemonTypeIdentifiers: [PokemonTypeIdentifier]) {
         
         self.pokemonTypeIdentifiers = pokemonTypeIdentifiers
@@ -67,6 +80,11 @@ class MultiplePokemonTypeFetcher {
 
 extension MultiplePokemonTypeFetcher {
     
+    //
+    // MARK: Public functions
+    //
+    
+    /// Fetch the data and calls the delegate on completion.
     func fetch() {
         
         for typeIdentifier in self.pokemonTypeIdentifiers {
@@ -100,6 +118,16 @@ extension MultiplePokemonTypeFetcher {
 
 extension MultiplePokemonTypeFetcher : PokemonTypeFetcherDelegate {
     
+    //
+    // MARK: PokemonTypeFetcherDelegate implementation
+    //
+    
+    /// Called after the fetch operation has completed.
+    ///
+    /// - parameter fetcher: Reference on the fetcher that has completed the operation.
+    /// - parameter success: True if the operation succeeded, false otherwise.
+    /// - parameter result: The retrieved type if successful, nil otherwise.
+    /// - parameter error: Error object if the operation failed, nil if it succeeded.
     func didGetPokemonType(fetcher: PokemonTypeFetcher, success: Bool, result: PokemonType?, error: NSError?) {
     
         defer {
@@ -112,10 +140,16 @@ extension MultiplePokemonTypeFetcher : PokemonTypeFetcherDelegate {
             
             self.success = false
             self.error = error
+            self.pokemonTypeArray = nil
             
             return
         }
         
-        self.pokemonTypeArray.append(pokemonTypeInstance)
+        if self.pokemonTypeArray == nil {
+            
+            self.pokemonTypeArray = []
+        }
+        
+        self.pokemonTypeArray!.append(pokemonTypeInstance)
     }
 }
