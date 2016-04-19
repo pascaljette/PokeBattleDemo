@@ -35,14 +35,17 @@ protocol PokemonTypeFetcherDelegate: class {
 }
 
 /// Retrieve detailed info for a single pokemon type.
-class PokemonTypeFetcher {
+class PokemonTypeFetcher : PokemonFetcherProtocol{
     
     //
-    // MARK: Nested types
+    // MARK: PokemonFetcherProtocol implementation
     //
     
-    /// Connection type
-    typealias GetPokemonTypeConnection = PokeApiConnection<GetPokemonTypeRequest, GetPokemonTypeResponse>
+    /// Request type
+    typealias RequestType = GetPokemonTypeRequest
+    
+    /// Response type
+    typealias ResponseType = GetPokemonTypeResponse
     
     //
     // MARK: Stored properties
@@ -85,8 +88,8 @@ extension PokemonTypeFetcher {
             }
         }
         
-        let call: GetPokemonTypeConnection = GetPokemonTypeConnection()
-        let getPokemonTypeRequest = GetPokemonTypeRequest(fullUrl: pokemonTypeIdentifier.infoUrl)
+        let call: ConnectionType = ConnectionType()
+        let getPokemonTypeRequest = RequestType(fullUrl: pokemonTypeIdentifier.infoUrl)
         
         call.onCompletion = { [weak self] (status, error, response) in
             

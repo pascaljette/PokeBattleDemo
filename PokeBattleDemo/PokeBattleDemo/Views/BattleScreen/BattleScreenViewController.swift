@@ -58,12 +58,6 @@ class BattleScreenViewController : GKViewControllerBase {
     // MARK: Stored properties.
     //
     
-    // TODO Do not keep a reference on the processing tile.  There might be several and then
-    // we have to refactor the whole thing.
-    
-    /// Tile that requested to load a new pokemon.
-    private var processingTile: BattleScreenTile!
-    
     /// Reference on all possible downloadable pokemon
     private var pokemonList: AllPokemonList
     
@@ -106,7 +100,6 @@ class BattleScreenViewController : GKViewControllerBase {
         super.init(nibName: "BattleScreenViewController", bundle: nil)
         
         stateMachine.delegate = self
-        self.pokemonFetcher.delegate = self
     }
     
     /// Required initialiser.  Unsupported so make it crash as soon as possible.
@@ -193,7 +186,8 @@ extension BattleScreenViewController : StateMachineDelegate {
     /// Fight button action used after all the players' turns are finished.
     func didPressFightButton() {
         
-        // TODO we shouldn't need to rebuild here
+        // TODO we shouldn't need to rebuild here.
+        // The proper way would be to change the player's pokemon and then reflect that change in the tile.
         player1.pokemonDraw = [team1poke1.pokemon!, team1poke2.pokemon!, team1poke3.pokemon!]
         player2.pokemonDraw = [team2poke1.pokemon!, team2poke2.pokemon!, team2poke3.pokemon!]
 
@@ -298,8 +292,6 @@ extension BattleScreenViewController : BattleScreenTileDelegate {
     /// - parameter: Tile sending the event.
     func tileButtonPressed(sender: BattleScreenTile) {
         
-        processingTile = sender
-        
         GKThread.dispatchOnUiThread { [weak self] in
             
             guard let strongSelf = self else {
@@ -313,34 +305,23 @@ extension BattleScreenViewController : BattleScreenTileDelegate {
         }
     
         actionButton.enabled = false
+        pokemonFetcher.delegate = sender
         pokemonFetcher.fetch()
     }
-}
-
-extension BattleScreenViewController : RandomPokemonFetcherDelegate {
     
-    //
-    // MARK: RandomPokemonFetcherDelegate implementation
-    //
-    
-    /// Did get random pokemon from pressing a tile.
+    /// Called after the tile has finished updating its pokemon.
     ///
-    /// - parameter success: Whether the list retrieval succeeded.
-    /// - parameter result: Retrieved list or nil on failure.
-    /// - parameter error: Error object or nil on failure.
-    func didGetPokemon(success: Bool, result: Pokemon?, error: NSError?) {
+    /// - parameter battleTile: Reference on the battle tile that completed the operation.
+    /// - parameter success: True if the update operation succeeded, false otherwise.
+    /// - parameter updatedPokemon: An instance of the updated pokemon on success, nil otherwise.
+    /// - parameter error: An instance of an error object if the operation failed, nil otherwise.
+    func didUpdatePokemon(battleTile: BattleScreenTile, success: Bool, updatedPokemon: Pokemon?, error: NSError?) {
+        
         if success {
             
-            GKThread.dispatchOnUiThread {
-                
-                self.processingTile.pokemon = result
-            }
-            
             stateMachine.proceedToNextState()
-            
+        
         } else {
-            
-            processingTile.loading = false
             
             // TODO push this into GearKit
             let alertController = UIAlertController(title: "Error", message: "Could not retrieve new pokemon", preferredStyle: .Alert)
@@ -350,7 +331,6 @@ extension BattleScreenViewController : RandomPokemonFetcherDelegate {
             
             presentViewController(alertController, animated: true, completion: nil)
         }
-
     }
 }
 

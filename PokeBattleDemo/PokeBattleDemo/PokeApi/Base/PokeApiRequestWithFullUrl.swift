@@ -22,17 +22,42 @@
 
 import Foundation
 
-// TODO There is no guarantee that all urls retrieved from the API will use the base url string.
-// As such, this should be extended so that it can use a full url as well.
-// We could create two children extensions for PokeApiRequestBase and play with protocol extensions
-// to achieve this.
-
-/// Protocol for all api requests.
-protocol PokeApiRequestBase {
-        
-    /// Query items (path parameter).
-    var queryItems: [NSURLQueryItem]? { get }
+/// A request where we provide the full Url.  This is useful for URLs for the PokeApi
+/// that are retrieved from JSON responses themselves and therefore include the base URL as well.
+protocol PokeApiRequestWithFullUrl : PokeApiRequestBase {
     
-    ///　Get the absolute Url for the request
-    var absoluteUrl: NSURL? { get }
+    /// Path of the function to call.
+    var fullUrl: String { get set }
+    
+    /// Initialise with a full Url.
+    init(fullUrl: String)
+}
+
+extension PokeApiRequestWithFullUrl {
+    
+    /// Build absolute url based on all url components in the type.
+    var absoluteUrl: NSURL? {
+        
+        guard let queryItemsInstance = queryItems else  {
+            
+            return NSURL(string: fullUrl)
+        }
+        
+        guard let components = NSURLComponents(string: fullUrl) else {
+            
+            print("Could not find URL components from string \(fullUrl)")
+            return nil
+        }
+        
+        if let _ = components.queryItems {
+            
+            components.queryItems!.appendContentsOf(queryItemsInstance)
+        
+        } else {
+            
+            components.queryItems = queryItemsInstance
+        }
+        
+        return components.URL
+    }
 }

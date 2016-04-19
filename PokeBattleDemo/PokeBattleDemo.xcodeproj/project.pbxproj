@@ -18,6 +18,9 @@
 		53CEEE6C1CC3891F0045C596 /* BattleResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CEEE6B1CC3891F0045C596 /* BattleResult.swift */; };
 		53CEEE6E1CC389BD0045C596 /* PlayerResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CEEE6D1CC389BD0045C596 /* PlayerResult.swift */; };
 		53CEEE701CC4E0510045C596 /* MultiplePokemonTypeFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CEEE6F1CC4E0510045C596 /* MultiplePokemonTypeFetcher.swift */; };
+		53CEEE741CC665270045C596 /* PokeApiRequestWithPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CEEE731CC665270045C596 /* PokeApiRequestWithPath.swift */; };
+		53CEEE761CC665320045C596 /* PokeApiRequestWithFullUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CEEE751CC665320045C596 /* PokeApiRequestWithFullUrl.swift */; };
+		53CEEE781CC665EC0045C596 /* PokemonFetcherProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CEEE771CC665EC0045C596 /* PokemonFetcherProtocol.swift */; };
 		53D0A9291CC0F99800AE3858 /* bug.png in Resources */ = {isa = PBXBuildFile; fileRef = 53D0A9171CC0F99800AE3858 /* bug.png */; };
 		53D0A92A1CC0F99800AE3858 /* dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 53D0A9181CC0F99800AE3858 /* dark.png */; };
 		53D0A92B1CC0F99800AE3858 /* dragon.png in Resources */ = {isa = PBXBuildFile; fileRef = 53D0A9191CC0F99800AE3858 /* dragon.png */; };
@@ -87,6 +90,9 @@
 		53CEEE6B1CC3891F0045C596 /* BattleResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BattleResult.swift; sourceTree = "<group>"; };
 		53CEEE6D1CC389BD0045C596 /* PlayerResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerResult.swift; sourceTree = "<group>"; };
 		53CEEE6F1CC4E0510045C596 /* MultiplePokemonTypeFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiplePokemonTypeFetcher.swift; sourceTree = "<group>"; };
+		53CEEE731CC665270045C596 /* PokeApiRequestWithPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PokeApiRequestWithPath.swift; sourceTree = "<group>"; };
+		53CEEE751CC665320045C596 /* PokeApiRequestWithFullUrl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PokeApiRequestWithFullUrl.swift; sourceTree = "<group>"; };
+		53CEEE771CC665EC0045C596 /* PokemonFetcherProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PokemonFetcherProtocol.swift; sourceTree = "<group>"; };
 		53D0A9171CC0F99800AE3858 /* bug.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bug.png; sourceTree = "<group>"; };
 		53D0A9181CC0F99800AE3858 /* dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dark.png; sourceTree = "<group>"; };
 		53D0A9191CC0F99800AE3858 /* dragon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dragon.png; sourceTree = "<group>"; };
@@ -198,6 +204,8 @@
 			children = (
 				532613831CBCFFF0006985F3 /* PokeApiRequestBase.swift */,
 				5326138B1CBD02BE006985F3 /* PokeApiResponseBase.swift */,
+				53CEEE731CC665270045C596 /* PokeApiRequestWithPath.swift */,
+				53CEEE751CC665320045C596 /* PokeApiRequestWithFullUrl.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -325,6 +333,7 @@
 				53D0A9571CC21EAF00AE3858 /* MultiplePokemonFetcher.swift */,
 				53D0A9691CC25D5000AE3858 /* PokemonTypeFetcher.swift */,
 				53CEEE6F1CC4E0510045C596 /* MultiplePokemonTypeFetcher.swift */,
+				53CEEE771CC665EC0045C596 /* PokemonFetcherProtocol.swift */,
 			);
 			path = Fetchers;
 			sourceTree = "<group>";
@@ -612,16 +621,19 @@
 				532613871CBD0027006985F3 /* GlobalConstants.swift in Sources */,
 				539A53751CBCEA74000B83A3 /* AppDelegate.swift in Sources */,
 				53CEEE6C1CC3891F0045C596 /* BattleResult.swift in Sources */,
+				53CEEE741CC665270045C596 /* PokeApiRequestWithPath.swift in Sources */,
 				53D0A94D1CC10C1E00AE3858 /* IntroScreenViewController.swift in Sources */,
 				53D0A97A1CC25DF800AE3858 /* GetPokemonTypeRequest.swift in Sources */,
 				53D0A9681CC25D0E00AE3858 /* PokemonTypeCache.swift in Sources */,
 				53D0A97C1CC25E0200AE3858 /* GetPokemonTypeResponse.swift in Sources */,
 				53D0A9771CC25DE600AE3858 /* GetPokemonResponse.swift in Sources */,
 				532613841CBCFFF0006985F3 /* PokeApiRequestBase.swift in Sources */,
+				53CEEE781CC665EC0045C596 /* PokemonFetcherProtocol.swift in Sources */,
 				53D0A9521CC2111C00AE3858 /* AllPokemonListFetcher.swift in Sources */,
 				53CEEE701CC4E0510045C596 /* MultiplePokemonTypeFetcher.swift in Sources */,
 				53D0A9751CC25DE600AE3858 /* GetAllPokemonListResponse.swift in Sources */,
 				5326138C1CBD02BE006985F3 /* PokeApiResponseBase.swift in Sources */,
+				53CEEE761CC665320045C596 /* PokeApiRequestWithFullUrl.swift in Sources */,
 				53D0A98A1CC35FDD00AE3858 /* PokeApiModelBase.swift in Sources */,
 				53D0A96A1CC25D5000AE3858 /* PokemonTypeFetcher.swift in Sources */,
 				53D0A9471CC10BF100AE3858 /* BattleScreenViewController.swift in Sources */,

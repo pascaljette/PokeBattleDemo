@@ -23,56 +23,26 @@
 import Foundation
 
 /// Request to get full info for a pokemon type given its URL.
-class GetPokemonTypeRequest {
-    
-    //
-    // MARK: Stored properties
-    //
-    
-    /// Full url for the pokemon type.
-    var pokemonTypeFullUrl: String = ""
-    
-    //
-    // MARK: Initialisation
-    //
-    
-    /// Required by the protocol.
-    required init() {
-        
-    }
-    
-    /// Initialise with full url.
-    ///
-    /// - parameter fullUrl: Full URL to retrieve the pokemon type info from the API.
-    init(fullUrl: String) {
-        
-        self.pokemonTypeFullUrl = fullUrl
-    }
-}
-
-extension GetPokemonTypeRequest : PokeApiRequestBase {
+class GetPokemonTypeRequest : PokeApiRequestWithFullUrl{
     
     //
     // MARK: PokeApiRequestBase implementation.
     //
     
-    /// Path of the function to call.  Build from the full URL.
-    var apiPath: String {
-        
-        /// TODO better error handling
-        guard let url: NSURL = NSURL(string: pokemonTypeFullUrl) else {
-            
-            print("could not build URL")
-            return ""
-        }
-        
-        return url.path ?? ""
-    }
+    /// Full url for the pokemon type.
+    var fullUrl: String
     
     /// Query items (path parameter).
     var queryItems: [NSURLQueryItem]? {
         
         return nil
     }
+    
+    /// Initialise with full url.
+    ///
+    /// - parameter fullUrl: Full URL to retrieve the pokemon type info from the API.
+    required init(fullUrl: String) {
+        
+        self.fullUrl = fullUrl
+    }
 }
-

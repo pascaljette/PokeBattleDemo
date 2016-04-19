@@ -34,14 +34,17 @@ protocol AllPokemonListFetcherDelegate: class {
 }
 
 /// Fetches the list of all available pokemon in the API using a GetAllPokemonListRequest
-class AllPokemonListFetcher {
+class AllPokemonListFetcher : PokemonFetcherProtocol {
     
     //
-    // MARK: Nested types
+    // MARK: PokemonFetcherProtocol implementation
     //
-
-    /// Connection type
-    typealias GetPokemonListConnection = PokeApiConnection<GetAllPokemonListRequest, GetAllPokemonListResponse>
+    
+    /// Request type
+    typealias RequestType = GetAllPokemonListRequest
+    
+    /// Response type
+    typealias ResponseType = GetAllPokemonListResponse
     
     //
     // MARK: Stored properties
@@ -62,7 +65,7 @@ extension AllPokemonListFetcher {
     /// Fetch the data and calls the delegate on completion.
     func fetch() {
         
-        let call: GetPokemonListConnection = GetPokemonListConnection()
+        let call: ConnectionType = ConnectionType()
         
         call.onCompletion = { [weak self] (status, error, response) in
             
@@ -84,7 +87,7 @@ extension AllPokemonListFetcher {
             }
         }
         
-        call.execute()
+        call.execute(RequestType())
     }
 }
 
