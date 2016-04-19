@@ -131,14 +131,22 @@ extension IntroScreenViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loading = false
-        
         // TODO localize
         self.navigationItem.title = "Pokermon!"
 
         dispatch_group_enter(dispatchGroup)
         allPokemonFetcher.fetch()
         status = .FETCHING_POKEMON_LIST
+    }
+    
+    /// View will appear.
+    ///
+    /// - parameter animated: Whether the view is animated when it appears.
+    override func viewWillAppear(animated: Bool) {
+        
+        super.viewWillAppear(animated)
+        
+        loading = false
     }
 }
 
@@ -164,9 +172,7 @@ extension IntroScreenViewController {
                     
                     return
                 }
-                
-                strongSelf.loading = false
-                
+                                
                 // Build player1 deck from the bottom half.
                 let player1: Player = Player(id: .PLAYER_1, pokemonDraw: Array(strongSelf.initialDraw[0..<GlobalConstants.NUMBER_OF_POKEMON_PER_PLAYER]))
 
