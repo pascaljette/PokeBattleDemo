@@ -73,13 +73,17 @@ class BattleScreenTile: UIView {
          
             if loading {
                 
-                nameLabel.text = nil
-                typeImage1.image = nil
-                typeImage2.image = nil
+                nameLabel.hidden = true
+                typeImage1.hidden = true
+                typeImage2.hidden = true
                 imageButton.setBackgroundImage(nil, forState: .Normal)
                 activityIndicator.startAnimating()
             
             } else {
+                
+                nameLabel.hidden = false
+                typeImage1.hidden = false
+                typeImage2.hidden = false
                 
                 activityIndicator.stopAnimating()
             }
@@ -109,7 +113,6 @@ class BattleScreenTile: UIView {
                 
                 self.typeImage1.image = PokemonTypeMapping(rawValue: firstType.name)?.getImage()
             }
-            
             
             if pokemonInstance.types.isInBounds(1) {
                 
