@@ -30,6 +30,14 @@ protocol BattleScreenTileDelegate: class {
     ///
     /// - parameter sender: The tile forwarding the call.
     func tileButtonPressed(sender: BattleScreenTile)
+    
+    /// Called after the tile has finished updating its pokemon.
+    ///
+    /// - parameter battleTile: Reference on the battle tile that completed the operation.
+    /// - parameter success: True if the update operation succeeded, false otherwise.
+    /// - parameter updatedPokemon: An instance of the updated pokemon on success, nil otherwise.
+    /// - parameter error: An instance of an error object if the operation failed, nil otherwise.
+    func didUpdatePokemon(battleTile: BattleScreenTile, success: Bool, updatedPokemon: Pokemon?, error: NSError?)
 }
 
 /// Represents a tile containing the pokemon image, its name and its image to
@@ -95,7 +103,6 @@ class BattleScreenTile: UIView {
     /// from the UI thread.
     var pokemon: Pokemon? {
         
-        // TODO this needs to be refactored and/or optimized to remove all the thread dispatching stuff
         didSet {
             
             guard let pokemonInstance = self.pokemon else {
@@ -209,6 +216,43 @@ extension BattleScreenTile {
     }
 
 }
+
+extension BattleScreenTile : RandomPokemonFetcherDelegate {
+    
+    //
+    // MARK: RandomPokemonFetcherDelegate implementation
+    //
+    
+    /// Did get random pokemon from pressing a tile.
+    ///
+    /// - parameter success: Whether the list retrieval succeeded.
+    /// - parameter result: Retrieved list or nil on failure.
+    /// - parameter error: Error object or nil on failure.
+    func didGetPokemon(success: Bool, result: Pokemon?, error: NSError?) {
+        
+        defer {
+            
+            GKThread.dispatchOnUiThread {
+                
+                self.loading = false
+                self.delegate?.didUpdatePokemon(self
+                    , success: success
+                    , updatedPokemon: result
+                    , error: error)
+            }
+        }
+        
+        if success {
+            
+            GKThread.dispatchOnUiThread {
+                
+                self.loading = false
+                self.pokemon = result
+            }
+        }
+    }
+}
+
 
 extension BattleScreenTile {
     
