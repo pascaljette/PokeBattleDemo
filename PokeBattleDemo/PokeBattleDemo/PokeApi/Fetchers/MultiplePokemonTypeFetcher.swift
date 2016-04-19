@@ -23,8 +23,15 @@
 
 import Foundation
 
+/// Delegate for a multiple pokemon type fetcher.
 protocol MultiplePokemonTypeFetcherDelegate: class {
     
+    /// Called after the fetch operation has completed.
+    ///
+    /// - parameter fetcher: Reference on the fetcher that has completed the operation.
+    /// - parameter success: True if the operation succeeded, false otherwise.
+    /// - parameter result: The retrieved type array if successful, nil otherwise.
+    /// - parameter error: Error object if the operation failed, nil if it succeeded.
     func didGetPokemonTypeArray(fetcher: MultiplePokemonTypeFetcher, success: Bool, result: [PokemonType]?, error: NSError?)
 }
 

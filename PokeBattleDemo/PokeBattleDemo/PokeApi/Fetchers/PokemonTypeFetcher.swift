@@ -22,8 +22,15 @@
 
 import Foundation
 
+/// Delegate for a single pokemon type fetcher.
 protocol PokemonTypeFetcherDelegate: class {
     
+    /// Called after the fetch operation has completed.
+    ///
+    /// - parameter fetcher: Reference on the fetcher that has completed the operation.
+    /// - parameter success: True if the operation succeeded, false otherwise.
+    /// - parameter result: The retrieved type if successful, nil otherwise.
+    /// - parameter error: Error object if the operation failed, nil if it succeeded.
     func didGetPokemonType(fetcher: PokemonTypeFetcher, success: Bool, result: PokemonType?, error: NSError?)
 }
 
