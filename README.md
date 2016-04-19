@@ -7,6 +7,8 @@ This uses XCode 7.3 (Swift 2.2).
 # How to use (play)
 There is an intial draw of 3 random pokemon per player.  Each player gets 2 rounds to discard one pokemon and get another random one.  After both players have completed all rounds, damage is calculated according to the pokemon types and the damage they can inflict to the opposing player's pokemon.  The winner is the player who can inflict the most damages to other players.  Type effectiveness is calculated according to the rules described in [Bulbapedia](http://bulbapedia.bulbagarden.net/wiki/Type) but instead of using specific moves, we are considering all pokemons have only one move which corresponds to their innate type.
 
+![Alt text](PokeBattleDemo/Screenshots/Demo.png "Intro Screen")
+
 # Design Philosophy
 
 ## No Storyboards
@@ -32,7 +34,18 @@ Documentation is not using the full extent of the [Swift markup language](https:
 ## Xamarin
 [Xamarin](https://www.xamarin.com/) implementation would have been better, considering we are aiming for iOS/Android cross-platform usage, but the proof of concept has been implemented in iOS/Swift only for now due to time constraints.
 
+## Dependency Injection and mocks
+We already have proper dependency injection in our view controllers.  This would make the project easy to mock and test.  What we need to do next is deign proper interfaces for the objects passed to the view controller initializers so that a mock implementation can be passed as well.
+
+## Localization
+In iOS, localization is as easy as putting all our strings in localizable .strings files.  This should be relatively trivial to do with our application.
+
 ## Home screen
 
 ### Progress View
 We have 1 task to retrieve the pokemon list and n tasks to retrieve initial draw pokemons from the home screen.  A rudimentary progress view could be implemented instead of the activity indicator to give the user a better indicator of the loading progress.
+
+## BattleScreen
+
+### Collection View
+We should be using a collection view instead of hardcoding 3 pokemon per player to make the program more extensible.  In that case, extra pokemon would mean long loading times but there might be a better way to stream data to circumvent this problem.

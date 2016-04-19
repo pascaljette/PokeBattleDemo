@@ -22,22 +22,44 @@
 
 import Foundation
 
+/// Delegate for a fetcher that retrieves a list of all available pokemon.
 protocol AllPokemonListFetcherDelegate: class {
     
+    /// Did get the list of all possible pokemon.
+    ///
+    /// - parameter success: Whether the list retrieval succeeded.
+    /// - parameter result: Retrieved list or nil on failure.
+    /// - parameter error: Error object or nil on failure.
     func didGetAllPokemonList(success: Bool, result: AllPokemonList?, error: NSError?)
 }
 
+/// Fetches the list of all available pokemon in the API using a GetAllPokemonListRequest
 class AllPokemonListFetcher {
     
+    //
+    // MARK: Nested types
+    //
+
+    /// Connection type
     typealias GetPokemonListConnection = PokeApiConnection<GetAllPokemonListRequest, GetAllPokemonListResponse>
     
+    //
+    // MARK: Stored properties
+    //
+    
+    /// Weak reference on the delegate.
     weak var delegate: AllPokemonListFetcherDelegate?
     
 }
 
 
 extension AllPokemonListFetcher {
-        
+    
+    //
+    // MARK: Public functions
+    //
+    
+    /// Fetch the data and calls the delegate on completion.
     func fetch() {
         
         let call: GetPokemonListConnection = GetPokemonListConnection()

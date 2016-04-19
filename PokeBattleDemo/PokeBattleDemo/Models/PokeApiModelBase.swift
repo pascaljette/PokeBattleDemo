@@ -22,7 +22,7 @@
 
 import Foundation
 
-
+/// Protocol for all models retrieved from the PokeApi.
 protocol PokeApiModelBase {
     
     // Required init for populating with JSON data

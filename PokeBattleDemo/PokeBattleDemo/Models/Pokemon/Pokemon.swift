@@ -23,21 +23,36 @@
 import Foundation
 import UIKit
 
-// TODO
-// For some obscure reason, this crashes if made as a struct.
-class Pokemon : PokeApiModelBase {
+/// Model representing a pokemon.  We store only the information we need from the massive JSON from
+/// PokeApi.
+struct Pokemon : PokeApiModelBase {
     
-    // TODO this should probably be configurable
-    private let BASE_DAMAGE: CGFloat = CGFloat(50.0)
-    
+    //
+    // MARK: Stored properties
+    //
+
+    /// Pokemon name.
     var name: String = ""
+    
+    /// String representing the URL to retrieve the pokemon's image.
     var spriteUrl: String = ""
+    
+    /// List of type identifiers associated with this pokemon.
     var types: [PokemonTypeIdentifier] = []
     
-    required init() {
+    //
+    // MARK: Initialization
+    //
+
+    /// Required by PokeApiModelBase
+    init() {
         
     }
     
+    /// Initialize with a name and sprite Url
+    ///
+    /// - parameter name: Pokemon name.
+    /// - paramater spriteUrl: String representing the URL to retrieve the pokemon's image.
     init(name: String, spriteUrl: String) {
         
         self.name = name

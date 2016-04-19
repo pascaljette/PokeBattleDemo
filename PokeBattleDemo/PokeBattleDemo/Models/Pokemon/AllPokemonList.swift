@@ -22,14 +22,23 @@
 
 import Foundation
 
-// TODO
-// For some obscure reason, this crashes if made as a struct.
-class AllPokemonList : PokeApiModelBase {
+/// List of all possible pokemons and the URL to get their information.
+/// Limited to 1000 by GetAllPokemonListRequest.
+struct AllPokemonList : PokeApiModelBase {
     
-    required init() {
-        
+    //
+    // MARK: Stored properties
+    //
+
+    /// All the urls used to retrieve the pokemon info.
+    var pokemonUrlStrings: [String] = []
+
+    //
+    // MARK: Initialization
+    //
+
+    /// Required by PokeApiModelBase
+    init() {
         
     }
-    
-    var pokemonUrlStrings: [String] = []
 }

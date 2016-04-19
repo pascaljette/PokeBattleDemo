@@ -22,8 +22,10 @@
 
 import Foundation
 
+/// Request to get all available pokemon in the api.  Limited to 1000
 class GetAllPokemonListRequest {
 
+    /// Required by the protocol
     required init() {
 
     }
@@ -31,12 +33,17 @@ class GetAllPokemonListRequest {
 
 extension GetAllPokemonListRequest : PokeApiRequestBase {
     
-    
+    //
+    // MARK: PokeApiRequestBase implementation
+    //
+
+    /// Path of the function to call.
     var apiPath: String {
         
         return "/api/v2/pokemon"
     }
     
+    /// Query items (path parameter).
     var queryItems: [NSURLQueryItem]? {
         
         return [NSURLQueryItem(name: "limit", value: "1000")]

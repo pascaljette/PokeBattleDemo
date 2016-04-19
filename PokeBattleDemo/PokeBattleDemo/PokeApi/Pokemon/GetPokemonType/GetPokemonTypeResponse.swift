@@ -23,19 +23,24 @@
 import Foundation
 import SwiftyJSON
 
+/// Response gotten when getting a single pokemon type info from the API.
 class GetPokemonTypeResponse: PokeApiResponseBase {
     
+    //
+    // MARK: PokeApiResponseBase implementation
+    //
+    
+    /// Model type
     typealias ModelType = PokemonType
     
+    /// Initialize from json.
+    ///
+    /// - parameter json: JSON or subJSON data with which to initialize.
     required init(json: JSON) {
         
         model = ModelType()
         
-        let typeIdentifier = PokemonTypeIdentifier()
-        typeIdentifier.name = json["name"].string ?? ""
-        typeIdentifier.infoUrl = json["url"].string ?? ""
-        
-        model.typeIdentifier = typeIdentifier
+        model.typeIdentifier = generateIdentifier(json)
         
         guard let damageRelations = json["damage_relations"].dictionary else {
             
@@ -44,32 +49,39 @@ class GetPokemonTypeResponse: PokeApiResponseBase {
         
         for (_,subJson):(String, JSON) in damageRelations["no_damage_to"]! {
             
-            let type = PokemonTypeIdentifier()
-            type.name = subJson["name"].string ?? ""
-            type.infoUrl = subJson["url"].string ?? ""
-            
-            model.noDamageToTypes.append(type)
+            model.noDamageToTypes.append(generateIdentifier(subJson))
         }
         
         for (_,subJson):(String, JSON) in damageRelations["half_damage_to"]! {
             
-            let type = PokemonTypeIdentifier()
-            type.name = subJson["name"].string ?? ""
-            type.infoUrl = subJson["url"].string ?? ""
-            
-            model.halfDamageToTypes.append(type)
+            model.halfDamageToTypes.append(generateIdentifier(subJson))
         }
 
         for (_,subJson):(String, JSON) in damageRelations["double_damage_to"]! {
-            
-            let type = PokemonTypeIdentifier()
-            type.name = subJson["name"].string ?? ""
-            type.infoUrl = subJson["url"].string ?? ""
-            
-            model.doubleDamageToTypes.append(type)
+                        
+            model.doubleDamageToTypes.append(generateIdentifier(subJson))
         }
     }
     
-    // enforce the fact that every response must be associated with a model
+    /// Model instance.
     var model: ModelType
+}
+
+
+extension GetPokemonTypeResponse {
+    
+    //
+    // MARK: Private utility functions.
+    //
+
+    /// Retrieve the pokemon type identifier from the type's subjson.
+    ///
+    /// - parameter subJson: Type subJSON containing all the type information.
+    ///
+    /// - returns: The generated type identifier.
+    private func generateIdentifier(subJson: JSON) -> PokemonTypeIdentifier {
+        
+        return PokemonTypeIdentifier(name: subJson["name"].string ?? ""
+            , infoUrl: subJson["url"].string ?? "")
+    }
 }

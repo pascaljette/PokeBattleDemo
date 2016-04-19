@@ -23,41 +23,67 @@
 import Foundation
 import GearKit
 
+/// Delegate for a battle screen tile.
 protocol BattleScreenTileDelegate: class {
     
+    /// Forward the call when the tile is pressed.
+    ///
+    /// - parameter sender: The tile forwarding the call.
     func tileButtonPressed(sender: BattleScreenTile)
 }
 
-// TODO fix all these dispatch to UI thread, they are unacceptable.
+/// Represents a tile containing the pokemon image, its name and its image to
+/// display in the main action view controller.
 class BattleScreenTile: UIView {
     
+    //
+    // MARK: IBOutlets.
+    //
+    
+    /// Pokemon name label
     @IBOutlet weak var nameLabel: UILabel!
     
+    /// Pokemon image (button so it is pressable)
     @IBOutlet weak var imageButton: UIButton!
     
+    /// Pokemon first type image
     @IBOutlet weak var typeImage1: UIImageView!
     
+    /// Pokemon second type image
     @IBOutlet weak var typeImage2: UIImageView!
     
+    /// Main view used for auto-layout.
     @IBOutlet weak var view: UIView!
     
+    /// Main view used for auto-layout.
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
+    //
+    // MARK: Stored properties.
+    //
+    
+    /// Delegate to forward calls.
     weak var delegate: BattleScreenTileDelegate?
     
+    /// Whether the current is loading or not.  Updates UI as well so make sure to always set
+    /// from the UI thread.
     var loading: Bool = false {
         
         didSet {
          
             if loading {
                 
-                nameLabel.text = nil
-                typeImage1.image = nil
-                typeImage2.image = nil
+                nameLabel.hidden = true
+                typeImage1.hidden = true
+                typeImage2.hidden = true
                 imageButton.setBackgroundImage(nil, forState: .Normal)
                 activityIndicator.startAnimating()
             
             } else {
+                
+                nameLabel.hidden = false
+                typeImage1.hidden = false
+                typeImage2.hidden = false
                 
                 activityIndicator.stopAnimating()
             }
@@ -65,6 +91,8 @@ class BattleScreenTile: UIView {
         
     }
     
+    /// Set the pokemon on the tile. Updates UI as well so make sure to always set
+    /// from the UI thread.
     var pokemon: Pokemon? {
         
         // TODO this needs to be refactored and/or optimized to remove all the thread dispatching stuff
@@ -72,39 +100,29 @@ class BattleScreenTile: UIView {
             
             guard let pokemonInstance = self.pokemon else {
                 
-                GKThread.dispatchOnUiThread {
-
-                    self.nameLabel.text = nil
-                    self.imageButton.setBackgroundImage(nil, forState: .Normal)
-                }
+                self.nameLabel.text = nil
+                self.imageButton.setBackgroundImage(nil, forState: .Normal)
                 
                 loading = false
                 return
             }
             
-            GKThread.dispatchOnUiThread {
-
-                self.nameLabel.text = pokemonInstance.name.uppercaseString
+            self.nameLabel.text = pokemonInstance.name.uppercaseString
+            
+            if let firstType = pokemonInstance.types.first {
                 
-                if let firstType = pokemonInstance.types.first {
-                    
-                    self.typeImage1.image = PokemonTypeMapping(rawValue: firstType.name)?.getImage()
-                }
+                self.typeImage1.image = PokemonTypeMapping(rawValue: firstType.name)?.getImage()
+            }
+            
+            if pokemonInstance.types.isInBounds(1) {
                 
-                
-                if pokemonInstance.types.isInBounds(1) {
-                    
-                    self.typeImage2.image = PokemonTypeMapping(rawValue: pokemonInstance.types[1].name)?.getImage()
-                }
+                self.typeImage2.image = PokemonTypeMapping(rawValue: pokemonInstance.types[1].name)?.getImage()
             }
 
             guard let imageUrl = NSURL(string: pokemonInstance.spriteUrl) where !String.isNilOrEmpty(pokemonInstance.spriteUrl) else {
                 
-                GKThread.dispatchOnUiThread {
-
-                    self.imageButton.setBackgroundImage(UIImage(named: "NoImageDefault.png"), forState: .Normal)
-                    self.loading = false
-                }
+                self.imageButton.setBackgroundImage(UIImage(named: "NoImageDefault.png"), forState: .Normal)
+                self.loading = false
                 
                 return
             }
@@ -143,6 +161,13 @@ class BattleScreenTile: UIView {
         }
     }
     
+    //
+    // MARK: Initialization.
+    //
+
+    /// Required init for initializating from interface builder.
+    ///
+    /// - parameter aDecoder: Codex used to decode from the nib.
     required init?(coder aDecoder: NSCoder) {
         
         super.init(coder: aDecoder)
@@ -150,6 +175,16 @@ class BattleScreenTile: UIView {
         setupView()
     }
     
+}
+
+extension BattleScreenTile {
+    
+    //
+    // MARK: Private utility functions.
+    //
+    
+    /// Setup the view when loading.  This will apply auto-layout even when the nib is directly 
+    /// ssetup as a child view in interface builder.
     private func setupView() {
         
         let className = String(self.dynamicType)
@@ -167,14 +202,23 @@ class BattleScreenTile: UIView {
         
         // Restore constraints when loaded in interface builder.
         self.view.translatesAutoresizingMaskIntoConstraints = false
+        
         self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[view]|", options: NSLayoutFormatOptions.AlignAllCenterY , metrics: nil, views: ["view": self.view]))
+        
         self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[view]|", options: NSLayoutFormatOptions.AlignAllCenterX , metrics: nil, views: ["view": self.view]))
-
     }
+
 }
 
 extension BattleScreenTile {
     
+    //
+    // MARK: IBActions
+    //
+    
+    /// Triggered when the image button is pressed.
+    ///
+    /// - parameter sender: Reference on the image button triggering the event.
     @IBAction func imageButtonPressed(sender: AnyObject) {
         
         delegate?.tileButtonPressed(self)

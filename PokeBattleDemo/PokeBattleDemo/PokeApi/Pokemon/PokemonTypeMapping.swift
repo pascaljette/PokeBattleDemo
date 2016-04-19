@@ -23,6 +23,7 @@
 import Foundation
 import UIKit
 
+/// Mappings for pokemon types and their internal image file.
 enum PokemonTypeMapping: String {
     
     // id = 1
@@ -79,7 +80,10 @@ enum PokemonTypeMapping: String {
     // id = 18
     case FAIRY = "fairy"
     
-
+    /// Get the mapped image for the pokemon type.  Since all images are kept locally,
+    /// we will force crash if an image is not properly retrieved.
+    ///
+    /// - returns: Generated image from the pokemon type.
     func getImage() -> UIImage {
         
         switch self {

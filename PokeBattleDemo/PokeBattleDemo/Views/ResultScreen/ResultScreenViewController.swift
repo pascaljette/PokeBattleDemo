@@ -1,29 +1,50 @@
+// The MIT License (MIT)
 //
-//  ResultScreenViewController.swift
-//  PokeBattleDemo
+// Copyright (c) 2015 pascaljette
 //
-//  Created by Pascal Jette on 4/17/16.
-//  Copyright © 2016 Pascal Jette. All rights reserved.
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
 //
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
 
 import Foundation
 import UIKit
 import GearKit
 
+/// Displays the result after the battle results have been computed.
 class ResultScreenViewController : GKViewControllerBase {
-    
     
     //
     // MARK: IBOutlets
     //
+    
+    /// Value of the damage dealt by player 1.
     @IBOutlet weak var player1DamageLabel: UILabel!
 
+    /// Value of the damage dealt by player 2.
     @IBOutlet weak var player2DamageLabel: UILabel!
     
+    /// Name of the player who won.
     @IBOutlet weak var winnerLabel: UILabel!
     
+    /// Label that displays the win string.
     @IBOutlet weak var winsLabel: UILabel!
 
+    /// Button used for one more game.
     @IBOutlet weak var oneMore: UIButton!
 
     //
@@ -35,7 +56,9 @@ class ResultScreenViewController : GKViewControllerBase {
     // MARK: Initialization
     //
 
-    /// Initialise with a model.
+    /// Initialise with battle result computed from the engine.
+    ///
+    /// - parameter battleResult: Result containing scores from both players.
     init(battleResult: BattleResult) {
         
         self.battleResult = battleResult
@@ -43,6 +66,9 @@ class ResultScreenViewController : GKViewControllerBase {
         super.init(nibName: "ResultScreenViewController", bundle: nil)
     }
     
+    /// Required initialiser.  Unsupported so make it crash as soon as possible.
+    ///
+    /// - parameter coder: Coder used to initialize the view controller (when instantiated from a storyboard).
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented (storyboard not supported)")
     }
@@ -54,6 +80,7 @@ extension ResultScreenViewController {
     // MARK: UIViewController overrides
     //
     
+    /// View did load.
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -67,11 +94,14 @@ extension ResultScreenViewController {
         oneMore.hidden = true
     }
     
-    
+    /// View did appear.
+    ///
+    /// - parameter animated: Whether the view is being animated when it appears.
     override func viewDidAppear(animated: Bool) {
         
         super.viewDidAppear(animated)
         
+        // Retrieve the playing winner.  Abort if it is a draw and displays the draw label.
         guard let winner = battleResult.winner else{
             
             winnerLabel.hidden = false
@@ -82,6 +112,7 @@ extension ResultScreenViewController {
             return
         }
     
+        // Set winner text to the corresponding player name.
         let winnerText: String
         switch winner.id {
             
@@ -92,11 +123,13 @@ extension ResultScreenViewController {
             winnerText = "Player 2"
         }
         
+        // Initially hide the winner text since we will be animating it.
         winnerLabel.text = winnerText
         winnerLabel.hidden = false
         
         let initialScaleFactor: CGFloat = 10.0
         
+        // Animate the winning player label by making it grow (scale).
         winnerLabel.transform = CGAffineTransformScale(winnerLabel.transform, 1.0 / initialScaleFactor, 1.0 / initialScaleFactor);
         
         UIView.animateWithDuration(1.0, animations:{
@@ -104,6 +137,7 @@ extension ResultScreenViewController {
             self.winnerLabel.transform = CGAffineTransformScale(self.winnerLabel.transform, initialScaleFactor, initialScaleFactor);
             }, completion: { _ in
                 
+                // Display the additional UI elements after the animation completes.
                 self.winsLabel.hidden = false
                 self.oneMore.hidden = false
         })
@@ -116,6 +150,10 @@ extension ResultScreenViewController {
     // MARK: IBAction
     //
 
+    /// One more button has been pressed.  Simply return to the root view controller. We will be using
+    /// the same pokemon draw for the new game.
+    ///
+    /// - parameter sender: Object sending the event.
     @IBAction func oneMoreButtonPressed(sender: AnyObject) {
         
         self.navigationController?.popToRootViewControllerAnimated(true)

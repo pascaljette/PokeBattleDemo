@@ -22,14 +22,28 @@
 
 import Foundation
 
+/// Request to get a single pokemon info given its url.
 class GetPokemonRequest {
     
+    //
+    // MARK: Stored properties
+    //
+    
+    /// Full url for the pokemon.
     var pokemonFullUrl: String = ""
     
+    //
+    // MARK: Initialisation
+    //
+
+    /// Required by the protocol.
     required init() {
 
     }
     
+    /// Initialise with full url.
+    ///
+    /// - parameter fullUrl: Full URL to retrieve the pokemon info from the API.
     init(fullUrl: String) {
         
         self.pokemonFullUrl = fullUrl
@@ -38,6 +52,11 @@ class GetPokemonRequest {
 
 extension GetPokemonRequest : PokeApiRequestBase {
     
+    //
+    // MARK: PokeApiRequestBase implementation.
+    //
+    
+    /// Path of the function to call.  Build from the full URL.
     var apiPath: String {
         
         /// TODO better error handling
@@ -50,10 +69,9 @@ extension GetPokemonRequest : PokeApiRequestBase {
         return url.path ?? ""
     }
     
+    /// Query items (path parameter).
     var queryItems: [NSURLQueryItem]? {
         
         return nil
     }
-
 }
-
