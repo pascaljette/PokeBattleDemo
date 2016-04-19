@@ -23,7 +23,7 @@
 import Foundation
 import UIKit
 
-/// Mappings for pokemon types.
+/// Mappings for pokemon types and their internal image file.
 enum PokemonTypeMapping: String {
     
     // id = 1

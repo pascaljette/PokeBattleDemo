@@ -74,6 +74,4 @@ extension GetPokemonRequest : PokeApiRequestBase {
         
         return nil
     }
-
 }
-

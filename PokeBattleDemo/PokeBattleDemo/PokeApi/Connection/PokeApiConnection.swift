@@ -26,8 +26,13 @@ import SwiftyJSON
 /// Status of the connection.
 enum PokeapiConnectionStatus {
     
+    /// Connection has completed successfully.
     case Success
+    
+    /// Connection has failed.
     case ConnectionError
+    
+    /// There was an error while building the URL.
     case UrlError
 }
 
@@ -124,4 +129,3 @@ extension PokeApiConnection {
         task!.resume()
     }
 }
-
