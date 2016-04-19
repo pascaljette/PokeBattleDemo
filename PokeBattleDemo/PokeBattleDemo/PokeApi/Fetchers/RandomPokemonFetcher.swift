@@ -34,14 +34,17 @@ protocol RandomPokemonFetcherDelegate: class {
 }
 
 /// Fetcher that retrieves a single random pokemon.
-class RandomPokemonFetcher {
+class RandomPokemonFetcher : PokemonFetcherProtocol {
     
     //
-    // MARK: Nested types
+    // MARK: PokemonFetcherProtocol implementation
     //
     
-    /// Connection type
-    typealias GetPokemonConnection = PokeApiConnection<GetPokemonRequest, GetPokemonResponse>
+    /// Request type
+    typealias RequestType = GetPokemonRequest
+    
+    /// Response type
+    typealias ResponseType = GetPokemonResponse
     
     //
     // MARK: Stored properties
@@ -80,7 +83,7 @@ extension RandomPokemonFetcher {
         
         let pokemonUrl = allPokemonList.pokemonUrlStrings[Int(arc4random_uniform(UInt32(allPokemonList.pokemonUrlStrings.count)))]
         
-        let call: GetPokemonConnection = GetPokemonConnection()
+        let call: ConnectionType = ConnectionType()
         let getPokemonRequest = GetPokemonRequest(fullUrl: pokemonUrl)
         
         call.onCompletion = { [weak self] (status, error, response) in

@@ -73,12 +73,6 @@ extension PokeApiConnection {
     //
     // MARK: Public methods
     //
-
-    /// Execute the connection by calling the requests parameterless constructor.
-    func execute() {
-        
-        performCall(RequestType())
-    }
     
     /// Execute the connection with an external reference on the request.
     /// Useful when the request requires additional configuration.
