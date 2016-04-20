@@ -22,11 +22,11 @@
 
 "POKERMON" = "ポーカーモン";
 
-"BATTLE" = "勝負";
+"BATTLE" = "ファイト";
 
 "FIGHT_NOW" = "戦う";
 
-"START" = "初め";
+"START" = "スタート";
 
 "ERROR" = "エラー";
 
@@ -36,8 +36,8 @@
 "PLAYER_1_SCORE" = "プレーヤー 1 スコア:";
 "PLAYER_2_SCORE" = "プレーヤー 2 スコア:";
 
-"REVENGE_BUTTON" = "復讐する！";
-"RESHUFFLE_BUTTON" = "もう一度切る";
+"REVENGE_BUTTON" = "同じポケモンで再チャレンジ";
+"RESHUFFLE_BUTTON" = "新ゲーム";
 
 "WINNER" = "勝者！";
 
