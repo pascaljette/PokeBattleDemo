@@ -9,6 +9,11 @@ There is an intial draw of 3 random pokemon per player.  Each player gets 2 roun
 
 ![Alt text](PokeBattleDemo/Screenshots/Demo.png "Intro Screen")
 
+# Localization
+
+* English
+* Japanese
+
 # Design Philosophy
 
 ## No Storyboards
