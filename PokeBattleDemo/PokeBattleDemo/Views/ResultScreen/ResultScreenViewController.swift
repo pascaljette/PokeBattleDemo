@@ -45,7 +45,7 @@ class ResultScreenViewController : GKViewControllerBase {
     @IBOutlet weak var winsLabel: UILabel!
 
     /// Button used for one more game.
-    @IBOutlet weak var oneMoreButton: UIButton!
+    @IBOutlet weak var revengeButton: UIButton!
 
     /// Button used for one more game with re-shuffle.
     @IBOutlet weak var reShuffleButton: UIButton!
@@ -94,7 +94,7 @@ extension ResultScreenViewController {
 
         winnerLabel.hidden = true
         winsLabel.hidden = true
-        oneMoreButton.hidden = true
+        revengeButton.hidden = true
         reShuffleButton.hidden = true
     }
     
@@ -111,7 +111,7 @@ extension ResultScreenViewController {
             winnerLabel.hidden = false
             winnerLabel.text = "DRAW"
             winsLabel.hidden = true
-            oneMoreButton.hidden = false
+            revengeButton.hidden = false
             reShuffleButton.hidden = false
             
             return
@@ -144,7 +144,7 @@ extension ResultScreenViewController {
                 
                 // Display the additional UI elements after the animation completes.
                 self.winsLabel.hidden = false
-                self.oneMoreButton.hidden = false
+                self.revengeButton.hidden = false
                 self.reShuffleButton.hidden = false
         })
     }
@@ -160,7 +160,7 @@ extension ResultScreenViewController {
     /// the same pokemon draw for the new game.
     ///
     /// - parameter sender: Object sending the event.
-    @IBAction func oneMoreButtonPressed(sender: AnyObject) {
+    @IBAction func revengeButtonPressed(sender: AnyObject) {
         
         self.navigationController?.popToRootViewControllerAnimated(true)
     }
