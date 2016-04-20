@@ -84,7 +84,8 @@ class BattleScreenTile: UIView {
                 nameLabel.hidden = true
                 typeImage1.hidden = true
                 typeImage2.hidden = true
-                imageButton.setBackgroundImage(nil, forState: .Normal)
+                imageButton.hidden = true
+                
                 activityIndicator.startAnimating()
             
             } else {
@@ -92,6 +93,7 @@ class BattleScreenTile: UIView {
                 nameLabel.hidden = false
                 typeImage1.hidden = false
                 typeImage2.hidden = false
+                imageButton.hidden = false
                 
                 activityIndicator.stopAnimating()
             }
@@ -104,23 +106,25 @@ class BattleScreenTile: UIView {
     var pokemon: Pokemon? {
         
         didSet {
+
+            resetView()
             
             guard let pokemonInstance = self.pokemon else {
-                
-                self.nameLabel.text = nil
-                self.imageButton.setBackgroundImage(nil, forState: .Normal)
                 
                 loading = false
                 return
             }
             
             self.nameLabel.text = pokemonInstance.name.uppercaseString
-            
+                        
+            // If the pokemon has at least one type, set the first image.
             if let firstType = pokemonInstance.types.first {
                 
                 self.typeImage1.image = PokemonTypeMapping(rawValue: firstType.name)?.getImage()
             }
             
+            // If a pokemon has a second type, set the second image.
+            // Pokemon are assumed to have at most 2 types.
             if pokemonInstance.types.isInBounds(1) {
                 
                 self.typeImage2.image = PokemonTypeMapping(rawValue: pokemonInstance.types[1].name)?.getImage()
@@ -197,13 +201,10 @@ extension BattleScreenTile {
         let className = String(self.dynamicType)
         self.view = NSBundle.mainBundle().loadNibNamed(className, owner: self, options: nil).first as! UIView
         
-        nameLabel.text = nil
         nameLabel.minimumScaleFactor = 8.0 / nameLabel.font.pointSize
         nameLabel.adjustsFontSizeToFitWidth = true
         
-        imageButton.setBackgroundImage(nil, forState: .Normal)
-        
-        activityIndicator.stopAnimating()
+        resetView()
         
         self.addSubview(self.view)
         
@@ -213,6 +214,15 @@ extension BattleScreenTile {
         self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[view]|", options: NSLayoutFormatOptions.AlignAllCenterY , metrics: nil, views: ["view": self.view]))
         
         self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[view]|", options: NSLayoutFormatOptions.AlignAllCenterX , metrics: nil, views: ["view": self.view]))
+    }
+    
+    /// Reset all elements in the view.
+    private func resetView() {
+        
+        nameLabel.text = nil
+        imageButton.setBackgroundImage(nil, forState: .Normal)
+        typeImage1.image = nil
+        typeImage2.image = nil
     }
 
 }

@@ -88,6 +88,8 @@ extension MultiplePokemonFetcher {
     /// random detailed entries.
     func fetch(allPokemonList: AllPokemonList) {
         
+        resetResults()
+        
         // Generate fetchers for :count: pokemon and start the fetch operation.
         for _ in 0..<count {
             
@@ -153,5 +155,20 @@ extension MultiplePokemonFetcher : RandomPokemonFetcherDelegate {
         }
         
         self.pokemonArray!.append(pokemonInstance)
+    }
+}
+
+extension MultiplePokemonFetcher {
+    
+    //
+    // MARK: Private utility functions
+    //
+    
+    /// Reset all previously obtained results
+    private func resetResults() {
+        
+        pokemonArray = nil
+        success = true
+        error = nil
     }
 }

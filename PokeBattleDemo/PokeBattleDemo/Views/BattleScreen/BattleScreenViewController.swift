@@ -157,9 +157,9 @@ extension BattleScreenViewController {
     /// View will appear.
     ///
     /// - parameter animated: Whether animated.
-    override func viewWillAppear(animated: Bool) {
+    override func viewDidAppear(animated: Bool) {
         
-        super.viewWillAppear(animated)
+        super.viewDidAppear(animated)
         
         team1poke1.pokemon = player1.pokemonDraw[0]
         team1poke2.pokemon = player1.pokemonDraw[1]

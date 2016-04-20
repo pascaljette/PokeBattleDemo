@@ -137,6 +137,8 @@ extension IntroScreenViewController {
         dispatch_group_enter(dispatchGroup)
         allPokemonFetcher.fetch()
         status = .FETCHING_POKEMON_LIST
+        
+        multiplePokemonFetcher.delegate = self
     }
     
     /// View will appear.
@@ -147,6 +149,25 @@ extension IntroScreenViewController {
         super.viewWillAppear(animated)
         
         loading = false
+    }
+}
+
+extension IntroScreenViewController {
+    
+    //
+    // MARK: Public methods
+    //
+
+    /// Shuffle the initial draw
+    func reshuffleDraw() {
+        
+        loading = true
+        
+        dispatch_group_enter(dispatchGroup)
+        
+        multiplePokemonFetcher.fetch(self.pokemonList)
+        
+        status = .FETCHING_INITIAL_DRAW
     }
 }
 
@@ -220,8 +241,6 @@ extension IntroScreenViewController : AllPokemonListFetcherDelegate {
         if success {
             
             self.pokemonList = result ?? AllPokemonList()
-
-            multiplePokemonFetcher.delegate = self
             
             multiplePokemonFetcher.fetch(self.pokemonList)
             
@@ -278,7 +297,7 @@ extension IntroScreenViewController : MultiplePokemonFetcherDelegate {
             status = .IDLE
             
             // TODO push this into GearKit
-            let alertController = UIAlertController(title: "Error", message: "Could not retrieve list of all pokemon", preferredStyle: .Alert)
+            let alertController = UIAlertController(title: "Error", message: "Could not retrieve initial draw", preferredStyle: .Alert)
             
             let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
             alertController.addAction(defaultAction)

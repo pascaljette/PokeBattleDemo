@@ -45,8 +45,11 @@ class ResultScreenViewController : GKViewControllerBase {
     @IBOutlet weak var winsLabel: UILabel!
 
     /// Button used for one more game.
-    @IBOutlet weak var oneMore: UIButton!
+    @IBOutlet weak var oneMoreButton: UIButton!
 
+    /// Button used for one more game with re-shuffle.
+    @IBOutlet weak var reShuffleButton: UIButton!
+    
     //
     // MARK: Stored properties
     //
@@ -91,7 +94,8 @@ extension ResultScreenViewController {
 
         winnerLabel.hidden = true
         winsLabel.hidden = true
-        oneMore.hidden = true
+        oneMoreButton.hidden = true
+        reShuffleButton.hidden = true
     }
     
     /// View did appear.
@@ -107,7 +111,8 @@ extension ResultScreenViewController {
             winnerLabel.hidden = false
             winnerLabel.text = "DRAW"
             winsLabel.hidden = true
-            oneMore.hidden = false
+            oneMoreButton.hidden = false
+            reShuffleButton.hidden = false
             
             return
         }
@@ -139,7 +144,8 @@ extension ResultScreenViewController {
                 
                 // Display the additional UI elements after the animation completes.
                 self.winsLabel.hidden = false
-                self.oneMore.hidden = false
+                self.oneMoreButton.hidden = false
+                self.reShuffleButton.hidden = false
         })
     }
 }
@@ -159,4 +165,17 @@ extension ResultScreenViewController {
         self.navigationController?.popToRootViewControllerAnimated(true)
     }
     
+    /// Re-shuffle button has been pressed.  Trigger a reshuffle and return to the intro view controller.
+    ///
+    /// - parameter sender: Object sending the event.
+    @IBAction func reShuffleButtonPressed(sender: AnyObject) {
+        
+        guard let introViewController = self.navigationController?.viewControllers[0] as? IntroScreenViewController else {
+            
+            return
+        }
+        
+        introViewController.reshuffleDraw()
+        self.navigationController?.popToViewController(introViewController, animated: true)
+    }
 }
