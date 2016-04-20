@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -7,9 +7,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ResultScreenViewController" customModule="PokeBattleDemo" customModuleProvider="target">
             <connections>
-                <outlet property="oneMore" destination="DGR-j7-BSE" id="kGU-w5-pgD"/>
                 <outlet property="player1DamageLabel" destination="dJ1-OZ-8t3" id="xaX-RW-elE"/>
+                <outlet property="player1ScoreTitleLabel" destination="jiX-Nl-18l" id="UFe-zV-Jyk"/>
                 <outlet property="player2DamageLabel" destination="9uq-4V-7qd" id="h02-Cr-2sF"/>
+                <outlet property="player2ScoreTitleLabel" destination="CTo-59-lrx" id="tLm-dp-ffJ"/>
+                <outlet property="reShuffleButton" destination="kaT-oT-QGp" id="b5Z-L9-N5B"/>
+                <outlet property="revengeButton" destination="DGR-j7-BSE" id="6D4-sz-6r5"/>
                 <outlet property="view" destination="iN0-l3-epB" id="MD8-aP-fjo"/>
                 <outlet property="winnerLabel" destination="AoC-XQ-ICU" id="EW5-HA-tRg"/>
                 <outlet property="winsLabel" destination="QVp-09-K4k" id="BCi-Wc-OpY"/>
@@ -89,8 +92,8 @@
                         <constraint firstItem="9uq-4V-7qd" firstAttribute="trailing" secondItem="dJ1-OZ-8t3" secondAttribute="trailing" id="oUA-1M-gSk"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WINS!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QVp-09-K4k">
-                    <rect key="frame" x="8" y="230.5" width="584" height="86"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="WINS!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QVp-09-K4k">
+                    <rect key="frame" x="8" y="230" width="584" height="86"/>
                     <fontDescription key="fontDescription" type="system" pointSize="72"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
@@ -102,12 +105,12 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DGR-j7-BSE" customClass="GKSolidColorButton" customModule="GearKit">
-                    <rect key="frame" x="24" y="388.5" width="552" height="60"/>
+                    <rect key="frame" x="24" y="455" width="552" height="60"/>
                     <color key="backgroundColor" red="0.074509803920000006" green="0.050980392159999999" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="EcB-Rh-sfR"/>
                     </constraints>
-                    <state key="normal" title="One more!">
+                    <state key="normal" title="Revenge">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <userDefinedRuntimeAttributes>
@@ -119,23 +122,48 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
-                        <action selector="oneMoreButtonPressed:" destination="-1" eventType="touchUpInside" id="JVJ-hO-CYq"/>
+                        <action selector="revengeButtonPressed:" destination="-1" eventType="touchUpInside" id="AKo-pQ-ASq"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kaT-oT-QGp" customClass="GKSolidColorButton" customModule="GearKit">
+                    <rect key="frame" x="24" y="528" width="552" height="60"/>
+                    <color key="backgroundColor" red="0.074509803920000006" green="0.050980392159999999" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="xhQ-5i-lgs"/>
+                    </constraints>
+                    <state key="normal" title="Reshuffle">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="disabledBackgroundColor">
+                            <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
+                            <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="reShuffleButtonPressed:" destination="-1" eventType="touchUpInside" id="DLL-PH-BhR"/>
                     </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="QVp-09-K4k" firstAttribute="top" secondItem="AoC-XQ-ICU" secondAttribute="bottom" constant="24" id="48h-Ef-if0"/>
+                <constraint firstItem="kaT-oT-QGp" firstAttribute="top" secondItem="DGR-j7-BSE" secondAttribute="bottom" constant="12.5" id="7gF-63-3fP"/>
                 <constraint firstItem="4W2-4k-65q" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="9aT-E5-Lmb"/>
+                <constraint firstAttribute="bottom" secondItem="kaT-oT-QGp" secondAttribute="bottom" constant="12" id="BBQ-qJ-Ef6"/>
                 <constraint firstAttribute="trailing" secondItem="4W2-4k-65q" secondAttribute="trailing" id="EdI-cb-vwB"/>
                 <constraint firstAttribute="trailing" secondItem="DGR-j7-BSE" secondAttribute="trailing" constant="24" id="It3-rQ-P5c"/>
-                <constraint firstItem="DGR-j7-BSE" firstAttribute="top" secondItem="QVp-09-K4k" secondAttribute="bottom" constant="72" id="Kpp-xu-XUa"/>
+                <constraint firstItem="DGR-j7-BSE" firstAttribute="top" relation="greaterThanOrEqual" secondItem="QVp-09-K4k" secondAttribute="bottom" constant="36" id="Kpp-xu-XUa"/>
                 <constraint firstAttribute="trailing" secondItem="AoC-XQ-ICU" secondAttribute="trailing" id="SAM-p1-xvz"/>
                 <constraint firstItem="QVp-09-K4k" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="TpT-Er-KMI"/>
                 <constraint firstItem="AoC-XQ-ICU" firstAttribute="top" secondItem="4W2-4k-65q" secondAttribute="bottom" constant="48" id="YVw-Ii-H5P"/>
                 <constraint firstAttribute="trailing" secondItem="QVp-09-K4k" secondAttribute="trailing" constant="8" id="cvl-CL-A6i"/>
                 <constraint firstItem="4W2-4k-65q" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="36" id="flh-Gh-C3q"/>
+                <constraint firstItem="kaT-oT-QGp" firstAttribute="leading" secondItem="DGR-j7-BSE" secondAttribute="leading" id="hhm-4F-oGj"/>
                 <constraint firstItem="AoC-XQ-ICU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="lAg-Cr-zJc"/>
+                <constraint firstItem="kaT-oT-QGp" firstAttribute="trailing" secondItem="DGR-j7-BSE" secondAttribute="trailing" id="mGe-OM-zEK"/>
                 <constraint firstItem="DGR-j7-BSE" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="24" id="ptm-Nk-kIc"/>
             </constraints>
             <point key="canvasLocation" x="280" y="204"/>

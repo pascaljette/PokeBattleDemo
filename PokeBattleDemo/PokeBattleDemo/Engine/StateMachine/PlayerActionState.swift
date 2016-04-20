@@ -69,7 +69,8 @@ class PlayerActionState: GameState {
     
     /// Text for the action button.
     var actionButtonText: String {
-        return "Select Pokemon or press here to skip"
+        
+        return NSLocalizedString("SKIP_OR_PICK", comment: "Player Action State")
     }
     
     /// When the action button is pressed, defer to the delegate..

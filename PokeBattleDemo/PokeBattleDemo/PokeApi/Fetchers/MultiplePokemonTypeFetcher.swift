@@ -87,6 +87,8 @@ extension MultiplePokemonTypeFetcher {
     /// Fetch the data and calls the delegate on completion.
     func fetch() {
         
+        resetResults()
+        
         for typeIdentifier in self.pokemonTypeIdentifiers {
             
             let typeFetcher = PokemonTypeFetcher(pokemonTypeIdentifier: typeIdentifier)
@@ -151,5 +153,20 @@ extension MultiplePokemonTypeFetcher : PokemonTypeFetcherDelegate {
         }
         
         self.pokemonTypeArray!.append(pokemonTypeInstance)
+    }
+}
+
+extension MultiplePokemonTypeFetcher {
+    
+    //
+    // MARK: Private utility functions
+    //
+    
+    /// Reset all previously obtained results
+    private func resetResults() {
+        
+        pokemonTypeArray = nil
+        success = true
+        error = nil
     }
 }

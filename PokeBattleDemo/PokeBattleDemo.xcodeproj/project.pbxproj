@@ -12,6 +12,7 @@
 		532613871CBD0027006985F3 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532613861CBD0027006985F3 /* GlobalConstants.swift */; };
 		5326138C1CBD02BE006985F3 /* PokeApiResponseBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5326138B1CBD02BE006985F3 /* PokeApiResponseBase.swift */; };
 		532613911CBD03A6006985F3 /* PokeApiConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532613901CBD03A6006985F3 /* PokeApiConnection.swift */; };
+		5384CF8B1CC798C20095A22D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5384CF8D1CC798C20095A22D /* Localizable.strings */; };
 		539A53751CBCEA74000B83A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539A53741CBCEA74000B83A3 /* AppDelegate.swift */; };
 		539A537C1CBCEA74000B83A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 539A537B1CBCEA74000B83A3 /* Assets.xcassets */; };
 		539A537F1CBCEA74000B83A3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 539A537D1CBCEA74000B83A3 /* LaunchScreen.storyboard */; };
@@ -82,6 +83,9 @@
 		532613861CBD0027006985F3 /* GlobalConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
 		5326138B1CBD02BE006985F3 /* PokeApiResponseBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PokeApiResponseBase.swift; sourceTree = "<group>"; };
 		532613901CBD03A6006985F3 /* PokeApiConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PokeApiConnection.swift; sourceTree = "<group>"; };
+		5384CF8A1CC798880095A22D /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		5384CF8C1CC798C20095A22D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5384CF8F1CC798EA0095A22D /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		539A53711CBCEA74000B83A3 /* PokeBattleDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokeBattleDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		539A53741CBCEA74000B83A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		539A537B1CBCEA74000B83A3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -163,6 +167,7 @@
 		53026E251CBFA80900C847D7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5384CF871CC797D50095A22D /* Strings */,
 				53026E261CBFA80900C847D7 /* Assets */,
 			);
 			name = Resources;
@@ -224,6 +229,14 @@
 				532613901CBD03A6006985F3 /* PokeApiConnection.swift */,
 			);
 			path = Connection;
+			sourceTree = "<group>";
+		};
+		5384CF871CC797D50095A22D /* Strings */ = {
+			isa = PBXGroup;
+			children = (
+				5384CF8D1CC798C20095A22D /* Localizable.strings */,
+			);
+			path = Strings;
 			sourceTree = "<group>";
 		};
 		539A53681CBCEA74000B83A3 = {
@@ -514,6 +527,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ja,
 			);
 			mainGroup = 539A53681CBCEA74000B83A3;
 			productRefGroup = 539A53721CBCEA74000B83A3 /* Products */;
@@ -534,6 +548,7 @@
 				53D0A93E1CC10B3000AE3858 /* pokeball.png in Resources */,
 				53D0A92B1CC0F99800AE3858 /* dragon.png in Resources */,
 				53D0A9A01CC3736E00AE3858 /* ResultScreenViewController.xib in Resources */,
+				5384CF8B1CC798C20095A22D /* Localizable.strings in Resources */,
 				53D0A93A1CC0F99800AE3858 /* water.png in Resources */,
 				53D0A9311CC0F99800AE3858 /* ghost.png in Resources */,
 				53D0A9291CC0F99800AE3858 /* bug.png in Resources */,
@@ -659,10 +674,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		5384CF8D1CC798C20095A22D /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5384CF8C1CC798C20095A22D /* en */,
+				5384CF8F1CC798EA0095A22D /* ja */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		539A537D1CBCEA74000B83A3 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				539A537E1CBCEA74000B83A3 /* Base */,
+				5384CF8A1CC798880095A22D /* ja */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";

@@ -53,7 +53,7 @@ class FightState: GameState {
     
     /// Text for the action button.
     var actionButtonText: String {
-        return "FIGHT !"
+        return NSLocalizedString("FIGHT_NOW", comment: "Fight State")
     }
     
     /// When the action button is pressed, defer to the delegate..

@@ -32,9 +32,15 @@ class ResultScreenViewController : GKViewControllerBase {
     // MARK: IBOutlets
     //
     
+    /// Title of the damage dealt by player 1.
+    @IBOutlet weak var player1ScoreTitleLabel: UILabel!
+    
     /// Value of the damage dealt by player 1.
     @IBOutlet weak var player1DamageLabel: UILabel!
 
+    /// Title of the damage dealt by player 1.
+    @IBOutlet weak var player2ScoreTitleLabel: UILabel!
+    
     /// Value of the damage dealt by player 2.
     @IBOutlet weak var player2DamageLabel: UILabel!
     
@@ -45,8 +51,11 @@ class ResultScreenViewController : GKViewControllerBase {
     @IBOutlet weak var winsLabel: UILabel!
 
     /// Button used for one more game.
-    @IBOutlet weak var oneMore: UIButton!
+    @IBOutlet weak var revengeButton: UIButton!
 
+    /// Button used for one more game with re-shuffle.
+    @IBOutlet weak var reShuffleButton: UIButton!
+    
     //
     // MARK: Stored properties
     //
@@ -86,12 +95,24 @@ extension ResultScreenViewController {
         
         navigationItem.hidesBackButton = true
 
+        player1ScoreTitleLabel.text = NSLocalizedString("PLAYER_1_SCORE", comment: "Player 1 score")
+        player2ScoreTitleLabel.text = NSLocalizedString("PLAYER_2_SCORE", comment: "Player 2 score")
+
         player1DamageLabel.text = String(battleResult.player1Result.score)
         player2DamageLabel.text = String(battleResult.player2Result.score)
 
+        revengeButton.setTitle(NSLocalizedString("REVENGE_BUTTON", comment: "Revenge Button")
+            , forState: .Normal)
+        
+        reShuffleButton.setTitle(NSLocalizedString("RESHUFFLE_BUTTON", comment: "Reshuffle Button")
+            , forState: .Normal)
+        
+        winsLabel.text = NSLocalizedString("WINNER", comment: "Winner label")
+        
         winnerLabel.hidden = true
         winsLabel.hidden = true
-        oneMore.hidden = true
+        revengeButton.hidden = true
+        reShuffleButton.hidden = true
     }
     
     /// View did appear.
@@ -105,9 +126,10 @@ extension ResultScreenViewController {
         guard let winner = battleResult.winner else{
             
             winnerLabel.hidden = false
-            winnerLabel.text = "DRAW"
+            winnerLabel.text = NSLocalizedString("DRAW", comment: "Draw")
             winsLabel.hidden = true
-            oneMore.hidden = false
+            revengeButton.hidden = false
+            reShuffleButton.hidden = false
             
             return
         }
@@ -117,10 +139,10 @@ extension ResultScreenViewController {
         switch winner.id {
             
         case .PLAYER_1:
-            winnerText = "Player 1"
+            winnerText = NSLocalizedString("PLAYER_1", comment: "Player 1")
             
         case .PLAYER_2:
-            winnerText = "Player 2"
+            winnerText = NSLocalizedString("PLAYER_2", comment: "Player 2")
         }
         
         // Initially hide the winner text since we will be animating it.
@@ -139,7 +161,8 @@ extension ResultScreenViewController {
                 
                 // Display the additional UI elements after the animation completes.
                 self.winsLabel.hidden = false
-                self.oneMore.hidden = false
+                self.revengeButton.hidden = false
+                self.reShuffleButton.hidden = false
         })
     }
 }
@@ -154,9 +177,22 @@ extension ResultScreenViewController {
     /// the same pokemon draw for the new game.
     ///
     /// - parameter sender: Object sending the event.
-    @IBAction func oneMoreButtonPressed(sender: AnyObject) {
+    @IBAction func revengeButtonPressed(sender: AnyObject) {
         
         self.navigationController?.popToRootViewControllerAnimated(true)
     }
     
+    /// Re-shuffle button has been pressed.  Trigger a reshuffle and return to the intro view controller.
+    ///
+    /// - parameter sender: Object sending the event.
+    @IBAction func reShuffleButtonPressed(sender: AnyObject) {
+        
+        guard let introViewController = self.navigationController?.viewControllers[0] as? IntroScreenViewController else {
+            
+            return
+        }
+        
+        introViewController.reshuffleDraw()
+        self.navigationController?.popToViewController(introViewController, animated: true)
+    }
 }
