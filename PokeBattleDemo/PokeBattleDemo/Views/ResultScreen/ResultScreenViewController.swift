@@ -32,9 +32,15 @@ class ResultScreenViewController : GKViewControllerBase {
     // MARK: IBOutlets
     //
     
+    /// Title of the damage dealt by player 1.
+    @IBOutlet weak var player1ScoreTitleLabel: UILabel!
+    
     /// Value of the damage dealt by player 1.
     @IBOutlet weak var player1DamageLabel: UILabel!
 
+    /// Title of the damage dealt by player 1.
+    @IBOutlet weak var player2ScoreTitleLabel: UILabel!
+    
     /// Value of the damage dealt by player 2.
     @IBOutlet weak var player2DamageLabel: UILabel!
     
@@ -89,9 +95,20 @@ extension ResultScreenViewController {
         
         navigationItem.hidesBackButton = true
 
+        player1ScoreTitleLabel.text = NSLocalizedString("PLAYER_1_SCORE", comment: "Player 1 score")
+        player2ScoreTitleLabel.text = NSLocalizedString("PLAYER_2_SCORE", comment: "Player 2 score")
+
         player1DamageLabel.text = String(battleResult.player1Result.score)
         player2DamageLabel.text = String(battleResult.player2Result.score)
 
+        revengeButton.setTitle(NSLocalizedString("REVENGE_BUTTON", comment: "Revenge Button")
+            , forState: .Normal)
+        
+        reShuffleButton.setTitle(NSLocalizedString("RESHUFFLE_BUTTON", comment: "Reshuffle Button")
+            , forState: .Normal)
+        
+        winsLabel.text = NSLocalizedString("WINNER", comment: "Winner label")
+        
         winnerLabel.hidden = true
         winsLabel.hidden = true
         revengeButton.hidden = true
@@ -109,7 +126,7 @@ extension ResultScreenViewController {
         guard let winner = battleResult.winner else{
             
             winnerLabel.hidden = false
-            winnerLabel.text = "DRAW"
+            winnerLabel.text = NSLocalizedString("DRAW", comment: "Draw")
             winsLabel.hidden = true
             revengeButton.hidden = false
             reShuffleButton.hidden = false
@@ -122,10 +139,10 @@ extension ResultScreenViewController {
         switch winner.id {
             
         case .PLAYER_1:
-            winnerText = "Player 1"
+            winnerText = NSLocalizedString("PLAYER_1", comment: "Player 1")
             
         case .PLAYER_2:
-            winnerText = "Player 2"
+            winnerText = NSLocalizedString("PLAYER_2", comment: "Player 2")
         }
         
         // Initially hide the winner text since we will be animating it.

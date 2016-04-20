@@ -8,7 +8,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ResultScreenViewController" customModule="PokeBattleDemo" customModuleProvider="target">
             <connections>
                 <outlet property="player1DamageLabel" destination="dJ1-OZ-8t3" id="xaX-RW-elE"/>
+                <outlet property="player1ScoreTitleLabel" destination="jiX-Nl-18l" id="UFe-zV-Jyk"/>
                 <outlet property="player2DamageLabel" destination="9uq-4V-7qd" id="h02-Cr-2sF"/>
+                <outlet property="player2ScoreTitleLabel" destination="CTo-59-lrx" id="tLm-dp-ffJ"/>
                 <outlet property="reShuffleButton" destination="kaT-oT-QGp" id="b5Z-L9-N5B"/>
                 <outlet property="revengeButton" destination="DGR-j7-BSE" id="6D4-sz-6r5"/>
                 <outlet property="view" destination="iN0-l3-epB" id="MD8-aP-fjo"/>

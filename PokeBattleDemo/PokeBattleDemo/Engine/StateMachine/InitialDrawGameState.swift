@@ -52,7 +52,7 @@ class InitialDrawGameState: GameState {
     
     /// Text for the action button.
     var actionButtonText: String {
-        return "Start"
+        return NSLocalizedString("START", comment: "Start State")
     }
     
     /// When the action button is pressed, defer to the delegate..

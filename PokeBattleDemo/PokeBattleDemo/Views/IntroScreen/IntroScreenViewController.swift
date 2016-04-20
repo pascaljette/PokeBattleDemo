@@ -131,8 +131,7 @@ extension IntroScreenViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // TODO localize
-        self.navigationItem.title = "Pokermon!"
+        self.navigationItem.title = NSLocalizedString("POKERMON", comment: "Pokermon")
 
         dispatch_group_enter(dispatchGroup)
         allPokemonFetcher.fetch()
@@ -251,7 +250,7 @@ extension IntroScreenViewController : AllPokemonListFetcherDelegate {
             status = .IDLE
             
             // TODO push this into GearKit
-            let alertController = UIAlertController(title: "Error", message: "Could not retrieve list of all pokemon", preferredStyle: .Alert)
+            let alertController = UIAlertController(title: NSLocalizedString("ERROR", comment: "Error"), message: "Could not retrieve list of all pokemon", preferredStyle: .Alert)
             
             let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
             alertController.addAction(defaultAction)
@@ -297,7 +296,7 @@ extension IntroScreenViewController : MultiplePokemonFetcherDelegate {
             status = .IDLE
             
             // TODO push this into GearKit
-            let alertController = UIAlertController(title: "Error", message: "Could not retrieve initial draw", preferredStyle: .Alert)
+            let alertController = UIAlertController(title: NSLocalizedString("ERROR", comment: "Error"), message: "Could not retrieve initial draw", preferredStyle: .Alert)
             
             let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
             alertController.addAction(defaultAction)

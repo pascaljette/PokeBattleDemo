@@ -123,7 +123,7 @@ extension BattleScreenViewController {
         super.viewDidLoad()
         
         // TODO localize
-        self.navigationItem.title = "Battle!"
+        self.navigationItem.title = NSLocalizedString("BATTLE", comment: "Battle navigation title")
         
         navigationItem.hidesBackButton = true
         
@@ -324,7 +324,7 @@ extension BattleScreenViewController : BattleScreenTileDelegate {
         } else {
             
             // TODO push this into GearKit
-            let alertController = UIAlertController(title: "Error", message: "Could not retrieve new pokemon", preferredStyle: .Alert)
+            let alertController = UIAlertController(title: NSLocalizedString("ERROR", comment: "Error"), message: "Could not retrieve new pokemon", preferredStyle: .Alert)
             
             let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
             alertController.addAction(defaultAction)
